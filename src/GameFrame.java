@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * The window for the game
  * Created by Stanso on 2/28/2015.
  */
 public class GameFrame extends JFrame
