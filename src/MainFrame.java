@@ -7,6 +7,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * The start up window
@@ -23,6 +25,10 @@ public final class MainFrame extends JFrame
     protected static GameFrame plyrGameFrame;
     protected static GameFrame agntGameFrame;
     private static boolean isPracticeMode;
+
+    // final private static Lock nrsLock = new ReentrantLock();
+    // final private static Lock docLock = new ReentrantLock();
+    // final private static Lock sgnLock = new ReentrantLock();
 
     private JTextField userIdTextField;
     private JTextField conditionTextField;
@@ -197,6 +203,7 @@ public final class MainFrame extends JFrame
     {
         mainTimer.stop();
         timeCount = 0;
+        taskTimer.purge();
         plyrGameFrame.dispose();
         agntGameFrame.dispose();
         MicroworldHospital.endLog();
@@ -222,4 +229,21 @@ public final class MainFrame extends JFrame
     {
         return isPracticeMode;
     }
+
+    /*
+    protected static synchronized Lock getLock(ResourceType rType)
+    {
+       switch (rType)
+       {
+           case DOCTOR:
+               return docLock;
+           case NURSE:
+               return nrsLock;
+           case SURGEON:
+               return sgnLock;
+           default:
+               throw new IllegalArgumentException("Invalid Resource Type");
+       }
+    }
+    */
 }

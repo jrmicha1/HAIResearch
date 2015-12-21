@@ -8,6 +8,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * The window for the game
@@ -52,6 +54,7 @@ public class GameFrame extends JFrame
     private boolean isAgent;
 
     protected GameFrame peerGameFrame;
+    private GameFrame thisGameFrame = this;
 
     private long timeRecord;
     private int acceptReqCount;
@@ -63,6 +66,8 @@ public class GameFrame extends JFrame
     private int giveDocPendNum;
     private int giveNrsPendNum;
     private int giveSgnPendNum;
+    final protected Object giveLock = new Object();
+    final private ReentrantLock resLock = new ReentrantLock();
 
     private int patientAAddCount;
     private int patientBAddCount;
@@ -424,7 +429,7 @@ public class GameFrame extends JFrame
         updateDecisionTime();
     }
 
-    private void updateDecisionTime()
+    private synchronized void updateDecisionTime()
     {
         long measuredTime = System.currentTimeMillis() - timeRecord;
         if(measuredTime > MainFrame.CONFIG.VALID_TIME_MEASUREMENT)
@@ -436,7 +441,7 @@ public class GameFrame extends JFrame
         }
         timeRecord = System.currentTimeMillis();
     }
-    protected void updateAssignmentTime()
+    protected synchronized void updateAssignmentTime()
     {
         long measuredTime = System.currentTimeMillis() - timeRecord;
         if(measuredTime > MainFrame.CONFIG.VALID_TIME_MEASUREMENT)
@@ -448,7 +453,7 @@ public class GameFrame extends JFrame
         }
         timeRecord = System.currentTimeMillis();
     }
-    private void updateResponseTime()
+    private synchronized void updateResponseTime()
     {
         long measuredTime = System.currentTimeMillis() - timeRecord;
         //if(measuredTime > MainFrame.CONFIG.VALID_TIME_MEASUREMENT)
@@ -461,7 +466,7 @@ public class GameFrame extends JFrame
         timeRecord = System.currentTimeMillis();
     }
 
-    public void addPatient()
+    public synchronized void addPatient()
     {
         if(rand.nextBoolean() && patientAAddCount <= MainFrame.CONFIG.getPlayerTotalPatientAdd())
         {
@@ -568,10 +573,14 @@ public class GameFrame extends JFrame
      */
     private void promptGiveConfirm(final ResourceType rType)
     {
-        new Thread(new Runnable() {
-            @Override
-            public void run()
-            {
+        //new Thread(new Runnable() {
+        //    @Override
+        //    public void run()
+        //    {
+                // delete?
+                // synchronized (giveLock)
+                //{
+
                 boolean isConfirmed = true;
                 if(!isAgent)
                 {
@@ -599,92 +608,117 @@ public class GameFrame extends JFrame
                     isConfirmed = (option == JOptionPane.YES_OPTION);
                 }
 
-                if(isConfirmed)
-                {
-                    switch (rType)
+                    if (isConfirmed)
                     {
-                        case DOCTOR:
-                            thisStatsPanel.decResourceNum(ResourceType.DOCTOR, 1);
-                            peerGameFrame.thisStatsPanel.incResourceNum(ResourceType.DOCTOR, 1);
-                            giveDocPendNum++;
-                            if(!isAgent())
-                                MicroworldHospital.writeLogLine("PlayerGive", "Doctor", isAgent());
-                            else MicroworldHospital.writeLogLine("AgentGive", "Doctor", !isAgent());
-                            break;
-                        case NURSE:
-                            thisStatsPanel.decResourceNum(ResourceType.NURSE, 1);
-                            peerGameFrame.thisStatsPanel.incResourceNum(ResourceType.NURSE, 1);
-                            giveNrsPendNum++;
-                            if(!isAgent())
-                                MicroworldHospital.writeLogLine("PlayerGive", "Nurse", isAgent());
-                            else MicroworldHospital.writeLogLine("AgentGive", "Nurse", !isAgent());
-                            break;
-                        case SURGEON:
-                            thisStatsPanel.decResourceNum(ResourceType.SURGEON, 1);
-                            peerGameFrame.thisStatsPanel.incResourceNum(ResourceType.SURGEON, 1);
-                            giveSgnPendNum++;
-                            if(!isAgent())
-                                MicroworldHospital.writeLogLine("PlayerGive", "Surgeon", isAgent());
-                            else MicroworldHospital.writeLogLine("AgentGive", "Surgeon", !isAgent());
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Invalid Resource Type");
-                    }
+                        // thisGameFrame.getResLock().lock();
+                        // peerGameFrame.getResLock().lock();
 
-                    if(!peerGameFrame.isAgent())
-                    {
-                        String msg = "";
-                        if (giveDocPendNum > 0) msg += "< " + giveDocPendNum + " Doctor(s) > ";
-                        if (giveNrsPendNum > 0) msg += "< " + giveNrsPendNum + " Nurse(s) > ";
-                        if (giveSgnPendNum > 0) msg += "< " + giveSgnPendNum + " Surgeon(s) > ";
+                        switch (rType)
+                        {
+                            case DOCTOR:
+                                // critical section
 
-                        msgOptionPane = new JOptionPane("The neighbor hospital has sent you " + msg + ".");
-                        if (msgInternalFrame != null && msgInternalFrame.isShowing()) {
-                            msgInternalFrame.dispose();
+                                thisStatsPanel.decResourceNum(rType, 1);
+                                peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
+                                giveDocPendNum++;
+                                if (!isAgent())
+                                    MicroworldHospital.writeLogLine("PlayerGive", "Doctor", isAgent());
+                                else MicroworldHospital.writeLogLine("AgentGive", "Doctor", !isAgent());
+
+                                break;
+                            case NURSE:
+                                // critical section
+
+                                thisStatsPanel.decResourceNum(rType, 1);
+                                peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
+                                giveNrsPendNum++;
+                                if (!isAgent())
+                                    MicroworldHospital.writeLogLine("PlayerGive", "Nurse", isAgent());
+                                else MicroworldHospital.writeLogLine("AgentGive", "Nurse", !isAgent());
+
+                                break;
+                            case SURGEON:
+                                // critical section
+
+                                thisStatsPanel.decResourceNum(rType, 1);
+                                peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
+                                giveSgnPendNum++;
+                                if (!isAgent())
+                                    MicroworldHospital.writeLogLine("PlayerGive", "Surgeon", isAgent());
+                                else MicroworldHospital.writeLogLine("AgentGive", "Surgeon", !isAgent());
+
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Invalid Resource Type");
                         }
-                        msgInternalFrame = msgOptionPane.createInternalFrame(peerGameFrame.contentPane, "Notification");
-                        msgInternalFrame.addInternalFrameListener(new InternalFrameListener() {
-                            @Override
-                            public void internalFrameOpened(InternalFrameEvent internalFrameEvent) {
 
+                        // peerGameFrame.getResLock().unlock();
+                        // thisGameFrame.getResLock().unlock();
+
+                        if (!peerGameFrame.isAgent())
+                        {
+                            String msg = "";
+                            if (giveDocPendNum > 0) msg += "< " + giveDocPendNum + " Doctor(s) > ";
+                            if (giveNrsPendNum > 0) msg += "< " + giveNrsPendNum + " Nurse(s) > ";
+                            if (giveSgnPendNum > 0) msg += "< " + giveSgnPendNum + " Surgeon(s) > ";
+
+                            msgOptionPane = new JOptionPane("The neighbor hospital has sent you " + msg + ".");
+                            if (msgInternalFrame != null && msgInternalFrame.isShowing())
+                            {
+                                msgInternalFrame.dispose();
                             }
+                            msgInternalFrame = msgOptionPane.createInternalFrame(peerGameFrame.contentPane, "Notification");
+                            msgInternalFrame.addInternalFrameListener(new InternalFrameListener()
+                            {
+                                @Override
+                                public void internalFrameOpened(InternalFrameEvent internalFrameEvent)
+                                {
 
-                            @Override
-                            public void internalFrameClosing(InternalFrameEvent internalFrameEvent) {
-                                giveDocPendNum = giveNrsPendNum = giveSgnPendNum = 0;
-                            }
+                                }
 
-                            @Override
-                            public void internalFrameClosed(InternalFrameEvent internalFrameEvent) {
+                                @Override
+                                public synchronized void internalFrameClosing(InternalFrameEvent internalFrameEvent)
+                                {
+                                    giveDocPendNum = giveNrsPendNum = giveSgnPendNum = 0;
+                                }
 
-                            }
+                                @Override
+                                public void internalFrameClosed(InternalFrameEvent internalFrameEvent)
+                                {
 
-                            @Override
-                            public void internalFrameIconified(InternalFrameEvent internalFrameEvent) {
+                                }
 
-                            }
+                                @Override
+                                public void internalFrameIconified(InternalFrameEvent internalFrameEvent)
+                                {
 
-                            @Override
-                            public void internalFrameDeiconified(InternalFrameEvent internalFrameEvent) {
+                                }
 
-                            }
+                                @Override
+                                public void internalFrameDeiconified(InternalFrameEvent internalFrameEvent)
+                                {
 
-                            @Override
-                            public void internalFrameActivated(InternalFrameEvent internalFrameEvent) {
+                                }
 
-                            }
+                                @Override
+                                public void internalFrameActivated(InternalFrameEvent internalFrameEvent)
+                                {
 
-                            @Override
-                            public void internalFrameDeactivated(InternalFrameEvent internalFrameEvent) {
+                                }
 
-                            }
-                        });
-                        msgInternalFrame.pack();
-                        msgInternalFrame.show();
+                                @Override
+                                public void internalFrameDeactivated(InternalFrameEvent internalFrameEvent)
+                                {
+
+                                }
+                            });
+                            msgInternalFrame.pack();
+                            msgInternalFrame.show();
+                        }
                     }
-                }
-            }
-        }).start();
+                //}
+            //}
+        //}).start();
     }
 
     public void start()
@@ -721,5 +755,10 @@ public class GameFrame extends JFrame
     public long getAssignTimeAvgMillis()
     {
         return assignTimeAvg;
+    }
+
+    protected ReentrantLock getResLock()
+    {
+        return resLock;
     }
 }

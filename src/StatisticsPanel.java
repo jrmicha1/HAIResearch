@@ -27,12 +27,18 @@ public class StatisticsPanel extends JPanel
 
     private GameFrame linkedGameFrame;
 
+    // Have to get locked
     private int scoreVal;
     private int docNum;
     private int nrsNum;
     private int sgnNum;
     protected int missedPatientA;
     protected int missedPatientB;
+
+    final private Object docNumLock = new Object();
+    final private Object nrsNumLock = new Object();
+    final private Object sgnNumLock = new Object();
+    final private Object scoreLock = new Object();
 
     /**
      * Inner class for patient queues
@@ -248,49 +254,140 @@ public class StatisticsPanel extends JPanel
 
     public void setScore(int num)
     {
-        scoreVal = num;
-        lblScoreVal.setText(String.valueOf(scoreVal));
-        updateLinkedStatsPanel();
+        synchronized (scoreLock)
+        {
+            scoreVal = num;
+            lblScoreVal.setText(String.valueOf(scoreVal));
+            updateLinkedStatsPanel();
+        }
     }
 
     public void setResourceNum(ResourceType rType, int num)
     {
+        if(num < 0)
+            System.out.println("TRIED TO SET RESOURCE NUM LESS THAN 0 !!!");
         switch (rType)
         {
             case DOCTOR:
-                docNum = num;
-                if(num < 0) docNum = 0;
-                lblDocNum.setText(String.valueOf(docNum));
+                synchronized (docNumLock)
+                {
+                    docNum = num;
+                    if (num < 0) docNum = 0;
+                    lblDocNum.setText(String.valueOf(docNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
                 break;
             case NURSE:
-                nrsNum = num;
-                if(num < 0) nrsNum = 0;
-                lblNrsNum.setText(String.valueOf(nrsNum));
+                synchronized (nrsNumLock)
+                {
+                    nrsNum = num;
+                    if (num < 0) nrsNum = 0;
+                    lblNrsNum.setText(String.valueOf(nrsNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
                 break;
             case SURGEON:
-                sgnNum = num;
-                if(num < 0) sgnNum = 0;
-                lblSgnNum.setText(String.valueOf(sgnNum));
+                synchronized (sgnNumLock)
+                {
+                    sgnNum = num;
+                    if (num < 0) sgnNum = 0;
+                    lblSgnNum.setText(String.valueOf(sgnNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Invalid Resource Type");
         }
 
-        updateButtons();
-        updateLinkedStatsPanel();
     }
 
     public void incResourceNum(ResourceType rType, int num)
     {
-        setResourceNum(rType, getResourceNum(rType) + num);
+        // setResourceNum(rType, getResourceNum(rType) + num);
+        switch (rType)
+        {
+            case DOCTOR:
+                synchronized (docNumLock)
+                {
+                    docNum += num;
+                    if (num < 0) docNum = 0;
+                    lblDocNum.setText(String.valueOf(docNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
+                break;
+            case NURSE:
+                synchronized (nrsNumLock)
+                {
+                    nrsNum += num;
+                    if (num < 0) nrsNum = 0;
+                    lblNrsNum.setText(String.valueOf(nrsNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
+                break;
+            case SURGEON:
+                synchronized (sgnNumLock)
+                {
+                    sgnNum += num;
+                    if (num < 0) sgnNum = 0;
+                    lblSgnNum.setText(String.valueOf(sgnNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid Resource Type");
+        }
+
+
     }
 
     public void decResourceNum(ResourceType rType, int num)
     {
-        setResourceNum(rType, getResourceNum(rType) - num);
+        // setResourceNum(rType, getResourceNum(rType) - num);
+        switch (rType)
+        {
+            case DOCTOR:
+                synchronized (docNumLock)
+                {
+                    docNum -= num;
+                    if (num < 0) docNum = 0;
+                    lblDocNum.setText(String.valueOf(docNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
+                break;
+            case NURSE:
+                synchronized (nrsNumLock)
+                {
+                    nrsNum -= num;
+                    if (num < 0) nrsNum = 0;
+                    lblNrsNum.setText(String.valueOf(nrsNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
+                break;
+            case SURGEON:
+                synchronized (sgnNumLock)
+                {
+                    sgnNum -= num;
+                    if (num < 0) sgnNum = 0;
+                    lblSgnNum.setText(String.valueOf(sgnNum));
+                    updateButtons();
+                    updateLinkedStatsPanel();
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid Resource Type");
+        }
+
     }
 
-    public void setQueueLen(PatientType pType, int len)
+    public synchronized void setQueueLen(PatientType pType, int len)
     {
         switch(pType)
         {
@@ -310,21 +407,21 @@ public class StatisticsPanel extends JPanel
         updateLinkedStatsPanel();
     }
 
-    public void dequeue(PatientType pType)
+    public synchronized void dequeue(PatientType pType)
     {
         setQueueLen(pType, getQueueLen(pType) -1);
         updateButtons();
         updateLinkedStatsPanel();
     }
 
-    public void enqueue(PatientType pType)
+    public synchronized void enqueue(PatientType pType)
     {
         setQueueLen(pType, getQueueLen(pType) +1);
         updateButtons();
         updateLinkedStatsPanel();
     }
 
-    public int getQueueLen(PatientType pType)
+    public synchronized int getQueueLen(PatientType pType)
     {
         switch(pType)
         {
@@ -339,7 +436,10 @@ public class StatisticsPanel extends JPanel
 
     public int getScore()
     {
-        return scoreVal;
+        synchronized (scoreLock)
+        {
+            return scoreVal;
+        }
     }
 
     public int getResourceNum(ResourceType rType)
@@ -347,11 +447,20 @@ public class StatisticsPanel extends JPanel
         switch (rType)
         {
             case DOCTOR:
-                return docNum;
+                synchronized (docNumLock)
+                {
+                    return docNum;
+                }
             case NURSE:
-                return nrsNum;
+                synchronized (nrsNumLock)
+                {
+                    return nrsNum;
+                }
             case SURGEON:
-                return sgnNum;
+                synchronized (sgnNumLock)
+                {
+                    return sgnNum;
+                }
             default:
                 throw new IllegalArgumentException("Invalid Resource Type");
         }
@@ -469,6 +578,7 @@ public class StatisticsPanel extends JPanel
         if(linkedGameFrame == null)
             return;
 
+        //linkedGameFrame.getResLock().lock();
         StatisticsPanel linkedStatsPanel = linkedGameFrame.peerGameFrame.peerStatsPanel;
         linkedStatsPanel.setResourceNum(ResourceType.DOCTOR, this.getResourceNum(ResourceType.DOCTOR));
         linkedStatsPanel.setResourceNum(ResourceType.NURSE, this.getResourceNum(ResourceType.NURSE));
@@ -476,6 +586,9 @@ public class StatisticsPanel extends JPanel
         linkedStatsPanel.setQueueLen(PatientType.A, this.getQueueLen(PatientType.A));
         linkedStatsPanel.setQueueLen(PatientType.B, this.getQueueLen(PatientType.B));
         linkedStatsPanel.setScore(this.getScore());
+
+        // linkedGameFrame.getResLock().unlock();
+
         //linkedStatsPanel.detailedQueuePanelA = this.detailedQueuePanelA;
         //linkedStatsPanel.detailedQueuePanelB = this.detailedQueuePanelB;
         //linkedStatsPanel.briefQueuePanel = this.briefQueuePanel;

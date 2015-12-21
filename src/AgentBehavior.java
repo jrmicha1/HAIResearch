@@ -16,6 +16,10 @@ public class AgentBehavior
 
     private GameFrame linkedGameFrame;
 
+    // final private Object giveDocLkObject = new Object();
+    // final private Object giveSgnLkObject = new Object();
+    // final private Object giveNrsLkObject = new Object();
+
     protected AgentBehavior()
     {
         /* Value Init */
@@ -234,6 +238,9 @@ public class AgentBehavior
                     continue;
                 }
             }
+
+            linkedGameFrame.getResLock().lock();
+
             // Find room that need only one resource
             if (linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) > 0 && (room = findRoom1R(ResourceType.DOCTOR)) != null)
             {
@@ -342,37 +349,52 @@ public class AgentBehavior
                 }
                 */
 
-                if(linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) > 0 &&
-                        linkedGameFrame.peerStatsPanel.getResourceNum(ResourceType.DOCTOR) == 0 &&
-                        findRoom1R(ResourceType.DOCTOR) == null &&
-                        findRoom2R(ResourceType.DOCTOR, ResourceType.NURSE) == null)
-                {
+                //synchronized (linkedGameFrame.giveLock)
+                //{
+                    linkedGameFrame.peerGameFrame.getResLock().lock();
+                    if (linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) > 0 &&
+                            linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) == 0 &&
+                            findRoom1R(ResourceType.DOCTOR) == null &&
+                            findRoom2R(ResourceType.DOCTOR, ResourceType.NURSE) == null)
+                    {
                         delay(assignDelay);
                         //linkedGameFrame.giveDoctorButton.doClick();
+                        System.out.println("Agent clicked give doctor.");
                         linkedGameFrame.clickGiveResourceButton(ResourceType.DOCTOR);
-                }
+                    }
 
-                if(linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.NURSE) > 0 &&
-                        linkedGameFrame.peerStatsPanel.getResourceNum(ResourceType.NURSE) == 0 &&
-                        findRoom1R(ResourceType.NURSE) == null &&
-                        findRoom2R(ResourceType.DOCTOR, ResourceType.NURSE) == null &&
-                        findRoom2R(ResourceType.SURGEON, ResourceType.NURSE) == null)
-                {
+                    else if (linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.NURSE) > 0 &&
+                            linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.NURSE) == 0 &&
+                            findRoom1R(ResourceType.NURSE) == null &&
+                            findRoom2R(ResourceType.DOCTOR, ResourceType.NURSE) == null &&
+                            findRoom2R(ResourceType.SURGEON, ResourceType.NURSE) == null)
+                    {
                         delay(assignDelay);
                         //linkedGameFrame.giveNurseButton.doClick();
+                        System.out.println("Agent clicked give nurse.");
                         linkedGameFrame.clickGiveResourceButton(ResourceType.NURSE);
-                }
+                    }
 
-                if(linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.SURGEON) > 0 &&
-                        linkedGameFrame.peerStatsPanel.getResourceNum(ResourceType.SURGEON) == 0 &&
-                        findRoom1R(ResourceType.SURGEON) == null &&
-                        findRoom2R(ResourceType.SURGEON, ResourceType.NURSE) == null)
-                {
+                    else if (linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.SURGEON) > 0 &&
+                            linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.SURGEON) == 0 &&
+                            findRoom1R(ResourceType.SURGEON) == null &&
+                            findRoom2R(ResourceType.SURGEON, ResourceType.NURSE) == null)
+                    {
                         delay(assignDelay);
                         //linkedGameFrame.giveSurgeonButton.doClick();
+                        System.out.println("Agent clicked give surgeon.");
                         linkedGameFrame.clickGiveResourceButton(ResourceType.SURGEON);
-                }
+                    }
+
+                    //if(linkedGameFrame.peerGameFrame.getResLock().isLocked())
+                    linkedGameFrame.peerGameFrame.getResLock().unlock();
+                //}
+
             }
+
+            //if(linkedGameFrame.getResLock().isLocked())
+            linkedGameFrame.getResLock().unlock();
+
         }
     }
 }

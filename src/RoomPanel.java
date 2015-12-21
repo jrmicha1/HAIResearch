@@ -223,19 +223,25 @@ public class RoomPanel extends JPanel
                 if(!needResource(rType))
                     return false;
 
-                linkedStatsPanel.decResourceNum(ResourceType.DOCTOR, 1);
-                lblHlprNum.setText(String.valueOf(++helperNum));
+                // critical section
+                linkedGameFrame.getResLock().lock();
 
-                if(needResource(ResourceType.NURSE))
-                    MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
-                else
-                    MicroworldHospital.writeLogLine("SecondResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+                    linkedStatsPanel.decResourceNum(ResourceType.DOCTOR, 1);
+                    lblHlprNum.setText(String.valueOf(++helperNum));
 
-                if (((patientType == PatientType.A && helperNum == DOCTOR_NEEDED) ||
-                        (patientType == PatientType.B && helperNum == SURGEON_NEEDED)) && nurseNum > 0)
-                    timer.start();
+                linkedGameFrame.getResLock().unlock();
 
-                linkedGameFrame.updateAssignmentTime();
+                    if (needResource(ResourceType.NURSE))
+                        MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+                    else
+                        MicroworldHospital.writeLogLine("SecondResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+
+                    if (((patientType == PatientType.A && helperNum == DOCTOR_NEEDED) ||
+                            (patientType == PatientType.B && helperNum == SURGEON_NEEDED)) && nurseNum > 0)
+                        timer.start();
+
+                    linkedGameFrame.updateAssignmentTime();
+
                 return true;
             }
             case SURGEON:
@@ -247,19 +253,25 @@ public class RoomPanel extends JPanel
                 if(!needResource(rType))
                     return false;
 
-                linkedStatsPanel.decResourceNum(ResourceType.SURGEON, 1);
-                lblHlprNum.setText(String.valueOf(++helperNum));
+                // critical section
+                linkedGameFrame.getResLock().lock();
 
-                if(needResource(ResourceType.NURSE))
-                    MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
-                else
-                    MicroworldHospital.writeLogLine("SecondResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+                    linkedStatsPanel.decResourceNum(ResourceType.SURGEON, 1);
+                    lblHlprNum.setText(String.valueOf(++helperNum));
 
-                if (((patientType == PatientType.A && helperNum == DOCTOR_NEEDED) ||
-                        (patientType == PatientType.B && helperNum == SURGEON_NEEDED)) && nurseNum > 0)
-                    timer.start();
+                linkedGameFrame.getResLock().unlock();
 
-                linkedGameFrame.updateAssignmentTime();
+                    if (needResource(ResourceType.NURSE))
+                        MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+                    else
+                        MicroworldHospital.writeLogLine("SecondResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+
+                    if (((patientType == PatientType.A && helperNum == DOCTOR_NEEDED) ||
+                            (patientType == PatientType.B && helperNum == SURGEON_NEEDED)) && nurseNum > 0)
+                        timer.start();
+
+                    linkedGameFrame.updateAssignmentTime();
+
                 return true;
             }
             case NURSE:
@@ -270,18 +282,24 @@ public class RoomPanel extends JPanel
                 if(!needResource(rType))
                     return false;
 
-                linkedStatsPanel.decResourceNum(ResourceType.NURSE, 1);
-                lblNrsNum.setText(String.valueOf(++nurseNum));
+                // critical section
+                linkedGameFrame.getResLock().lock();
 
-                if(needResource(ResourceType.DOCTOR) || needResource(ResourceType.SURGEON))
-                    MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
-                else
-                    MicroworldHospital.writeLogLine("SecondResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+                    linkedStatsPanel.decResourceNum(ResourceType.NURSE, 1);
+                    lblNrsNum.setText(String.valueOf(++nurseNum));
 
-                if (helperNum == NURSE_NEEDED && nurseNum > 0)
-                    timer.start();
+                linkedGameFrame.getResLock().unlock();
 
-                linkedGameFrame.updateAssignmentTime();
+                    if (needResource(ResourceType.DOCTOR) || needResource(ResourceType.SURGEON))
+                        MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+                    else
+                        MicroworldHospital.writeLogLine("SecondResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
+
+                    if (helperNum == NURSE_NEEDED && nurseNum > 0)
+                        timer.start();
+
+                    linkedGameFrame.updateAssignmentTime();
+
                 return true;
             }
             default:
@@ -400,20 +418,28 @@ public class RoomPanel extends JPanel
     private void collectButtonClicked()
     {
         timer.setDelay(1000);
+
+        linkedGameFrame.getResLock().lock();
+
         linkedStatsPanel.incResourceNum(ResourceType.NURSE, nurseNum);
+        nurseNum = 0;
+
         switch (patientType)
         {
             case A:
                 linkedStatsPanel.incResourceNum(ResourceType.DOCTOR, helperNum);
+                helperNum = 0;
                 break;
             case B:
                 linkedStatsPanel.incResourceNum(ResourceType.SURGEON, helperNum);
+                helperNum = 0;
                 break;
         }
+
+        linkedGameFrame.getResLock().unlock();
+
         roomOccupied = false;
         timeCount = 0;
-        helperNum = 0;
-        nurseNum = 0;
         patientType = null;
         MicroworldHospital.writeLogLine("PlayerCollect", lblRoomNum.getText(), linkedGameFrame.isAgent());
         dispPanelCard.show(dispPanel, "vacantPanel");
