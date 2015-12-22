@@ -612,46 +612,51 @@ public class GameFrame extends JFrame
                     {
                         // thisGameFrame.getResLock().lock();
                         // peerGameFrame.getResLock().lock();
-
-                        switch (rType)
+                        synchronized (peerGameFrame.getResLock())
                         {
-                            case DOCTOR:
-                                // critical section
+                            synchronized (thisGameFrame.getResLock())
+                            {
 
-                                thisStatsPanel.decResourceNum(rType, 1);
-                                peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
-                                giveDocPendNum++;
-                                if (!isAgent())
-                                    MicroworldHospital.writeLogLine("PlayerGive", "Doctor", isAgent());
-                                else MicroworldHospital.writeLogLine("AgentGive", "Doctor", !isAgent());
+                                switch (rType)
+                                {
+                                    case DOCTOR:
+                                        // critical section
 
-                                break;
-                            case NURSE:
-                                // critical section
+                                        thisStatsPanel.decResourceNum(rType, 1);
+                                        peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
+                                        giveDocPendNum++;
+                                        if (!isAgent())
+                                            MicroworldHospital.writeLogLine("PlayerGive", "Doctor", isAgent());
+                                        else MicroworldHospital.writeLogLine("AgentGive", "Doctor", !isAgent());
 
-                                thisStatsPanel.decResourceNum(rType, 1);
-                                peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
-                                giveNrsPendNum++;
-                                if (!isAgent())
-                                    MicroworldHospital.writeLogLine("PlayerGive", "Nurse", isAgent());
-                                else MicroworldHospital.writeLogLine("AgentGive", "Nurse", !isAgent());
+                                        break;
+                                    case NURSE:
+                                        // critical section
 
-                                break;
-                            case SURGEON:
-                                // critical section
+                                        thisStatsPanel.decResourceNum(rType, 1);
+                                        peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
+                                        giveNrsPendNum++;
+                                        if (!isAgent())
+                                            MicroworldHospital.writeLogLine("PlayerGive", "Nurse", isAgent());
+                                        else MicroworldHospital.writeLogLine("AgentGive", "Nurse", !isAgent());
 
-                                thisStatsPanel.decResourceNum(rType, 1);
-                                peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
-                                giveSgnPendNum++;
-                                if (!isAgent())
-                                    MicroworldHospital.writeLogLine("PlayerGive", "Surgeon", isAgent());
-                                else MicroworldHospital.writeLogLine("AgentGive", "Surgeon", !isAgent());
+                                        break;
+                                    case SURGEON:
+                                        // critical section
 
-                                break;
-                            default:
-                                throw new IllegalArgumentException("Invalid Resource Type");
+                                        thisStatsPanel.decResourceNum(rType, 1);
+                                        peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
+                                        giveSgnPendNum++;
+                                        if (!isAgent())
+                                            MicroworldHospital.writeLogLine("PlayerGive", "Surgeon", isAgent());
+                                        else MicroworldHospital.writeLogLine("AgentGive", "Surgeon", !isAgent());
+
+                                        break;
+                                    default:
+                                        throw new IllegalArgumentException("Invalid Resource Type");
+                                }
+                            }
                         }
-
                         // peerGameFrame.getResLock().unlock();
                         // thisGameFrame.getResLock().unlock();
 
