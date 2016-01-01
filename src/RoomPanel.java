@@ -224,13 +224,12 @@ public class RoomPanel extends JPanel
                     return false;
 
                 // critical section
-                // linkedGameFrame.getResLock().lock();
-                synchronized (linkedGameFrame.getResLock())
-                {
+                linkedGameFrame.getResLock().lock();
+
                     linkedStatsPanel.decResourceNum(ResourceType.DOCTOR, 1);
                     lblHlprNum.setText(String.valueOf(++helperNum));
-                }
-                // linkedGameFrame.getResLock().unlock();
+
+                linkedGameFrame.getResLock().unlock();
 
                     if (needResource(ResourceType.NURSE))
                         MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
@@ -255,13 +254,12 @@ public class RoomPanel extends JPanel
                     return false;
 
                 // critical section
-                // linkedGameFrame.getResLock().lock();
-                synchronized (linkedGameFrame.getResLock())
-                {
+                linkedGameFrame.getResLock().lock();
+
                     linkedStatsPanel.decResourceNum(ResourceType.SURGEON, 1);
                     lblHlprNum.setText(String.valueOf(++helperNum));
-                }
-                // linkedGameFrame.getResLock().unlock();
+
+                linkedGameFrame.getResLock().unlock();
 
                     if (needResource(ResourceType.NURSE))
                         MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
@@ -285,14 +283,12 @@ public class RoomPanel extends JPanel
                     return false;
 
                 // critical section
-                // linkedGameFrame.getResLock().lock();
-                synchronized (linkedGameFrame.getResLock())
-                {
+                linkedGameFrame.getResLock().lock();
 
                     linkedStatsPanel.decResourceNum(ResourceType.NURSE, 1);
                     lblNrsNum.setText(String.valueOf(++nurseNum));
-                }
-                // linkedGameFrame.getResLock().unlock();
+
+                linkedGameFrame.getResLock().unlock();
 
                     if (needResource(ResourceType.DOCTOR) || needResource(ResourceType.SURGEON))
                         MicroworldHospital.writeLogLine("FirstResource", lblRoomNum.getText(), linkedGameFrame.isAgent());
@@ -423,27 +419,24 @@ public class RoomPanel extends JPanel
     {
         timer.setDelay(1000);
 
-        // linkedGameFrame.getResLock().lock();
-        synchronized (linkedGameFrame.getResLock())
+        linkedGameFrame.getResLock().lock();
+
+        linkedStatsPanel.incResourceNum(ResourceType.NURSE, nurseNum);
+        nurseNum = 0;
+
+        switch (patientType)
         {
-
-            linkedStatsPanel.incResourceNum(ResourceType.NURSE, nurseNum);
-            nurseNum = 0;
-
-            switch (patientType)
-            {
-                case A:
-                    linkedStatsPanel.incResourceNum(ResourceType.DOCTOR, helperNum);
-                    helperNum = 0;
-                    break;
-                case B:
-                    linkedStatsPanel.incResourceNum(ResourceType.SURGEON, helperNum);
-                    helperNum = 0;
-                    break;
-            }
-
+            case A:
+                linkedStatsPanel.incResourceNum(ResourceType.DOCTOR, helperNum);
+                helperNum = 0;
+                break;
+            case B:
+                linkedStatsPanel.incResourceNum(ResourceType.SURGEON, helperNum);
+                helperNum = 0;
+                break;
         }
-        // linkedGameFrame.getResLock().unlock();
+
+        linkedGameFrame.getResLock().unlock();
 
         roomOccupied = false;
         timeCount = 0;
