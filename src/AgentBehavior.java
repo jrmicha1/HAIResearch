@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 /**
@@ -12,13 +15,9 @@ public class AgentBehavior
     private long decisionDelay;
     private int titForTatCount;
     private boolean plyrLastResponse;
-    private long requestDelay;
+    private boolean shouldRequest;
 
     private GameFrame linkedGameFrame;
-
-    // final private Object giveDocLkObject = new Object();
-    // final private Object giveSgnLkObject = new Object();
-    // final private Object giveNrsLkObject = new Object();
 
     protected AgentBehavior()
     {
@@ -27,7 +26,7 @@ public class AgentBehavior
         responseDelay = MainFrame.CONFIG.getAgentResponseDelayMillis();
         assignDelay = MainFrame.CONFIG.getAgentAssignDelayMillis();
         decisionDelay = MainFrame.CONFIG.getAgentDecisionDelayMillis();
-        requestDelay = 0;
+        shouldRequest = true;
         titForTatCount = 0;
     }
 
@@ -43,7 +42,7 @@ public class AgentBehavior
             titForTatCount = MainFrame.CONFIG.getAgentTitForTatMem();
     }
 
-    protected boolean respondRequest(ResourceType resType)
+    protected synchronized boolean respondRequest(ResourceType resType)
     {
         updateDelay();
         delay(responseDelay);
@@ -69,13 +68,27 @@ public class AgentBehavior
         try
         {
             Thread.sleep(milisTime);
-            if(requestDelay > 0)
-                requestDelay -= milisTime;
         }
         catch(Exception e)
         {
             System.err.println("Thread Interrupted");
         }
+    }
+
+    private void startRequestDelay()
+    {
+        Timer timer = new Timer(MainFrame.CONFIG.getAgentRequestDelayMillis(), new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                shouldRequest = true;
+            }
+        });
+
+        shouldRequest = false;
+        timer.setRepeats(false);
+        timer.start();
     }
 
     private void updateDelay()
@@ -160,21 +173,30 @@ public class AgentBehavior
         return null;
     }
 
+    private boolean needResource(ResourceType rType)
+    {
+        if(linkedGameFrame.thisStatsPanel.getResourceNum(rType) <= 0)
+            for(RoomPanel room: linkedGameFrame.roomPanelList)
+                if(room.needResource(rType))
+                    return true;
+        return false;
+    }
+
     /**
      * Is the time have been long enough to make another request to the player
      * @return Should or not request
      */
     private boolean shouldRequest()
     {
-        if(requestDelay > 0)
+        if(!shouldRequest)
             return false;
         if(MainFrame.CONFIG.isHighCoopAgent())
         {
-            if(linkedGameFrame.peerStatsPanel.isFullQueue(null) && MainFrame.CONFIG.agentRequestWhenPeerFull())
+            if(linkedGameFrame.peerGameFrame.thisStatsPanel.isFullQueue(null) && MainFrame.CONFIG.agentRequestWhenPeerFull())
                 return true;
-            else if(linkedGameFrame.peerStatsPanel.isCrowdedQueue(null) && MainFrame.CONFIG.agentRequestWhenPeerCrowded())
+            else if(linkedGameFrame.peerGameFrame.thisStatsPanel.isCrowdedQueue(null) && MainFrame.CONFIG.agentRequestWhenPeerCrowded())
                 return true;
-            else if(linkedGameFrame.peerStatsPanel.isSpareQueue(null) && MainFrame.CONFIG.agentRequestWhenPeerSpare())
+            else if(linkedGameFrame.peerGameFrame.thisStatsPanel.isSpareQueue(null) && MainFrame.CONFIG.agentRequestWhenPeerSpare())
                 return true;
         }
         else
@@ -296,65 +318,45 @@ public class AgentBehavior
             }
 
             // Request Mode
-            else if (MainFrame.CONFIG.isRequestMode() && shouldRequest())
+            else if (MainFrame.CONFIG.isRequestMode())
             {
-                if((room = findRoom1R(ResourceType.DOCTOR)) != null && linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) > 0)
+                linkedGameFrame.peerGameFrame.getResLock().lock();
+
+                if(shouldRequest())
                 {
-                    //linkedGameFrame.requestDoctorButton.doClick();
-                    linkedGameFrame.clickRequestResourceButton(ResourceType.DOCTOR);
-                    requestDelay = MainFrame.CONFIG.getAgentRequestDelayMillis();
+
+                    if (needResource(ResourceType.DOCTOR) && linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) > 0)
+                    {
+                        //linkedGameFrame.requestDoctorButton.doClick();
+                        linkedGameFrame.clickRequestResourceButton(ResourceType.DOCTOR);
+                        System.out.println("Agent clicked request doctor.");
+                        startRequestDelay();
+                    } else if (needResource(ResourceType.NURSE) && linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.NURSE) > 0)
+                    {
+                        //linkedGameFrame.requestNurseButton.doClick();
+                        linkedGameFrame.clickRequestResourceButton(ResourceType.NURSE);
+                        System.out.println("Agent clicked request nurse.");
+                        startRequestDelay();
+                    } else if (needResource(ResourceType.SURGEON) && linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.SURGEON) > 0)
+                    {
+                        //linkedGameFrame.requestSurgeonButton.doClick();
+                        linkedGameFrame.clickRequestResourceButton(ResourceType.SURGEON);
+                        System.out.println("Agent clicked request surgeon.");
+                        startRequestDelay();
+                    }
                 }
-                else if((room = findRoom1R(ResourceType.NURSE)) != null && linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.NURSE) > 0)
-                {
-                    //linkedGameFrame.requestNurseButton.doClick();
-                    linkedGameFrame.clickRequestResourceButton(ResourceType.NURSE);
-                    requestDelay = MainFrame.CONFIG.getAgentRequestDelayMillis();
-                }
-                else if((room = findRoom1R(ResourceType.SURGEON)) != null && linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.SURGEON) > 0)
-                {
-                    //linkedGameFrame.requestSurgeonButton.doClick();
-                    linkedGameFrame.clickRequestResourceButton(ResourceType.SURGEON);
-                    requestDelay = MainFrame.CONFIG.getAgentRequestDelayMillis();
-                }
+
+                linkedGameFrame.peerGameFrame.getResLock().unlock();
             }
 
             // Giving Mode
             else if(MainFrame.CONFIG.isGivingMode())
             {
-                /*
-                if((linkedGameFrame.peerStatsPanel.getResourceNum(ResourceType.DOCTOR) == 0 ||
-                        linkedGameFrame.peerStatsPanel.getResourceNum(ResourceType.NURSE) == 0 ||
-                        linkedGameFrame.peerStatsPanel.getResourceNum(ResourceType.SURGEON) == 0) &&
-                        findRoom1R(ResourceType.DOCTOR) == null &&
-                        findRoom1R(ResourceType.NURSE) == null &&
-                        findRoom1R(ResourceType.SURGEON) == null &&
-                        findRoom2R(ResourceType.DOCTOR, ResourceType.NURSE) == null &&
-                        findRoom2R(ResourceType.SURGEON, ResourceType.NURSE) == null)
-                {
-                    while(linkedGameFrame.giveDoctorButton.isEnabled())
-                    {
-                        delay(assignDelay);
-                        linkedGameFrame.giveDoctorButton.doClick();
-                    }
-                    while(linkedGameFrame.giveNurseButton.isEnabled())
-                    {
-                        delay(assignDelay);
-                        linkedGameFrame.giveNurseButton.doClick();
-                    }
-                    while(linkedGameFrame.giveSurgeonButton.isEnabled())
-                    {
-                        delay(assignDelay);
-                        linkedGameFrame.giveSurgeonButton.doClick();
-                    }
-                }
-                */
-
-                //synchronized (linkedGameFrame.giveLock)
-                //{
                     linkedGameFrame.peerGameFrame.getResLock().lock();
+
                     if (linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) > 0 &&
                             linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.DOCTOR) == 0 &&
-                            findRoom1R(ResourceType.DOCTOR) == null &&
+                            !needResource(ResourceType.DOCTOR) &&
                             findRoom2R(ResourceType.DOCTOR, ResourceType.NURSE) == null)
                     {
                         delay(assignDelay);
@@ -365,7 +367,7 @@ public class AgentBehavior
 
                     else if (linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.NURSE) > 0 &&
                             linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.NURSE) == 0 &&
-                            findRoom1R(ResourceType.NURSE) == null &&
+                            !needResource(ResourceType.NURSE) &&
                             findRoom2R(ResourceType.DOCTOR, ResourceType.NURSE) == null &&
                             findRoom2R(ResourceType.SURGEON, ResourceType.NURSE) == null)
                     {
@@ -377,7 +379,7 @@ public class AgentBehavior
 
                     else if (linkedGameFrame.thisStatsPanel.getResourceNum(ResourceType.SURGEON) > 0 &&
                             linkedGameFrame.peerGameFrame.thisStatsPanel.getResourceNum(ResourceType.SURGEON) == 0 &&
-                            findRoom1R(ResourceType.SURGEON) == null &&
+                            !needResource(ResourceType.SURGEON) &&
                             findRoom2R(ResourceType.SURGEON, ResourceType.NURSE) == null)
                     {
                         delay(assignDelay);
@@ -386,13 +388,10 @@ public class AgentBehavior
                         linkedGameFrame.clickGiveResourceButton(ResourceType.SURGEON);
                     }
 
-                    //if(linkedGameFrame.peerGameFrame.getResLock().isLocked())
                     linkedGameFrame.peerGameFrame.getResLock().unlock();
-                //}
 
             }
 
-            //if(linkedGameFrame.getResLock().isLocked())
             linkedGameFrame.getResLock().unlock();
 
         }

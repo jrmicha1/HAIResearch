@@ -66,7 +66,6 @@ public class GameFrame extends JFrame
     private int giveDocPendNum;
     private int giveNrsPendNum;
     private int giveSgnPendNum;
-    final protected Object giveLock = new Object();
     final private ReentrantLock resLock = new ReentrantLock();
 
     private int patientAAddCount;
@@ -384,6 +383,7 @@ public class GameFrame extends JFrame
                     MicroworldHospital.writeLogLine("PlayerRequest", "Doctor", isAgent());
                 else MicroworldHospital.writeLogLine("AgentRequest", "Doctor", !isAgent());
                 buttonClicked = Activity.REQUEST_DOCTOR_CLICKED;
+                // cross call
                 peerGameFrame.promptRequest(ResourceType.DOCTOR);
                 break;
             case NURSE:
@@ -495,10 +495,10 @@ public class GameFrame extends JFrame
     protected void promptRequest(final ResourceType rType)
     {
         // New thread to make sure the request will not pause the game
-        new Thread(new Runnable() {
-            @Override
-            public void run()
-            {
+        //new Thread(new Runnable() {
+        //    @Override
+        //    public void run()
+        //    {
                 boolean isAccepted;
                 String res = "";
 
@@ -517,6 +517,9 @@ public class GameFrame extends JFrame
                         throw new IllegalArgumentException("Invalid Resource Type");
                 }
 
+                // hold the resource
+                // thisStatsPanel.decResourceNum(rType, 1);
+
                 if (!isAgent)
                 {
                     int option;
@@ -533,6 +536,7 @@ public class GameFrame extends JFrame
                     updateResponseTime();
                 }
 
+                // not supposed to happen
                 if(isAccepted && thisStatsPanel.getResourceNum(rType) <= 0)
                 {
                     isAccepted = false;
@@ -546,9 +550,18 @@ public class GameFrame extends JFrame
                     if(!isAgent())
                         MicroworldHospital.writeLogLine("PlayerResponse", "Accept", isAgent());
                     else MicroworldHospital.writeLogLine("AgentResponse", "Accept", !isAgent());
+
+                    // critical section
+                    thisGameFrame.getResLock().lock();
+                    peerGameFrame.getResLock().lock();
+
                     acceptReqCount++;
                     thisStatsPanel.decResourceNum(rType, 1);
                     peerGameFrame.thisStatsPanel.incResourceNum(rType, 1);
+
+                    peerGameFrame.getResLock().unlock();
+                    thisGameFrame.getResLock().unlock();
+
                     if (!peerGameFrame.isAgent())
                         JOptionPane.showInternalMessageDialog(peerGameFrame.contentPane, "A " + res + " has given to you!");
                 }
@@ -557,14 +570,18 @@ public class GameFrame extends JFrame
                     if(!isAgent())
                         MicroworldHospital.writeLogLine("PlayerResponse", "Deny", isAgent());
                     else MicroworldHospital.writeLogLine("AgentResponse", "Deny", !isAgent());
+
+                    // add the held resource back
+                    // thisStatsPanel.incResourceNum(rType, 1);
                     denialReqCount++;
                     if (!peerGameFrame.isAgent())
                         JOptionPane.showInternalMessageDialog(peerGameFrame.contentPane, "Your request of " + res + " has been denied.");
                 }
+
                 if (peerGameFrame.isAgent())
                     peerGameFrame.agent.receiveResponse(isAccepted);
-            }
-        }).start();
+            //}
+        //}).start();
     }
 
     /**
@@ -573,14 +590,6 @@ public class GameFrame extends JFrame
      */
     private void promptGiveConfirm(final ResourceType rType)
     {
-        //new Thread(new Runnable() {
-        //    @Override
-        //    public void run()
-        //    {
-                // delete?
-                // synchronized (giveLock)
-                //{
-
                 boolean isConfirmed = true;
                 if(!isAgent)
                 {
@@ -610,8 +619,8 @@ public class GameFrame extends JFrame
 
                     if (isConfirmed)
                     {
-                        // thisGameFrame.getResLock().lock();
-                        // peerGameFrame.getResLock().lock();
+                        peerGameFrame.getResLock().lock();
+                        thisGameFrame.getResLock().lock();
 
                         switch (rType)
                         {
@@ -652,8 +661,8 @@ public class GameFrame extends JFrame
                                 throw new IllegalArgumentException("Invalid Resource Type");
                         }
 
-                        // peerGameFrame.getResLock().unlock();
-                        // thisGameFrame.getResLock().unlock();
+                        thisGameFrame.getResLock().unlock();
+                        peerGameFrame.getResLock().unlock();
 
                         if (!peerGameFrame.isAgent())
                         {
@@ -716,9 +725,6 @@ public class GameFrame extends JFrame
                             msgInternalFrame.show();
                         }
                     }
-                //}
-            //}
-        //}).start();
     }
 
     public void start()

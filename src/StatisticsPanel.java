@@ -216,6 +216,11 @@ public class StatisticsPanel extends JPanel
         missedPatientA = 0;
         missedPatientB = 0;
 
+        scoreVal = 0;
+        docNum = 0;
+        nrsNum = 0;
+        sgnNum = 0;
+
         /* Window Setup */
         queuePanelCard = new CardLayout();
         waitingRoomPanel.setLayout(queuePanelCard);
