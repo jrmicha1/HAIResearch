@@ -11,6 +11,9 @@ div.form {
     border: 1px solid gray;
     padding: 1em;
 }
+div.spacing{
+    padding:0.4em
+}
 
 header, footer {
     padding: 1em;
@@ -46,19 +49,19 @@ header, footer {
   <br><br>
   
   <b>If a current student, please write in the following:</b><hr>
-  <div style="padding:0.3em;">
+  <div class="spacing">
   College:<br>
   <input type="text" size="50" name="college">
   </div>
-  <div style="padding:0.3em;">
+  <div class="spacing">
   Major:<br>
   <input type="text" size="50" name="major">
   </div>
-  <div style="padding:0.3em;">
+  <div class="spacing">
   Degree in pursuit of:<br>
   <input type="text" size="50" name="degree">
   </div>
-  <div style="padding:0.3em;">
+  <div class="spacing">
   Number of years pursuing this degree:<br>
   <input type="number" min="1" name="degree_years">
   </div>
@@ -69,18 +72,32 @@ header, footer {
   <br><br>
   
   <b>Highest level of education earned:</b><hr>
+  <div class="spacing">
   <input type="radio" name="education" value="some_hs"> Some high school or less<br>
+  </div>
+  <div class="spacing">
   <input type="radio" name="education" value="hs_diploma"> High school diploma<br>
+  </div>
+  <div class="spacing">
   <input type="radio" name="education" value="two_year"> 2-year college degree/trade school (please specify area of focus/major):<br>
   <input type="text" size="50" name="two_year_major"><br>
+  </div>
+  <div class="spacing">
   <input type="radio" name="education" value="four_year"> 4-year college degree (please specify area of focus/major):<br>
   <input type="text" size="50" name="four_year_major"><br>
+  </div>
+  <div class="spacing">
   <input type="radio" name="education" value="masters"> Masters degree (please specify area of focus/major):<br>
   <input type="text" size="50" name="masters_major"><br>
+  </div>
+  <div class="spacing">
   <input type="radio" name="education" value="professional"> Professional degree (please specify area of focus/major):<br>
   <input type="text" size="50" name="professional_major"><br>
+  </div>
+  <div class="spacing">
   <input type="radio" name="education" value="doctorate"> Doctorate degree (please specify area of focus/major):<br>
   <input type="text" size="50" name="doctorate_major"><br>
+  </div>
   <br><br>
   
   <b>I use a computer:</b><hr>
