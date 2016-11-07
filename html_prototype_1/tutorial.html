@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <TITLE>Microworld Hospital</TITLE>
+  
+  <style>
+    body {
+        font: 16px Helvetica;
+        background: #99CCFF;
+    }
+	h1 {
+	    font: 25px Arial Black;
+	    text-align: center;
+	}
+	.game_container {
+	  margin: 0 auto;
+	  max-width: 900px;
+	  min-width: 840px;
+	  height: 460px;
+	  border-radius: 7pt;
+	  box-shadow: 1px 1px 6px rgba(0,0,200,0.4);
+	  padding: 10px;
+	}
+	.statistics {
+		margin-right: 5px;
+		border: 1px solid black;
+		padding: 5px;
+		width: 90%;
+		height:425px;
+	}
+	.rooms {
+	    margin-right: 5px;
+		border: 1px solid black;
+		padding: 5px;
+		width: 90%;
+		height:425px;
+	}
+	.timer {
+		border: 1px solid black;
+		padding: 5px;
+		width: 90%;
+		height:10px;
+		margin-bottom:10px; 
+		text-align:center;
+		vertical-align: middle;
+		font: 24px Arial Black;
+		color: black;
+		line-height: 10px;
+		
+	}
+	.controls {
+		border: 1px solid black;
+		padding: 5px;
+		width: 90%;
+		height:375px;
+	}
+	
+	.stat_panel {
+	    background: gainsboro;
+		padding: 5px;
+	}
+	
+	.room_box {
+	    background: gainsboro;
+		padding: 5px; 
+		border: 1px solid gray; 
+		margin: 5px; 
+		height: 33%;
+	}
+	.room_header {
+	    text-align:center;
+	}
+	
+	.room_inner_box {
+	    background: white;
+		padding: 5px; 
+		border: 1px solid gray;  
+		height: 75%;
+		text-align:center;
+		vertical-align: middle;
+		font: 24px Arial Black;
+		color: silver;
+		line-height: 380%;
+
+	}
+  </style>
+  
+</head>
+<body>
+
+<div style="text-align:center; font: 24px Arial Black;">Microworld Hospital Game (PRACTICE MODE)</div>
+
+<div class="game_container">
+
+<div style="float:left; width:28%;">
+  Statistics
+  <div class="statistics">
+  
+  
+    <div class="stat_panel" id="your_panel">
+	  <div style="text-align:center; font: 18px Helvetica;"><b>Bayview Medical Clinic (You)</b></div>
+	  <div style="border: 2px solid gray; padding:10px;">
+	    <div><b><i>Waiting Room</i></b></div>
+		<div style="border: 1px solid gray; padding:3px; background:white;">
+		 <div style="padding-top:1px;">
+		   <div style="float:left; width:75px;">Standard:</div>
+		   <div style="overflow:hidden;"><img src="circle1.png" style="padding-right:10px;"><img src="circle1.png" style="padding-right:10px;"></div>
+		 </div>
+		 <div style="padding-top:1px;">
+		   <div style="float:left; width:75px;">Surgery:</div>
+		   <div style="overflow:hidden;"><img src="circle1.png" style="padding-right:10px;"></div>
+		 </div>
+		</div>
+		<div style="margin-top:2px;"><b><i>Statistics</i></b></div>
+		<div style="border: 1px solid gray; padding:3px; height:50px;">
+		  <div style="border: 1px solid gray; padding:2px; margin-right:15px; background:white; width:45%; float:left;">
+		    <div style="padding-bottom:0px; font:12px Helvetica;">2 Doctor(s)</div>
+			<div style="padding-bottom:0px; font:12px Helvetica;">3 Nurse(s)</div>
+			<div style="font:12px Helvetica;">2 Surgeon(s)</div>
+		  </div>
+		  <div style="overflow:hidden; background:white; padding:0px; text-align:center;">
+		    <b>Score</b>
+			<div style="border:1px solid gray; margin:2px; padding:0px; font:24px Helvetica;"><b>0</b></div>
+		  </div>
+		</div>
+      </div>
+	</div>
+	
+	
+	<div class="stat_panel" style="margin-top:5px;" id="agents_panel">
+	  <div style="text-align:center; font: 18px Helvetica;"><b>OneLife Medical Center</b></div>
+	  <div style="border: 2px solid gray; padding:5px;">
+	    <div><b><i>Waiting Room</i></b></div>
+		<div style="border: 1px solid gray; padding:2px; height:50px; background:white;">
+		 <div style="padding-top:5px; margin-right:50px; float:left;">Queue<br>Status</div>
+		 <div style="overflow:hidden; margin-top:7px; padding:15px; background:lime; width:0px; border:1px solid black;"></div>
+		</div>
+		<div style="margin-top:2px;"><b><i>Statistics</i></b></div>
+		<div style="border: 1px solid gray; padding:3px; height:50px;">
+		  <div style="border: 1px solid gray; padding:2px; margin-right:15px; background:white; width:45%; float:left;">
+		    <div style="padding-bottom:0px; font:12px Helvetica;">0 Doctor(s)</div>
+			<div style="padding-bottom:0px; font:12px Helvetica;">1 Nurse(s)</div>
+			<div style="font:12px Helvetica;">1 Surgeon(s)</div>
+		  </div>
+		  <div style="overflow:hidden; background:white; padding:0px; text-align:center;">
+		    <b>Score</b>
+			<div style="border:1px solid gray; margin:2px; padding:0px; font:24px Helvetica;"><b>0</b></div>
+		  </div>
+		</div>
+      </div>
+	</div>
+	
+	
+  </div>
+</div>
+
+<div class="holder1" style="overflow:hidden; width:68%;">
+  <div style="float:left; width:55%;">
+    Rooms
+    <div class="rooms">
+	  <div style="width:50%; float:left; height:88%">
+	    <div class="room_box">
+		  <div class="room_header"><b>Room 1</b></div>
+		  <div class="room_inner_box">VACANT</div>
+		</div>
+		<div class="room_box">
+		  <div class="room_header"><b>Room 3</b></div>
+		  <div class="room_inner_box">VACANT</div>
+		</div>
+		<div class="room_box">
+		  <div class="room_header"><b>Room 5</b></div>
+		  <div class="room_inner_box">VACANT</div>
+		</div>
+	  </div>
+	  
+	  <div style="width:50%; float:right; height:88%">
+	    <div class="room_box">
+		  <div class="room_header"><b>Room 2</b></div>
+		  <div class="room_inner_box">VACANT</div>
+		</div>
+		<div class="room_box">
+		  <div class="room_header"><b>Room 4</b></div>
+		  <div class="room_inner_box">VACANT</div>
+		</div>
+		<div class="room_box">
+		  <div class="room_header"><b>Room 6</b></div>
+		  <div class="room_inner_box">VACANT</div>
+		</div>
+	  </div>
+      
+    </div>
+  </div>
+  
+  <div class="holder2" style="overflow:hidden; width:45%;">
+    <div>
+	  Timer
+      <div class="timer">
+	  02:00
+	  </div>
+	  Controls
+	  <div class="controls">
+	    <div style="height:33%; padding:2px;">
+	      <button type="button" style="height:90%; width:32%;">Assign<br>Standard<br>Patient</button>
+		  <button type="button" style="height:90%; width:32%;">Assign<br>Surgery<br>Patient</button>
+		</div>
+		<div style="height:33%; padding:5px;">
+	      <button type="button" style="height:90%; width:32%;">Assign<br>Doctor</button>
+		  <button type="button" style="height:90%; width:32%;">Assign<br>Nurse</button>
+		  <button type="button" style="height:90%; width:32%;">Assign<br>Surgeon</button>
+		</div>
+		<div style="height:33%; padding:5px;">
+	      <button type="button" style="height:90%; width:32%;">Give<br>Doctor</button>
+		  <button type="button" style="height:90%; width:32%;">Give<br>Nurse</button>
+		  <button type="button" style="height:90%; width:32%;">Give<br>Surgeon</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+</div>
+
+</div>
+
+</body>
+</html>
