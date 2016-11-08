@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<HEAD>
+	<title>Microworld Hospital</title>
+	<style>	
+		div.container {
+			width: 100%;
+			border: 1px solid gray;
+		}
+		div.form {
+			width: 100%;
+			border: 1px solid gray;
+			padding: 1em;
+		}
+		div.spacing{
+			padding-top:1em;
+			padding-bottom:0.5em;
+		}
+
+		header, footer {
+			padding: 1em;
+			color: white;
+			background-color: #99ccff;
+			clear: left;
+			text-align: center;
+		}
+	</style>
+</HEAD>
+<BODY>
+	<div class="containter">
+		<header>
+			<h1>
+				Training
+			</h1>
+		</header>
+		<div>
+			<hr>
+			<b>Objective:</b>
+			</br>
+			You are the Bayview Medical Clinic manager who must schedule patients 
+			</br>
+			and hospital staff to treat as many patients as possible.
+			</br><hr></br>
+			
+			<b>How to Play:</b>
+			</br>
+			There are 2 types of patients:
+			</br>
+			A: Standard
+			</br>
+			B: Surgery
+			</br></br>
+			The standard patient requires a doctor and a nurse in order to start recovery
+			</br>
+			and the surgery patients require a surgeon and a nurse to begin recovering.
+			</br></br>
+			As soon as a patient is assigned to a room and has both resources also 
+			</br>
+			assigned, a timer will begin to count down to their recovery.
+			</br></br>
+			You also have help! The neighboring medical clinic OneLife Medical Center
+			</br>
+			is willing to share staff with you. Both you and the Center can share
+			</br>
+			send and receive resources to help save the greatest numnber of patients.
+			</br></br>
+			<img src="./pics/sharing.png" style="width:330px;height:150px;">
+			</br><hr></br>
+			<b>Interface:</b>
+			</br>
+			There are four main parts to the interface: Your panel, OneLife 
+			</br>
+			Medical's panel, rooms, and controls.
+			</br></br>
+			<img src="./pics/interface.png" style="width:600px;height:450px;">
+			</br></br>
+			To treat patients you need to assign them to a room with the correct hospital
+			</br>
+			staff. You have 6 rooms. Once a patient or staff is assigned to a room they
+			</br>
+			cannot be unassigned.
+			</br></br>
+			<img src="./pics/assigning.png" style="width:600px;height:450px;">
+			</br></br>
+			Within the waiting room, each circle represents a patient. The color of
+			</br>
+			the circles reflects the number of patients waiting:
+			</br>
+			Green: 1-2
+			</br>
+			Yellow: 2-4
+			</br>
+			Red: 5-6
+			</br></br>
+			The maximum capacity is 6. Once the waiting room is full, no new patients
+			</br>
+			can enter the waiting room.
+			</br></br>
+			Your available staff will be displayed in the Bayview Medical panel.
+			</br>
+			You can see OneLife's available staff and queu color as well. For each
+			</br>
+			patient treated in <b>EITHER</b> hospital increases the score by 1.
+			</br></br>
+			<img src="./pics/stats.png" style="width:200px;height:450px;">
+			</br></br>
+			After completing patient and staff assignment, treatment will begin.
+			</br>
+			When it completes after 60 seconds, you can collect your resources
+			</br>
+			by clicking the room before you can use them again.
+			</br></br>
+			<img src="./pics/collect.png" style="width:350px;height:450px;">
+			</br><hr></br>
+			<b>Trail run:</b>
+			</br>
+			You will play two runs. The first will begin when you go to the next
+			</br>
+			page by clicking the button at the bottom of the screen. This first
+			</br>
+			run will be for practice and allow you to get used to the controls.
+			</br>
+			This will last 2 minutes and then you will begin the full trial.
+			</br>
+			The full trial will be 8 minutes and a final score will be shown
+			</br>
+			at the end. Please contact the proctor if you have any further questions.
+			</br>
+		</div>
+		</br>
+		<button onclick="window.location.href='./tutorial.html'">
+			Continue to practice
+		</button>
+		</br></br>
+		<footer>
+			ASU Polytechnic
+			</br>
+			Copyright 2016
+		</footer>
+	</div>
+</BODY>
+</html>
