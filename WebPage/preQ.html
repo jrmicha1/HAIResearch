@@ -23,6 +23,14 @@ header, footer {
     clear: left;
     text-align: center;
 }
+b {
+	font-size: 25px;
+}
+select {
+	width:250px;
+	height:50px;
+	font-size:20px;
+}
 </style>
 </HEAD>
 <BODY>
@@ -40,9 +48,13 @@ header, footer {
   <br><br>
   
   <b>Gender:</b><hr>
-  <input type="radio" name="gender" value="male"> Male<br>
-  <input type="radio" name="gender" value="female"> Female<br>
-  <input type="radio" name="gender" value="other"> Undisclosed
+  
+  <select name="gender">
+	<option value="">- Please Select -</option>
+	<option value="male">Male</option>
+	<option value="female">Female</option>
+	<option value="undisclosed">Undisclosed</option>
+  </select>
   <br><br>
   
   <b>If a current student, please write in the following:</b><hr>
