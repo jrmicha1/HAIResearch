@@ -24,12 +24,21 @@ header, footer {
     text-align: center;
 }
 b {
-	font-size: 25px;
+	font-size: 30px;
 }
 select {
 	width:300px;
 	height:50px;
-	font-size:20px;
+	font-size:30px;
+}
+input[type="checkbox"]{
+	vertical-align: middle;
+	width: 70px;
+	height: 70px;
+}
+span.checkbox_label{
+	vertical-align: middle;
+	font-size: 30px;
 }
 </style>
 </HEAD>
@@ -141,13 +150,11 @@ select {
   <br><br>
   
   <b>I use the computer for (check all that apply):</b><hr>
-  <input type="checkbox" name="cpu_usage_purpose" value="info"> Looking up information<br>
+  <input type="checkbox" name="cpu_usage_purpose" value="info"><span class="checkbox_label"> Looking up information</span><br>
   <input type="checkbox" name="cpu_usage_purpose" value="email"> Checking email<br>
   <input type="checkbox" name="cpu_usage_purpose" value="word_processing"> Word processing<br>
   <input type="checkbox" name="cpu_usage_purpose" value="spreadsheets"> Spreadsheets<br>
   <input type="checkbox" name="cpu_usage_purpose" value="games"> Playing games<br>
-  <input type="checkbox" name="cpu_usage_purpose" value="other"> Other (please specify):<br>
-  <input type="text" size="50" name="cpu_usage_purpose_other_desc"><br>
   <br><br>
   
   <b>I own or play video games on the following (check all that apply):</b><hr>
@@ -163,8 +170,6 @@ select {
   <input type="checkbox" name="vg_type" value="rpg"> Role-playing (RPG)<br>
   <input type="checkbox" name="vg_type" value="adventure"> Adventure<br>
   <input type="checkbox" name="vg_type" value="puzzle"> Puzzle<br>
-  <input type="checkbox" name="vg_type" value="other"> Other (please specify):<br>
-  <input type="text" size="50" name="vg_type_other_desc"><br>
   <br><br>
   
   <b>I use the following (check all that apply):</b><hr>
@@ -198,7 +203,7 @@ select {
 </form>
 <form action="training.html">
   <b>Thank you for completing this questionnaire</b><hr>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" style="font-size:50px; padding:10px;">
 </form>
 </div>
 </BODY>
