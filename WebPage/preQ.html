@@ -27,7 +27,7 @@ b {
 	font-size: 25px;
 }
 select {
-	width:250px;
+	width:300px;
 	height:50px;
 	font-size:20px;
 }
@@ -174,20 +174,26 @@ select {
   <input type="checkbox" name="devices_used" value="none"> None of the above<br>
   <br><br>
   
-  <b>How much experience do you have playing video games?:</b><hr>
-  <input type="radio" name="vg_experience" value="none"> None<br>
-  <input type="radio" name="vg_experience" value="less_than_one"> Less than 1 year<br>
-  <input type="radio" name="vg_experience" value="one-two"> 1 - 2 years<br>
-  <input type="radio" name="vg_experience" value="more_than_two"> More than 2 years<br>
+  <b>How much experience do you have playing video games?</b><hr>
+  <select name="vg_experience">
+	<option value="">- Please Select -</option>
+	<option value="none">None</option>
+	<option value="less_than_one">Less than 1 year</option>
+	<option value="one-two">1 - 2 years</option>
+	<option value="more_than_two">More than 2 years</option>
+  </select>
   <br><br>
   
   <b>I play video games:</b><hr>
-  <input type="radio" name="vg_play_freq" value="daily"> Daily<br>
-  <input type="radio" name="vg_play_freq" value="few_times_a_week"> A few times a week<br>
-  <input type="radio" name="vg_play_freq" value="few_times_a_month"> A few times a month<br>
-  <input type="radio" name="vg_play_freq" value="few_times_a_year"> A few times a year<br>
-  <input type="radio" name="vg_play_freq" value="less_than_few_times_a_year"> Less than A few times a year<br>
-  <input type="radio" name="vg_play_freq" value="never"> Never<br>
+  <select name="vg_play_freq">
+	<option value="">- Please Select -</option>
+	<option value="daily">Daily</option>
+	<option value="few_times_a_week">A few times a week</option>
+	<option value="few_times_a_month">A few times a month</option>
+	<option value="few_times_a_year">A few times a year</option>
+	<option value="less_than_few_times_a_year">Less than A few times a year</option>
+	<option value="never">Never</option>
+  </select>
   <br><br>
 </form>
 <form action="training.html">
