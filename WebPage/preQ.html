@@ -27,7 +27,7 @@ b {
 	font-size: 35px;
 }
 select {
-	width:300px;
+	width:500px;
 	height:50px;
 	font-size:30px;
 }
@@ -141,12 +141,15 @@ span.checkbox_label{
   <br><br>
   
   <b>I use a computer:</b><hr>
-  <input type="radio" name="cpu_usage" value="daily"> Daily<br>
-  <input type="radio" name="cpu_usage" value="every_couple_days"> Every couple days<br>
-  <input type="radio" name="cpu_usage" value="once_a_week"> Once a week<br>
-  <input type="radio" name="cpu_usage" value="every_couple_weeks"> Every couple weeks<br>
-  <input type="radio" name="cpu_usage" value="less_than_once_a_month"> Less than once a month<br>
-  <input type="radio" name="cpu_usage" value="never"> Never<br>
+  <select name="cpu_usage">
+	<option value="">- Please Select -</option>
+	<option value="daily">Daily</option>
+	<option value="every_couple_days">Every couple days</option>
+	<option value="once_a_week">Once a week</option>
+	<option value="every_couple_weeks">Every couple weeks</option>
+	<option value="less_than_once_a_month">Less than once a month</option>
+	<option value="never">Never</option>
+  </select>
   <br><br>
   
   <b>I use the computer for (check all that apply):</b><hr>
