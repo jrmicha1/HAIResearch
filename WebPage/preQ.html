@@ -222,53 +222,16 @@ span.checkbox_label{
   <br><br>
   
   <b>Highest level of education earned:</b><hr>
-  <div class="spacing">
-  <input type="radio" name="education" style="float:left" value="some_hs"> Some high school or less
-  </div>
-  
-  <div class="spacing">
-  <input type="radio" name="education" style="float:left" value="hs_diploma"> High school diploma
-  </div>
-  
-  <div class="spacing">
-  <input type="radio" name="education" style="float:left" value="two_year">
-  <div style="overflow:hidden;">
-  2-year college degree/trade school (please specify area of focus/major):<br>
-  <input type="text" size="60" name="two_year_major">
-  </div>
-  </div>
-  
-  <div class="spacing">
-  <input type="radio" name="education" style="float:left" value="four_year"> 
-  <div style="overflow:hidden;">
-  4-year college degree (please specify area of focus/major):<br>
-  <input type="text" size="60" name="four_year_major">
-  </div>
-  </div>
-  
-  <div class="spacing">
-  <input type="radio" name="education" style="float:left" value="masters">
-  <div style="overflow:hidden;">
-  Masters degree (please specify area of focus/major):<br>
-  <input type="text" size="60" name="masters_major">
-  </div>
-  </div>
-  
-  <div class="spacing">
-  <input type="radio" name="education" style="float:left" value="professional">
-  <div style="overflow:hidden;">
-  Professional degree (please specify area of focus/major):<br>
-  <input type="text" size="60" name="professional_major">
-  </div>
-  </div>
-  
-  <div class="spacing">
-  <input type="radio" name="education" style="float:left" value="doctorate">
-  <div style="overflow:hidden;">
-  Doctorate degree (please specify area of focus/major):<br>
-  <input type="text" size="60" name="doctorate_major">
-  </div>
-  </div>
+  <select name="education">
+	<option value="">- Please Select -</option>
+	<option value="some_hs">Some high school or less</option>
+	<option value="hs_diploma">High school diploma</option>
+	<option value="two_year">2-year college degree/trade school</option>
+	<option value="four_year">4-year college degree</option>
+	<option value="masters">Masters degree</option>
+	<option value="professional">Professional degree</option>
+	<option value="doctorate">Doctorate degree</option>
+  </select>
   
   <br><br>
   
