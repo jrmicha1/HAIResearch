@@ -8,19 +8,24 @@
 }
 div.container {
     width: 100%;
-    border: 1px solid gray;
+    border: 2px solid black;
 }
 div.form {
     width: 100%;
-    border: 1px solid gray;
-    padding: 1em;
+    border: 2px solid black;
+	border-top: 0;
+}
+div.formInner {
+	padding: 1em;
 }
 div.spacing{
     padding-top:0.25em;
     padding-bottom:0.5em;
 	font: 20px Arial;
 }
-
+hr {
+	border-color: black;
+}
 div.section_header {
 	padding-top:25px;
 	width: 450px;
@@ -52,6 +57,7 @@ input[type="text"] {
 	width:450px;
 	height:50px;
 	font-size:20px;
+	padding: 10px;
 }
 input[type="checkbox"]{
 	vertical-align: middle;
@@ -72,7 +78,7 @@ span.checkbox_label{
 </header>
 </div>
 <div class="form">
-
+<div class="formInner">
 <form action="training.html">
   <div class="section_header">Age:</div><hr>
   <select name="age">
@@ -397,6 +403,7 @@ span.checkbox_label{
   <div class="section_header">Thank you for completing this questionnaire</div><hr>
   <input type="submit" value="Submit" style="font:25px Arial Black; padding:25px;">
 </form>
+</div>
 </div>
 </BODY>
 </HTML>
