@@ -12,8 +12,9 @@ div.form {
     padding: 1em;
 }
 div.spacing{
-    padding-top:1em;
+    padding-top:0.75em;
     padding-bottom:0.5em;
+	font: 25px Arial;
 }
 
 header, footer {
@@ -24,21 +25,21 @@ header, footer {
     text-align: center;
 }
 b {
-	font-size: 35px;
+	font: 35px Arial Black;
 }
 select {
-	width:500px;
+	width:450px;
 	height:50px;
-	font-size:30px;
+	font-size:20px;
 }
 input[type="checkbox"]{
 	vertical-align: middle;
-	width: 70px;
-	height: 70px;
+	width: 50px;
+	height: 50px;
 }
 span.checkbox_label{
 	vertical-align: middle;
-	font-size: 30px;
+	font: 25px Arial;
 }
 </style>
 </HEAD>
@@ -198,23 +199,50 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <b>If a current student, please write in the following:</b><hr>
+  <b>If a current student, please answer the following:</b><hr>
   <div class="spacing">
   College:<br>
-  <input type="text" size="50" name="college">
+  <select name="college" style="margin-top:5px;">
+	<option value="">- Please Select -</option>
+	<option value="asu">Arizona State University</option>
+	<option value="other">Other</option>
+  </select>
   </div>
   <div class="spacing">
   Major:<br>
-  <input type="text" size="50" name="major">
+  <select name="major" style="margin-top:5px;">
+	<option value="">- Please Select -</option>
+	<option value="major1">Major 1</option>
+	<option value="major2">Major 2</option>
+	<option value="major3">Major 3</option>
+  </select>
   </div>
   <div class="spacing">
   Degree in pursuit of:<br>
-  <input type="text" size="50" name="degree">
+  <select name="major" style="margin-top:5px;">
+	<option value="">- Please Select -</option>
+	<option value="degree1">Degree 1</option>
+	<option value="degree2">Degree 2</option>
+	<option value="degree3">Degree 3</option>
+  </select>
   </div>
   <div class="spacing">
   Number of years pursuing this degree:<br>
-  <input type="number" min="1" name="degree_years">
+  <select name="age">
+	<option value="">- Please Select -</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+  </select>
   </div>
+  
   <br><br>
   
   <b>If employed, please write in your occupation:</b><hr>
