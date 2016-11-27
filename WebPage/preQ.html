@@ -12,9 +12,15 @@ div.form {
     padding: 1em;
 }
 div.spacing{
-    padding-top:0.75em;
+    padding-top:0.25em;
     padding-bottom:0.5em;
 	font: 25px Arial;
+}
+
+div.section_header {
+	padding-top:25px;
+	width: 450px;
+	font: 25px Arial Black;
 }
 
 header, footer {
@@ -44,7 +50,7 @@ input[type="checkbox"]{
 }
 span.checkbox_label{
 	vertical-align: middle;
-	font: 25px Arial;
+	font: 20px Arial;
 }
 </style>
 </HEAD>
@@ -58,7 +64,7 @@ span.checkbox_label{
 <div class="form">
 
 <form action="training.html">
-  <b>Age:</b><hr>
+  <div class="section_header">Age:</div><hr>
   <select name="age">
 	<option value="">- Please Select -</option>
 	<option value="1">1</option>
@@ -194,7 +200,7 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <b>Gender:</b><hr>
+  <div class="section_header">Gender:</div><hr>
   
   <select name="gender">
 	<option value="">- Please Select -</option>
@@ -204,7 +210,7 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <b>If a current student, please answer the following:</b><hr>
+  <div class="section_header">If a current student, please answer the following:</div><hr>
   <div class="spacing">
   College:<br>
   <select name="college" style="margin-top:5px;">
@@ -250,11 +256,11 @@ span.checkbox_label{
   
   <br><br>
   
-  <b>If employed, please write in your occupation:</b><hr>
+  <div class="section_header">If employed, please write in your occupation:</div><hr>
   <input type="text" size="100" name="occupation"><br>
   <br><br>
   
-  <b>Highest level of education earned:</b><hr>
+  <div class="section_header">Highest level of education earned:</div><hr>
   <select name="education">
 	<option value="">- Please Select -</option>
 	<option value="some_hs">Some high school or less</option>
@@ -268,7 +274,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <b>I use a computer:</b><hr>
+  <div class="section_header">I use a computer:</div><hr>
   <select name="cpu_usage">
 	<option value="">- Please Select -</option>
 	<option value="daily">Daily</option>
@@ -280,7 +286,7 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <b>I use the computer for (check all that apply):</b><hr>
+  <div class="section_header">I use the computer for (check all that apply):</div><hr>
   <input type="checkbox" name="cpu_usage_purpose" value="info" id="cpu_usage_purpose_1">
   <label for="cpu_usage_purpose_1"><span class="checkbox_label"> Looking up information</span></label><br><br>
   
@@ -301,7 +307,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <b>I own or play video games on the following (check all that apply):</b><hr>
+  <div class="section_header">I own or play video games on the following (check all that apply):</div><hr>
   <input type="checkbox" name="vg_platform" value="console" id="vg_platform_1"> 
   <label for="vg_platform_1"><span class="checkbox_label">Console connected to a television</span></label><br><br>
   
@@ -316,7 +322,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <b>I play the following types of video games (check all that apply):</b><hr>
+  <div class="section_header">I play the following types of video games (check all that apply):</div><hr>
   <input type="checkbox" name="vg_type" value="sports" id="vg_type_1"> 
   <label for="vg_type_1"><span class="checkbox_label">Sports or Racing</span></label><br><br>
   
@@ -340,7 +346,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <b>I use the following (check all that apply):</b><hr>
+  <div class="section_header">I use the following (check all that apply):</div><hr>
   <input type="checkbox" name="devices_used" value="basic_mobile" id="devices_used_1"> 
   <label for="devices_used_1"><span class="checkbox_label">Basic mobile phone</span></label><br><br>
   
@@ -355,7 +361,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <b>How much experience do you have playing video games?</b><hr>
+  <div class="section_header">How much experience do you have playing video games?</div><hr>
   <select name="vg_experience">
 	<option value="">- Please Select -</option>
 	<option value="none">None</option>
@@ -365,7 +371,7 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <b>I play video games:</b><hr>
+  <div class="section_header">I play video games:</div><hr>
   <select name="vg_play_freq">
 	<option value="">- Please Select -</option>
 	<option value="daily">Daily</option>
@@ -378,8 +384,8 @@ span.checkbox_label{
   <br><br>
 </form>
 <form action="training.html">
-  <b>Thank you for completing this questionnaire</b><hr>
-  <input type="submit" value="Submit" style="font-size:50px; padding:10px;">
+  <div class="section_header">Thank you for completing this questionnaire</div><hr>
+  <input type="submit" value="Submit" style="font:25px Arial Black; padding:25px;">
 </form>
 </div>
 </BODY>
