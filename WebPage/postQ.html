@@ -41,6 +41,7 @@ label {
     text-align: center;
 }
 input[type=radio] {
+    -moz-appearance: checkbox;
     border: 0px;
     width: 100%;
     height: 2em;
@@ -50,7 +51,10 @@ input[type=radio] {
 $(document).ready(function(){
     var $table = $('table');
     $table.floatThead({
-    position: 'absolute'
+        position: 'fixed',
+        responsiveContainer: function($table){
+            return $table.closest('.table-responsive');
+        }
     });
 });
 </script>
