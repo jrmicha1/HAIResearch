@@ -10,6 +10,7 @@ div.form {
     width: 100%;
     border: 1px solid gray;
     padding: 1em;
+    text-align: center;
 }
 div.spacing{
     padding-top:0.25em;
@@ -19,7 +20,6 @@ div.spacing{
 
 div.section_header {
 	padding-top:25px;
-	width: 450px;
 	font: 25px Arial Black;
 }
 
@@ -64,7 +64,7 @@ span.checkbox_label{
 <div class="form">
 
 <form action="training.html">
-  <div class="section_header">Age:</div><hr>
+  <div class="section_header">*Age:</div><hr>
   <select name="age">
 	<option value="">- Please Select -</option>
 	<option value="1">1</option>
@@ -200,7 +200,7 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <div class="section_header">Gender:</div><hr>
+  <div class="section_header">*Gender:</div><hr>
   
   <select name="gender">
 	<option value="">- Please Select -</option>
@@ -210,7 +210,7 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <div class="section_header">If a current student, please answer the following:</div><hr>
+  <div class="section_header">If you are a current student, please answer the following:</div><hr>
   <div class="spacing">
   College:<br>
   <select name="college" style="margin-top:5px;">
@@ -260,7 +260,7 @@ span.checkbox_label{
   <input type="text" size="100" name="occupation"><br>
   <br><br>
   
-  <div class="section_header">Highest level of education earned:</div><hr>
+  <div class="section_header">*Highest level of education earned:</div><hr>
   <select name="education">
 	<option value="">- Please Select -</option>
 	<option value="some_hs">Some high school or less</option>
@@ -274,7 +274,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <div class="section_header">I use a computer:</div><hr>
+  <div class="section_header">*I use a computer:</div><hr>
   <select name="cpu_usage">
 	<option value="">- Please Select -</option>
 	<option value="daily">Daily</option>
@@ -286,7 +286,7 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <div class="section_header">I use the computer for (check all that apply):</div><hr>
+  <div class="section_header">*I use the computer for (check all that apply):</div><hr>
   <input type="checkbox" name="cpu_usage_purpose" value="info" id="cpu_usage_purpose_1">
   <label for="cpu_usage_purpose_1"><span class="checkbox_label"> Looking up information</span></label><br><br>
   
@@ -300,19 +300,19 @@ span.checkbox_label{
   <label for="cpu_usage_purpose_4"><span class="checkbox_label">Spreadsheets</span></label><br><br>
   
   <input type="checkbox" name="cpu_usage_purpose" value="games" id="cpu_usage_purpose_5"> 
-  <label for="cpu_usage_purpose_5"><span class="checkbox_label">Playing games</span></label><br><br>
+  <label for="cpu_usage_purpose_5"><span class="checkbox_label">Playing video games</span></label><br><br>
   
   <input type="checkbox" name="cpu_usage_purpose" value="none" id="cpu_usage_purpose_6"> 
   <label for="cpu_usage_purpose_6"><span class="checkbox_label">None of the above</span></label><br><br>
   
   <br><br>
   
-  <div class="section_header">I own or play video games on the following (check all that apply):</div><hr>
+  <div class="section_header">*I own or play video games on the following (check all that apply):</div><hr>
   <input type="checkbox" name="vg_platform" value="console" id="vg_platform_1"> 
   <label for="vg_platform_1"><span class="checkbox_label">Console connected to a television</span></label><br><br>
   
   <input type="checkbox" name="vg_platform" value="mobile" id="vg_platform_2"> 
-  <label for="vg_platform_2"><span class="checkbox_label">Hand-held, tablet, or mobile phone</span></label><br><br>
+  <label for="vg_platform_2"><span class="checkbox_label">Handheld device, tablet, or mobile phone</span></label><br><br>
   
   <input type="checkbox" name="vg_platform" value="pc" id="vg_platform_3"> 
   <label for="vg_platform_3"><span class="checkbox_label">Personal computer</span></label><br><br>
@@ -322,7 +322,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <div class="section_header">I play the following types of video games (check all that apply):</div><hr>
+  <div class="section_header">*I play the following types of video games (check all that apply):</div><hr>
   <input type="checkbox" name="vg_type" value="sports" id="vg_type_1"> 
   <label for="vg_type_1"><span class="checkbox_label">Sports or Racing</span></label><br><br>
   
@@ -346,7 +346,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <div class="section_header">I use the following (check all that apply):</div><hr>
+  <div class="section_header">*I use the following (check all that apply):</div><hr>
   <input type="checkbox" name="devices_used" value="basic_mobile" id="devices_used_1"> 
   <label for="devices_used_1"><span class="checkbox_label">Basic mobile phone</span></label><br><br>
   
@@ -361,7 +361,7 @@ span.checkbox_label{
   
   <br><br>
   
-  <div class="section_header">How much experience do you have playing video games?</div><hr>
+  <div class="section_header">*How much experience do you have playing video games?</div><hr>
   <select name="vg_experience">
 	<option value="">- Please Select -</option>
 	<option value="none">None</option>
@@ -371,14 +371,14 @@ span.checkbox_label{
   </select>
   <br><br>
   
-  <div class="section_header">I play video games:</div><hr>
+  <div class="section_header">*I play video games:</div><hr>
   <select name="vg_play_freq">
 	<option value="">- Please Select -</option>
 	<option value="daily">Daily</option>
 	<option value="few_times_a_week">A few times a week</option>
 	<option value="few_times_a_month">A few times a month</option>
 	<option value="few_times_a_year">A few times a year</option>
-	<option value="less_than_few_times_a_year">Less than A few times a year</option>
+	<option value="less_than_few_times_a_year">Less than a few times a year</option>
 	<option value="never">Never</option>
   </select>
   <br><br>
