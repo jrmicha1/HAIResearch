@@ -23,6 +23,11 @@ div.section_header {
 	font: 25px Arial Black;
 }
 
+div.checkboxes {
+	width:500px; 
+	margin:auto;
+}
+
 header, footer {
     padding: 1em;
     color: white;
@@ -37,6 +42,7 @@ select {
 	width:450px;
 	height:50px;
 	font-size:20px;
+	vertical-align: left;
 }
 input[type="text"] {
 	width:450px;
@@ -275,6 +281,7 @@ span.checkbox_label{
   <br><br>
   
   <div class="section_header">*I use a computer:</div><hr>
+  
   <select name="cpu_usage" required>
 	<option value="">- Please Select -</option>
 	<option value="daily">Daily</option>
@@ -286,7 +293,11 @@ span.checkbox_label{
   </select>
   <br><br>
   
+  
+  
   <div class="section_header">*I use the computer for (check all that apply):</div><hr>
+  <div class="checkboxes">
+  <div style="text-align:left;">
   <input type="checkbox" name="cpu_usage_purpose" value="info" id="cpu_usage_purpose_1">
   <label for="cpu_usage_purpose_1"><span class="checkbox_label"> Looking up information</span></label><br><br>
   
@@ -304,10 +315,15 @@ span.checkbox_label{
   
   <input type="checkbox" name="cpu_usage_purpose" value="none" id="cpu_usage_purpose_6"> 
   <label for="cpu_usage_purpose_6"><span class="checkbox_label">None of the above</span></label><br><br>
+  </div>
+  </div>
   
   <br><br>
   
   <div class="section_header">*I own or play video games on the following (check all that apply):</div><hr>
+  
+  <div class="checkboxes">
+  <div style="text-align:left;">
   <input type="checkbox" name="vg_platform" value="console" id="vg_platform_1"> 
   <label for="vg_platform_1"><span class="checkbox_label">Console connected to a television</span></label><br><br>
   
@@ -319,10 +335,14 @@ span.checkbox_label{
   
   <input type="checkbox" name="vg_platform" value="none" id="vg_platform_4"> 
   <label for="vg_platform_4"><span class="checkbox_label">None of the above</span></label><br><br>
+  </div>
+  </div>
   
   <br><br>
   
   <div class="section_header">*I play the following types of video games (check all that apply):</div><hr>
+  <div class="checkboxes">
+  <div style="text-align:left;">
   <input type="checkbox" name="vg_type" value="sports" id="vg_type_1"> 
   <label for="vg_type_1"><span class="checkbox_label">Sports or Racing</span></label><br><br>
   
@@ -343,10 +363,14 @@ span.checkbox_label{
   
   <input type="checkbox" name="vg_type" value="puzzle" id="vg_type_7"> 
   <label for="vg_type_7"><span class="checkbox_label">None of the above</span></label><br><br>
+  </div>
+  </div>
   
   <br><br>
   
   <div class="section_header">*I use the following (check all that apply):</div><hr>
+  <div class="checkboxes">
+  <div style="text-align:left;">
   <input type="checkbox" name="devices_used" value="basic_mobile" id="devices_used_1"> 
   <label for="devices_used_1"><span class="checkbox_label">Basic mobile phone</span></label><br><br>
   
@@ -358,6 +382,8 @@ span.checkbox_label{
   
   <input type="checkbox" name="devices_used" value="none" id="devices_used_4"> 
   <label for="devices_used_4"><span class="checkbox_label">None of the above</span></label><br><br>
+  </div>
+  </div>
   
   <br><br>
   
