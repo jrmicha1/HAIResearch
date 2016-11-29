@@ -18,7 +18,7 @@ var text = [
 ];
 
 var page = 0;
-var timeDelay = 10000;
+var timeDelay = 1000;
 
 window.onload = function init() {
 
