@@ -1,219 +1,306 @@
 <HTML>
 <HEAD>
+    <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE"/>
   <TITLE>Microworld Hospital</TITLE>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.4.5/jquery.floatThead.js"></script>
   <style>
 div.container {
     width: 100%;
     border: 1px solid gray;
+    font-family: Sans-serif;
 }
-
+table{
+    margin-left:auto; 
+    margin-right:auto;
+    border-collapse:collapse;
+    font-family: Sans-serif;
+}
+td{
+    padding:20px;
+    border:solid 1px #000000;
+    font-family: Sans-serif;
+}
+th{
+    padding:20px;
+    background-color: #dadee5;
+    border:solid 1px #000000;
+    font-family: Sans-serif;
+}
 header, footer {
-    padding: 1em;
+    padding: 20px;
     color: white;
     background-color: #99ccff;
+    border:solid 1px #000000;
     clear: left;
     text-align: center;
+    font-family: Sans-serif;
 }
-article {
-    padding: 1em;
-    overflow: hidden;
+label {
+    display: block;
+    text-align: center;
+}
+input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 2em;
 }
 </style>
+<script>
+$(document).ready(function(){
+    var $table = $('table');
+    $table.floatThead({
+    position: 'absolute'
+    });
+});
+</script>
 </HEAD>
 <BODY>
 <div class="container">
 <header>
    <h1>Post Questions</h1>
 </header>
-  <article>
-     Each item will be accompanied by a six-point scale with the options: "Strongly
-     Disagree"(1), "Disagree"(2), "Somewhat Disagree"(3), "Somewhat Agree"(4), "Agree"(5),
-     and "Strongly Agree"(6).
-  </article><hr>
-<FORM ACTION="/" METHOD="GET">
-  <CENTER>
-    <h2 text-align=center> Propensity to Trust</h2>
-    I listen to my conscience.<br>
-    <input type="radio" name="cons" value="1" required> 1
-    <input type="radio" name="cons" value="2"> 2
-    <input type="radio" name="cons" value="3"> 3
-    <input type="radio" name="cons" value="4"> 4
-    <input type="radio" name="cons" value="5"> 5
-    <input type="radio" name="cons" value="6"> 6 <hr>
-    I anticipate the needs of others.<br>
-    <input type="radio" name="need" value="1" required> 1
-    <input type="radio" name="need" value="2"> 2
-    <input type="radio" name="need" value="3"> 3
-    <input type="radio" name="need" value="4"> 4
-    <input type="radio" name="need" value="5"> 5
-    <input type="radio" name="need" value="6"> 6 <hr>
-    I respect others.<br>
-    <input type="radio" name="respect" value="1" required> 1
-    <input type="radio" name="respect" value="2"> 2
-    <input type="radio" name="respect" value="3"> 3
-    <input type="radio" name="respect" value="4"> 4
-    <input type="radio" name="respect" value="5"> 5
-    <input type="radio" name="respect" value="6"> 6 <hr>
-    I can get along with most people.<br>
-    <input type="radio" name="along" value="1" required> 1
-    <input type="radio" name="along" value="2"> 2
-    <input type="radio" name="along" value="3"> 3
-    <input type="radio" name="along" value="4"> 4
-    <input type="radio" name="along" value="5"> 5
-    <input type="radio" name="along" value="6"> 6 <hr>
-    I have always been completely fair to others.<br>
-    <input type="radio" name="fair" value="1" required> 1
-    <input type="radio" name="fair" value="2"> 2
-    <input type="radio" name="fair" value="3"> 3
-    <input type="radio" name="fair" value="4"> 4
-    <input type="radio" name="fair" value="5"> 5
-    <input type="radio" name="fair" value="6"> 6 <hr>
-    I stick to the rules.<br>
-    <input type="radio" name="rules" value="1" required> 1
-    <input type="radio" name="rules" value="2"> 2
-    <input type="radio" name="rules" value="3"> 3
-    <input type="radio" name="rules" value="4"> 4
-    <input type="radio" name="rules" value="5"> 5
-    <input type="radio" name="rules" value="6"> 6 <hr>
-    I believe that laws should be strictly enforced.<br>
-    <input type="radio" name="laws" value="1" required> 1
-    <input type="radio" name="laws" value="2"> 2
-    <input type="radio" name="laws" value="3"> 3
-    <input type="radio" name="laws" value="4"> 4
-    <input type="radio" name="laws" value="5"> 5
-    <input type="radio" name="laws" value="6"> 6 <hr>
-    I have a good word for everyone.<br>
-    <input type="radio" name="word" value="1" required> 1
-    <input type="radio" name="word" value="2"> 2
-    <input type="radio" name="word" value="3"> 3
-    <input type="radio" name="word" value="4"> 4
-    <input type="radio" name="word" value="5"> 5
-    <input type="radio" name="word" value="6"> 6 <hr>
-    I value cooperation over competition<br>
-    <input type="radio" name="coop" value="1" required> 1
-    <input type="radio" name="coop" value="2"> 2
-    <input type="radio" name="coop" value="3"> 3
-    <input type="radio" name="coop" value="4"> 4
-    <input type="radio" name="coop" value="5"> 5
-    <input type="radio" name="coop" value="6"> 6 <hr>
-    I return extra change when a cashier makes a mistake.<br>
-    <input type="radio" name="change" value="1" required> 1
-    <input type="radio" name="change" value="2"> 2
-    <input type="radio" name="change" value="3"> 3
-    <input type="radio" name="change" value="4"> 4
-    <input type="radio" name="change" value="5"> 5
-    <input type="radio" name="change" value="6"> 6 <hr>
-    I would never cheat on my taxes.<br>
-    <input type="radio" name="taxes" value="1" required> 1
-    <input type="radio" name="taxes" value="2"> 2
-    <input type="radio" name="taxes" value="3"> 3
-    <input type="radio" name="taxes" value="4"> 4
-    <input type="radio" name="taxes" value="5"> 5
-    <input type="radio" name="taxes" value="6"> 6 <hr>
-    I follow through with my plans.<br>
-    <input type="radio" name="plans" value="1" required> 1
-    <input type="radio" name="plans" value="2"> 2
-    <input type="radio" name="plans" value="3"> 3
-    <input type="radio" name="plans" value="4"> 4
-    <input type="radio" name="plans" value="5"> 5
-    <input type="radio" name="plans" value="6"> 6 <hr>
-    I believe that people are basically moral.<br>
-    <input type="radio" name="moral" value="1" required> 1
-    <input type="radio" name="moral" value="2"> 2
-    <input type="radio" name="moral" value="3"> 3
-    <input type="radio" name="moral" value="4"> 4
-    <input type="radio" name="moral" value="5"> 5
-    <input type="radio" name="moral" value="6"> 6 <hr>
-    I finish what I start.<br>
-    <input type="radio" name="start" value="1" required> 1
-    <input type="radio" name="start" value="2"> 2
-    <input type="radio" name="start" value="3"> 3
-    <input type="radio" name="start" value="4"> 4
-    <input type="radio" name="start" value="5"> 5
-    <input type="radio" name="start" value="6"> 6 <hr>
-    I retreat from others.<br>
-    <input type="radio" name="retreat" value="1" required> 1
-    <input type="radio" name="retreat" value="2"> 2
-    <input type="radio" name="retreat" value="3"> 3
-    <input type="radio" name="retreat" value="4"> 4
-    <input type="radio" name="retreat" value="5"> 5
-    <input type="radio" name="retreat" value="6"> 6 <hr>
-    I am filled with doubts about things.<br>
-    <input type="radio" name="doubts" value="1" required> 1
-    <input type="radio" name="doubts" value="2"> 2
-    <input type="radio" name="doubts" value="3"> 3
-    <input type="radio" name="doubts" value="4"> 4
-    <input type="radio" name="doubts" value="5"> 5
-    <input type="radio" name="doubts" value="6"> 6 <hr>
-    I feel short-changed in life.<br>
-    <input type="radio" name="life" value="1" required> 1
-    <input type="radio" name="life" value="2"> 2
-    <input type="radio" name="life" value="3"> 3
-    <input type="radio" name="life" value="4"> 4
-    <input type="radio" name="life" value="5"> 5
-    <input type="radio" name="life" value="6"> 6 <hr>
-    I avoid contact with others.<br>
-    <input type="radio" name="avoid" value="1" required> 1
-    <input type="radio" name="avoid" value="2"> 2
-    <input type="radio" name="avoid" value="3"> 3
-    <input type="radio" name="avoid" value="4"> 4
-    <input type="radio" name="avoid" value="5"> 5
-    <input type="radio" name="avoid" value="6"> 6 <hr>
-    I believe that most people would lie to get ahead.<br>
-    <input type="radio" name="lie" value="1" required> 1
-    <input type="radio" name="lie" value="2"> 2
-    <input type="radio" name="lie" value="3"> 3
-    <input type="radio" name="lie" value="4"> 4
-    <input type="radio" name="lie" value="5"> 5
-    <input type="radio" name="lie" value="6"> 6 <hr>
-    I find it hard to forgive others.<br>
-    <input type="radio" name="forgive" value="1" required> 1
-    <input type="radio" name="forgive" value="2"> 2
-    <input type="radio" name="forgive" value="3"> 3
-    <input type="radio" name="forgive" value="4"> 4
-    <input type="radio" name="forgive" value="5"> 5
-    <input type="radio" name="forgive" value="6"> 6 <hr>
-    <h2 text-align=center> Task Interdependence</h2>
-    I frequently must coordinate my efforts with the neighboring hospital.<br>
-    <input type="radio" name="coordinate" value="1" required> 1
-    <input type="radio" name="coordinate" value="2"> 2
-    <input type="radio" name="coordinate" value="3"> 3
-    <input type="radio" name="coordinate" value="4"> 4
-    <input type="radio" name="coordinate" value="5"> 5
-    <input type="radio" name="coordinate" value="6"> 6 <hr>
-    Goal attainment for one hospital helped goal attainment for the other hospital. <br>
-    <input type="radio" name="attainment" value="1" required> 1
-    <input type="radio" name="attainment" value="2"> 2
-    <input type="radio" name="attainment" value="3"> 3
-    <input type="radio" name="attainment" value="4"> 4
-    <input type="radio" name="attainment" value="5"> 5
-    <input type="radio" name="attainment" value="6"> 6 <hr>
-    To achieve high performance, it was important to rely on each other. <br>
-    <input type="radio" name="rely" value="1" required> 1
-    <input type="radio" name="rely" value="2"> 2
-    <input type="radio" name="rely" value="3"> 3
-    <input type="radio" name="rely" value="4"> 4
-    <input type="radio" name="rely" value="5"> 5
-    <input type="radio" name="rely" value="6"> 6 <hr>
-    The tasks performed by the different hospital schedulers were related to one
-another<br>
-    <input type="radio" name="schedulers" value="1" required> 1
-    <input type="radio" name="schedulers" value="2"> 2
-    <input type="radio" name="schedulers" value="3"> 3
-    <input type="radio" name="schedulers" value="4"> 4
-    <input type="radio" name="schedulers" value="5"> 5
-    <input type="radio" name="schedulers" value="6"> 6 <hr>
-    Success for one hospital implied success for the other hospital.<br>
-    <input type="radio" name="success" value="1" required> 1
-    <input type="radio" name="success" value="2"> 2
-    <input type="radio" name="success" value="3"> 3
-    <input type="radio" name="success" value="4"> 4
-    <input type="radio" name="success" value="5"> 5
-    <input type="radio" name="success" value="6"> 6 <hr>
-  </CENTER>
-</FORM>
 <div style="text-align:center">
-<form action="thanks.html" align="center">
+<form action="thanks.html" method="POST" align="center">
+    <table>
+        <thead>
+        <tr>
+            <th>Propensity to Trust and Task Interdependence</th>
+            <th>Strongly Disagree</th>
+            <th>Disagree</th>
+            <th>Somewhat Disagree</th>
+            <th>Somewhat Agree</th>
+            <th>Agree</th>
+            <th>Strongly Agree</th>
+        </tr>
+        </thead>
+    <tr>
+        <td><b>I listen to my conscience.</b></td>
+        <td> <label for="cons"><input type="radio" name="cons" id="cons" value="1" required></label></td>
+        <td> <label for="cons"><input type="radio" name="cons" id="cons" value="2" ></label></td>
+        <td> <label for="cons"><input type="radio" name="cons" id="cons" value="3" ></label></td>
+        <td> <label for="cons"><input type="radio" name="cons" id="cons" value="4" ></label></td>
+        <td> <label for="cons"><input type="radio" name="cons" id="cons" value="5" ></label></td>
+        <td> <label for="cons"><input type="radio" name="cons" id="cons" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I anticipate the needs of others.</b></td>
+        <td> <label for="need"><input type="radio" name="need" id="need" value="1" required></label></td>
+        <td> <label for="need"><input type="radio" name="need" id="need" value="2" ></label></td>
+        <td> <label for="need"><input type="radio" name="need" id="need" value="3" ></label></td>
+        <td> <label for="need"><input type="radio" name="need" id="need" value="4" ></label></td>
+        <td> <label for="need"><input type="radio" name="need" id="need" value="5" ></label></td>
+        <td> <label for="need"><input type="radio" name="need" id="need" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I respect others.</b></td>
+        <td> <label for="respect"><input type="radio" name="respect" id="respect" value="1" required></label></td>
+        <td> <label for="respect"><input type="radio" name="respect" id="respect" value="2" ></label></td>
+        <td> <label for="respect"><input type="radio" name="respect" id="respect" value="3" ></label></td>
+        <td> <label for="respect"><input type="radio" name="respect" id="respect" value="4" ></label></td>
+        <td> <label for="respect"><input type="radio" name="respect" id="respect" value="5" ></label></td>
+        <td> <label for="respect"><input type="radio" name="respect" id="respect" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I can get along with most people.</b></td>
+        <td> <label for="along"><input type="radio" name="along" id="along" value="1" required></label></td>
+        <td> <label for="along"><input type="radio" name="along" id="along" value="2" ></label></td>
+        <td> <label for="along"><input type="radio" name="along" id="along" value="3" ></label></td>
+        <td> <label for="along"><input type="radio" name="along" id="along" value="4" ></label></td>
+        <td> <label for="along"><input type="radio" name="along" id="along" value="5" ></label></td>
+        <td> <label for="along"><input type="radio" name="along" id="along" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I have always been completely fair to others.</b></td>
+        <td> <label for="fair"><input type="radio" name="fair" id="fair" value="1" required></label></td>
+        <td> <label for="fair"><input type="radio" name="fair" id="fair" value="2" ></label></td>
+        <td> <label for="fair"><input type="radio" name="fair" id="fair" value="3" ></label></td>
+        <td> <label for="fair"><input type="radio" name="fair" id="fair" value="4" ></label></td>
+        <td> <label for="fair"><input type="radio" name="fair" id="fair" value="5" ></label></td>
+        <td> <label for="fair"><input type="radio" name="fair" id="fair" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I stick to the rules.</b></td>
+        <td> <label for="rules"><input type="radio" name="rules" id="rules" value="1" required></label></td>
+        <td> <label for="rules"><input type="radio" name="rules" id="rules" value="2" ></label></td>
+        <td> <label for="rules"><input type="radio" name="rules" id="rules" value="3" ></label></td>
+        <td> <label for="rules"><input type="radio" name="rules" id="rules" value="4" ></label></td>
+        <td> <label for="rules"><input type="radio" name="rules" id="rules" value="5" ></label></td>
+        <td> <label for="rules"><input type="radio" name="rules" id="rules" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I believe that laws should be strictly enforced.</b></td>
+        <td> <label for="laws"><input type="radio" name="laws" id="laws" value="1" required></label></td>
+        <td> <label for="laws"><input type="radio" name="laws" id="laws" value="2" ></label></td>
+        <td> <label for="laws"><input type="radio" name="laws" id="laws" value="3" ></label></td>
+        <td> <label for="laws"><input type="radio" name="laws" id="laws" value="4" ></label></td>
+        <td> <label for="laws"><input type="radio" name="laws" id="laws" value="5" ></label></td>
+        <td> <label for="laws"><input type="radio" name="laws" id="laws" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I have a good word for everyone.</b></td>
+        <td> <label for="word"><input type="radio" name="word" id="word" value="1" required></label></td>
+        <td> <label for="word"><input type="radio" name="word" id="word" value="2" ></label></td>
+        <td> <label for="word"><input type="radio" name="word" id="word" value="3" ></label></td>
+        <td> <label for="word"><input type="radio" name="word" id="word" value="4" ></label></td>
+        <td> <label for="word"><input type="radio" name="word" id="word" value="5" ></label></td>
+        <td> <label for="word"><input type="radio" name="word" id="word" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I value cooperation over competition.</b></td>
+        <td> <label for="coop"><input type="radio" name="coop" id="coop" value="1" required></label></td>
+        <td> <label for="coop"><input type="radio" name="coop" id="coop" value="2" ></label></td>
+        <td> <label for="coop"><input type="radio" name="coop" id="coop" value="3" ></label></td>
+        <td> <label for="coop"><input type="radio" name="coop" id="coop" value="4" ></label></td>
+        <td> <label for="coop"><input type="radio" name="coop" id="coop" value="5" ></label></td>
+        <td> <label for="coop"><input type="radio" name="coop" id="coop" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I return extra change when a cashier makes a mistake.</b></td>
+        <td> <label for="change"><input type="radio" name="change" id="change" value="1" required></label></td>
+        <td> <label for="change"><input type="radio" name="change" id="change" value="2" ></label></td>
+        <td> <label for="change"><input type="radio" name="change" id="change" value="3" ></label></td>
+        <td> <label for="change"><input type="radio" name="change" id="change" value="4" ></label></td>
+        <td> <label for="change"><input type="radio" name="change" id="change" value="5" ></label></td>
+        <td> <label for="change"><input type="radio" name="change" id="change" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I would never cheat on my taxes.</b></td>
+        <td> <label for="taxes"><input type="radio" name="taxes" id="taxes" value="1" required></label></td>
+        <td> <label for="taxes"><input type="radio" name="taxes" id="taxes" value="2" ></label></td>
+        <td> <label for="taxes"><input type="radio" name="taxes" id="taxes" value="3" ></label></td>
+        <td> <label for="taxes"><input type="radio" name="taxes" id="taxes" value="4" ></label></td>
+        <td> <label for="taxes"><input type="radio" name="taxes" id="taxes" value="5" ></label></td>
+        <td> <label for="taxes"><input type="radio" name="taxes" id="taxes" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I follow through with my plans.</b></td>
+        <td> <label for="plans"><input type="radio" name="plans" id="plans" value="1" required></label></td>
+        <td> <label for="plans"><input type="radio" name="plans" id="plans" value="2" ></label></td>
+        <td> <label for="plans"><input type="radio" name="plans" id="plans" value="3" ></label></td>
+        <td> <label for="plans"><input type="radio" name="plans" id="plans" value="4" ></label></td>
+        <td> <label for="plans"><input type="radio" name="plans" id="plans" value="5" ></label></td>
+        <td> <label for="plans"><input type="radio" name="plans" id="plans" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I believe that people are basically moral.</b></td>
+        <td> <label for="moral"><input type="radio" name="moral" id="moral" value="1" required></label></td>
+        <td> <label for="moral"><input type="radio" name="moral" id="moral" value="2" ></label></td>
+        <td> <label for="moral"><input type="radio" name="moral" id="moral" value="3" ></label></td>
+        <td> <label for="moral"><input type="radio" name="moral" id="moral" value="4" ></label></td>
+        <td> <label for="moral"><input type="radio" name="moral" id="moral" value="5" ></label></td>
+        <td> <label for="moral"><input type="radio" name="moral" id="moral" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I finish what I start.</b></td>
+        <td> <label for="start"><input type="radio" name="start" id="start" value="1" required></label></td>
+        <td> <label for="start"><input type="radio" name="start" id="start" value="2" ></label></td>
+        <td> <label for="start"><input type="radio" name="start" id="start" value="3" ></label></td>
+        <td> <label for="start"><input type="radio" name="start" id="start" value="4" ></label></td>
+        <td> <label for="start"><input type="radio" name="start" id="start" value="5" ></label></td>
+        <td> <label for="start"><input type="radio" name="start" id="start" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I retreat from others.</b></td>
+        <td> <label for="retreat"><input type="radio" name="retreat" id="retreat" value="1" required></label></td>
+        <td> <label for="retreat"><input type="radio" name="retreat" id="retreat" value="2" ></label></td>
+        <td> <label for="retreat"><input type="radio" name="retreat" id="retreat" value="3" ></label></td>
+        <td> <label for="retreat"><input type="radio" name="retreat" id="retreat" value="4" ></label></td>
+        <td> <label for="retreat"><input type="radio" name="retreat" id="retreat" value="5" ></label></td>
+        <td> <label for="retreat"><input type="radio" name="retreat" id="retreat" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I am filled with doubts about things.</b></td>
+        <td> <label for="doubts"><input type="radio" name="doubts" id="doubts" value="1" required></label></td>
+        <td> <label for="doubts"><input type="radio" name="doubts" id="doubts" value="2" ></label></td>
+        <td> <label for="doubts"><input type="radio" name="doubts" id="doubts" value="3" ></label></td>
+        <td> <label for="doubts"><input type="radio" name="doubts" id="doubts" value="4" ></label></td>
+        <td> <label for="doubts"><input type="radio" name="doubts" id="doubts" value="5" ></label></td>
+        <td> <label for="doubts"><input type="radio" name="doubts" id="doubts" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I feel short-changed in life.</b></td>
+        <td> <label for="life"><input type="radio" name="life" id="life" value="1" required></label></td>
+        <td> <label for="life"><input type="radio" name="life" id="life" value="2" ></label></td>
+        <td> <label for="life"><input type="radio" name="life" id="life" value="3" ></label></td>
+        <td> <label for="life"><input type="radio" name="life" id="life" value="4" ></label></td>
+        <td> <label for="life"><input type="radio" name="life" id="life" value="5" ></label></td>
+        <td> <label for="life"><input type="radio" name="life" id="life" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I avoid contact with others.</b></td>
+        <td> <label for="avoid"><input type="radio" name="avoid" id="avoid" value="1" required></label></td>
+        <td> <label for="avoid"><input type="radio" name="avoid" id="avoid" value="2" ></label></td>
+        <td> <label for="avoid"><input type="radio" name="avoid" id="avoid" value="3" ></label></td>
+        <td> <label for="avoid"><input type="radio" name="avoid" id="avoid" value="4" ></label></td>
+        <td> <label for="avoid"><input type="radio" name="avoid" id="avoid" value="5" ></label></td>
+        <td> <label for="avoid"><input type="radio" name="avoid" id="avoid" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I believe that most people would lie to get ahead.</b></td>
+        <td> <label for="lie"><input type="radio" name="lie" id="lie" value="1" required></label></td>
+        <td> <label for="lie"><input type="radio" name="lie" id="lie" value="2" ></label></td>
+        <td> <label for="lie"><input type="radio" name="lie" id="lie" value="3" ></label></td>
+        <td> <label for="lie"><input type="radio" name="lie" id="lie" value="4" ></label></td>
+        <td> <label for="lie"><input type="radio" name="lie" id="lie" value="5" ></label></td>
+        <td> <label for="lie"><input type="radio" name="lie" id="lie" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I find it hard to forgive others.</b></td>
+        <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="1" required></label></td>
+        <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="2" ></label></td>
+        <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="3" ></label></td>
+        <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="4" ></label></td>
+        <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="5" ></label></td>
+        <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>I frequently must coordinate my efforts with the neighboring hospital.</b></td>
+        <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="1" required></label></td>
+        <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="2" ></label></td>
+        <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="3" ></label></td>
+        <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="4" ></label></td>
+        <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="5" ></label></td>
+        <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>Goal attainment for one hospital helped goal attainment for the other hospital.</b></td>
+        <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="1" required></label></td>
+        <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="2" ></label></td>
+        <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="3" ></label></td>
+        <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="4" ></label></td>
+        <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="5" ></label></td>
+        <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>To achieve high performance, it was important to rely on each other.</b></td>
+        <td> <label for="rely"><input type="radio" name="rely" id="rely" value="1" required></label></td>
+        <td> <label for="rely"><input type="radio" name="rely" id="rely" value="2" ></label></td>
+        <td> <label for="rely"><input type="radio" name="rely" id="rely" value="3" ></label></td>
+        <td> <label for="rely"><input type="radio" name="rely" id="rely" value="4" ></label></td>
+        <td> <label for="rely"><input type="radio" name="rely" id="rely" value="5" ></label></td>
+        <td> <label for="rely"><input type="radio" name="rely" id="rely" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>The tasks performed by the different hospital schedulers were related to one another.</b></td>
+        <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="1" required></label></td>
+        <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="2" ></label></td>
+        <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="3" ></label></td>
+        <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="4" ></label></td>
+        <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="5" ></label></td>
+        <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="6" ></label></td>
+    </tr>
+    <tr>
+        <td><b>Success for one hospital implied success for the other hospital.</b></td>
+        <td> <label for="success"><input type="radio" name="success" id="success" value="1" required></label></td>
+        <td> <label for="success"><input type="radio" name="success" id="success" value="2" ></label></td>
+        <td> <label for="success"><input type="radio" name="success" id="success" value="3" ></label></td>
+        <td> <label for="success"><input type="radio" name="success" id="success" value="4" ></label></td>
+        <td> <label for="success"><input type="radio" name="success" id="success" value="5" ></label></td>
+        <td> <label for="success"><input type="radio" name="success" id="success" value="6" ></label></td>
+    </tr>
+
+</table>
 <input type="submit" value="Submit">
 </div>
 </div>
