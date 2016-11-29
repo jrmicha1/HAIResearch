@@ -18,19 +18,23 @@ var text = [
 ];
 
 var page = 0;
-var currentPage = document.getElementById("page")
+var timeDelay = 10000;
 
 window.onload = function init() {
 
     var element = document.getElementById("main");
 	element.innerHTML = text[0];
 	document.getElementById("back").style.visibility = 'hidden';
-	
+	document.getElementById("continue").style.visibility = 'hidden';
+	document.getElementById("next").disabled = true;
+	setTimeout(delay, timeDelay);
+			
 	document.getElementById("back").onclick = function() {
 		if (page > 0){
 			page--;
 			element.innerHTML = text[page];
 			document.getElementById("next").style.visibility = 'visible';
+			document.getElementById("continue").style.visibility = 'hidden';
 		}
 		
 		if (page == 0){
@@ -45,16 +49,28 @@ window.onload = function init() {
 			page++;
 			element.innerHTML = text[page];
 			document.getElementById("back").style.visibility = 'visible';
+			document.getElementById("next").disabled = true;
+			setTimeout(delay, timeDelay);
 		}
 		
 		if (page == 7){
 			document.getElementById("next").style.visibility = 'hidden';
+			document.getElementById("continue").style.visibility = 'visible'
+			document.getElementById("continue").disabled = true;
+			setTimeout(delay, timeDelay);
+
 		}else{
 			document.getElementById("next").style.visibility = 'visible';
 		}
 		
 	};
-
 }
+
+function delay()
+{
+	document.getElementById("next").disabled = false;
+	document.getElementById("continue").disabled = false;
+}
+
 
 
