@@ -2,51 +2,75 @@
 <HEAD>
   <TITLE>Microworld Hospital</TITLE>
   <style>
+  
+:root {
+	--main-bg-color: crimson;
+}
 div.container {
     width: 100%;
-    border: 1px solid gray;
+    border: 2px solid black;
 }
 div.form {
     width: 100%;
-    border: 1px solid gray;
-    padding: 1em;
+    border: 2px solid black;
+	border-top: 0;
+}
+div.formInner {
+	padding: 1em;
 }
 div.spacing{
     padding-top:0.25em;
     padding-bottom:0.5em;
-	font: 25px Arial;
+	font: 20px Arial;
 }
-
+hr {
+	border-color: black;
+}
 div.section_header {
 	padding-top:25px;
 	width: 450px;
-	font: 25px Arial Black;
+	font: 35px Impact;
+	color: tomato;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 header, footer {
     padding: 1em;
     color: white;
-    background-color: #99ccff;
+    background-color: var(--main-bg-color);
     clear: left;
     text-align: center;
 }
-b {
-	font: 35px Arial Black;
+h1 {
+	font: 45px Impact;
+	text-shadow: 5px 5px black;
+	color: gold;
+}
+body {
+	background-color: lightgoldenrodyellow;
 }
 select {
 	width:450px;
 	height:50px;
-	font-size:20px;
+	font: 20px Arial;
 }
 input[type="text"] {
 	width:450px;
 	height:50px;
 	font-size:20px;
+	padding: 10px;
 }
 input[type="checkbox"]{
 	vertical-align: middle;
 	width: 50px;
 	height: 50px;
+}
+input[type="submit"]{
+	font:25px Arial; 
+	padding:25px;
+	color: tomato;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-weight: bold;
 }
 span.checkbox_label{
 	vertical-align: middle;
@@ -62,7 +86,7 @@ span.checkbox_label{
 </header>
 </div>
 <div class="form">
-
+<div class="formInner">
 <form action="training.html">
   <div class="section_header">Age:</div><hr>
   <select name="age">
@@ -385,8 +409,9 @@ span.checkbox_label{
 </form>
 <form action="training.html">
   <div class="section_header">Thank you for completing this questionnaire</div><hr>
-  <input type="submit" value="Submit" style="font:25px Arial Black; padding:25px;">
+  <input type="submit" value="Submit">
 </form>
+</div>
 </div>
 </BODY>
 </HTML>
