@@ -1,32 +1,63 @@
+<!DOCTYPE html>
 <html>
+<meta charset="utf-8">
+
 <head>
     <title>Microworld Hospital</title>
+    
     <style>
         body {
-            overflow:hidden;
+            overflow: hidden;
         }
-		header {
+        header, footer {
             width: 100%;
             height: 100%;
-			padding: 1em;
-			color: white;
-			background-color: #99ccff;
-			text-align: center;
-		}
+            padding: 1em;
+            color: white;
+            background-color: #99ccff;
+            font-family: Sans-Serif;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .main {
+            width: 100%;
+            height: 100%;
+            padding: 1em;
+            color: white;
+            background-color: #99ccff;
+            font-family: Sans-Serif;
+            font-size: 25px;
+            text-align: center;
+        }
     </style>
-    <script language="JavaScript">
+    
+    <script language = "JavaScript">
+        // ***** EDIT BELOW *****
+        var begin = 23;  // beginning hour (24-hr format)
+        var ending = 24; // ending hour (must be greater than beginning hour)
+        // ***** EDIT ABOVE *****
+        // Example: You want it open from 1500 - 1600 hours.
+        // Begin would be 15, and ending would be 16.
+        
         var today = new Date();
-        var time = today.getHours();
-        if(time <= "13") window.location.href = "nosurvey.html";
-        else if(time <= "14") window.location.href = "welcome.html";
-        else if(time >= "15") window.location.href = "nosurvey.html";
+        var hours = today.getHours();
+        if(hours < begin) window.location.href = "nosurvey.html";
+        else if(hours <= ending) window.locaiton.href = "welcome.html";
+        else window.locaiton.href = "nosurvey.html";
     </script>
 </head>
-<body oncontextmenu="return false;">
+
+<body oncontextmenu = "return false;">
     <header>
-    <h2>
-    <noscript>JavaScript is not enabled.  Please enable to continue.</noscript>
-    </h2>
+        Microworld Hospital
     </header>
+    <div class = "main">
+        <noscript>JavaScript is not enabled.  Please enable to continue.</noscript>
+    </div>
+    <footer>
+        Copyright 2016 - ASU Polytechnic
+    </footer>
 </body>
+
 </html>

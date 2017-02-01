@@ -1,68 +1,57 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<HEAD>
-	<script type="text/javascript" src="window.js"></script>
-	<title>Microworld Hospital</title>
-	<style>	
-		div.container {
-			width: 100%;
-			border: 1px solid gray;
-		}
-		div.form {
-			width: 100%;
-			border: 1px solid gray;
-			padding: 1em;
-		}
-		div.spacing{
-			padding-top:1em;
-			padding-bottom:0.5em;
-		}
-		h2{
-			font-family: Sans-serif;		
+
+<head>
+    <title>Microworld Hospital</title>
+    
+    <style>
+        header, footer {
+            width: 100%;
+            height: 100%;
+            padding: 1em;
+            color: white;
+            background-color: #99ccff;
+            font-family: Sans-Serif;
+            font-size: 25px;
+            font-weight: bold;
             text-align: center;
-		}
-		header, footer {
-			padding: 1em;
-			color: white;
-			background-color: #99ccff;
-			clear: left;
-			text-align: center;
-			font-family: Sans-serif;
-		}
-	</style>
-</HEAD>
-<BODY>
-	<div class="containter">
-		<header>
-			<h1>
-				Training
-			</h1>
-		</header>
-		
-		</br>
-		<h2 id="main">
-		
-		</h2>
-		<p align="center">
-			<button id="back" style="font-size:25px; width: 15%"">
-				&lArr;
-			</button>
-			<button id="next" style="font-size:25px; width: 15%">
-				&rArr;
-			</button>
-			
-			<button id="continue" onclick="window.location.href='./tutorial.html'" style="font-size:20px; width: 15%">
-				Start Trial Run
-			</button>
-			</br></br>
-		</p>
-		
-		<footer>
-			ASU Polytechnic
-			</br>
-			Copyright 2016
-		</footer>
-	</div>	
-</BODY>
+        }
+        .main {
+            width: 99%;
+            height: 100%;
+            padding: 1em;
+            color: white;
+            background-color: #99ccff;
+            font-family: Sans-Serif;
+            font-size: 25px;
+            text-align: center;
+        }
+        .button {
+            background-color: #99ccff;
+            text-align: center;
+        }
+    </style>
+    
+    <script src = "window.js"></script>
+</head>
+
+<body oncontextmenu = "return false;">
+    <header>
+        <p>Microworld Hospital</p>
+        <p>Training</p>
+    </header>
+
+    <div class = "main">
+        <h4 id = "tng"></h4>
+        <button id = "back" style = "font-size: 18px; width: 15%; height: 15%;">Back</button>
+        <button id = "continue" onclick = "window.location.href = 'game.html'" style = "font-size: 18px; width: 15%; height: 15%;">Continue</button>
+        <button id = "next" style = "font-size: 18px; width: 15%; height: 15%;">Next</button>
+    </div>
+
+    <footer>
+        Copyright 2016 - ASU Polytechnic
+    </footer>
+</body>
+
 </html>

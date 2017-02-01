@@ -1,85 +1,61 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<HEAD>
-	<title>Microworld Hospital</title>
-	<style>	
-		div.container {
-			width: 100%;
-			border: 1px solid gray;
-		}
-		div.form {
-			width: 100%;
-			border: 1px solid gray;
-			padding: 1em;
-		}
-		div.spacing{
-			padding-top:1em;
-			padding-bottom:0.5em;
-		}
 
-		header, footer {
-			padding: 1em;
-			color: white;
-			background-color: #99ccff;
-			clear: left;
-			text-align: center;
-			font-family: Sans-serif;
-		}
-	</style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="disclaim.js"></script>
-</HEAD>
-<BODY>
-	<div class="containter">
-		<header>
-			<h1>
-				</br></br></br>
-				Human-Agent Interation Study
-				</br></br>
-				
-			</h1>
-			<h2>
-            <div class="disclaimer" style="height:150px;overflow:auto;">
+<head>
+    <title>Microworld Hospital</title>
+    
+    <style>
+        header, footer {
+            width: 100%;
+            height: 100%;
+            padding: 1em;
+            color: white;
+            background-color: #99ccff;
+            font-family: Sans-Serif;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .main {
+            width: 99%;
+            height: 100%;
+            padding: 1em;
+            color: white;
+            background-color: #99ccff;
+            font-family: Sans-Serif;
+            font-size: 25px;
+            text-align: center;
+        }
+        .button {
+            background-color: #99ccff;
+            text-align: center;
+        }
+    </style>
+</head>
 
-I am a PhD student under the direction of Professor Erin Chiou in the Department of Computing, Informatics and Decision System Engineering at Arizona State University. I am conducting a research study to understand the reciprocal exchange relationship between human and agent.  
-I am inviting your participation, which will involve 15 minutes of your time. You need to answer some general questions about your habits and, play a game provided by this website. You have the right not to answer any question, and to stop participation at any time.
-Your participation in this study is voluntary.  If you choose not to participate or to withdraw from the study at any time, there will be no penalty.
-The result of your participation in this study will be used in reports, presentations, or publications to answer some open questions in the area of Human-Robot Interaction (HRI). There are no foreseeable risks or discomforts to your participation.
-You do not need to provide your name, or release any private information for this study as your responses will be anonymous.
-If you have any questions concerning the research study, please contact the research team at: (mehrdad@asu.edu). If you have any questions about your rights as a subject/participant in this research, or if you feel you have been placed at risk, you can contact the Chair of the Human Subjects Institutional Review Board, through the ASU Office of Research Integrity and Assurance, at (480) 965-6788. Please let me know if you wish to be part of the study.
-By clicking below, you are agreeing to be part of the study.							
-Date:
+<body oncontextmenu = "return false;">
+    <header>
+        <p>Microworld Hospital</p>
+        <p>Human-Agent Interaction Study</p>
+    </header>
+    <div class = "main">
+        <p>I am a PhD student under the direction of Professor Erin Chiou in the<br> Department of Computing, Informatics and Decision System Engineering<br> at Arizona State University. I am conducting a research study to understand<br> the reciprocal exchange relationship between human and agent.</p>
+        <p>I am inviting your participation, which will involve 15 minutes of your time.<br> You need to answer some general questions about your habits and, play a game<br> provided by this website. You have the right not to answer any question,<br> and to stop participation at any time.</p>
+        <p>Your participation in this study is voluntary.  If you choose<br> not to participate or to withdraw from the study at any time,<br> there will be no penalty.</p>
+        <p>The result of your participation in this study will be used in reports,<br> presentations, or publications to answer some open questions in the area of<br> Human-Agent Interaction (HAI). There are no foreseeable risks or<br> discomforts to your participation.</p>
+        <p>You do not need to provide your name, or release any private information<br> for this study as your responses will be anonymous.</p>
+        <p>If you have any questions concerning the research study,<br> please contact the research team at: (mehrdad@asu.edu).<br> If you have any questions about your rights as a subject / participant<br> in this research, or if you feel you have been placed at risk, you can<br> contact the Chair of the Human Subjects Institutional Review Board,<br> through the ASU Office of Research Integrity and Assurance at (480) 965-6788.<br> Please let me know if you do not wish to be part of the study.</p>
+        <p>By clicking below, you are agreeing to be part of the study.</p>
+        <p>Today's Date-Time Group:</p>
+        <p id = "dtg"><script language = "JavaScript">document.getElementById("dtg").innerHTML = Date();</script></p>
+    </div>
+    <div class = "button">
+        <button onclick = "window.location.href = 'preQ.html'" style = "font-size: 18px; width: 25%; height: 15%;">Click here to begin</button>
+    </div>
+    <footer>
+        Copyright 2016 - ASU Polytechnic
+    </footer>
+</body>
 
-</div>
-			
-				</br>
-				<p id="date"></p>
-				
-				<script>
-					document.getElementById("date").innerHTML = Date();
-				</script>
-				
-				</br></br></br>
-				<button onclick="window.location.href='./preQ.html'">
-					Click here
-					</br>
-					to begin
-				</button>
-				</br></br></br>
-				</br></br>
-			</h2>
-			
-			
-		</header>
-		<div>
-		
-		</div>
-		<footer>
-			ASU Polytechnic
-			</br>
-			Copyright 2016
-		</footer>
-	</div>
-</BODY>
 </html>
