@@ -26,7 +26,8 @@ public final class MainFrame extends JFrame {
    private static boolean isPracticeMode;
    private static boolean isAutomatic;
 
-   private JTextField userIdTextField;
+   private static String userId;
+
    private JTextField conditionTextField;
    private JSpinner trialSpinner;
    private JButton startGameButton;
@@ -41,6 +42,7 @@ public final class MainFrame extends JFrame {
     */
    public MainFrame() {
       /* Value Init */
+      userId = "123"; //TODO: '123' is just a placeholder - Must set the actual User ID somehow!
       isPracticeMode = true; // First run through the game is always practice
       trialSpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
 
@@ -109,11 +111,11 @@ public final class MainFrame extends JFrame {
          return;
       }
 
-      if (userIdTextField.getText().isEmpty()) {
-         JOptionPane.showMessageDialog(this, "The userID cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+      if (userId.isEmpty() || userId == null) {
+         JOptionPane.showMessageDialog(this, "Invalid userID!", "Error", JOptionPane.ERROR_MESSAGE);
          return;
       } else {
-         MicroworldHospital.setUpLogFile(userIdTextField.getText() + "_" + conditionTextField.getText() + "_" + trialSpinner.getValue());
+         MicroworldHospital.setUpLogFile(userId + "_" + conditionTextField.getText() + "_" + trialSpinner.getValue());
       }
 
       /* Main Timer Setup */
