@@ -33,7 +33,6 @@ public final class MainFrame extends JFrame {
    private JCheckBox visualizeAgntActivityCheckBox;
    private JButton configButton;
    private JPanel contentPane;
-   private JCheckBox practiceModeCheckBox;
    private JCheckBox automaticCheckBox;
    private JFileChooser configFileChooser;
 
@@ -42,6 +41,7 @@ public final class MainFrame extends JFrame {
     */
    public MainFrame() {
       /* Value Init */
+      isPracticeMode = true; // First run through the game is always practice
       trialSpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
 
       // Config File Chooser Init
@@ -65,12 +65,6 @@ public final class MainFrame extends JFrame {
             startGame();
          }
       });
-      practiceModeCheckBox.addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            isPracticeMode = practiceModeCheckBox.isSelected();
-         }
-      });
       automaticCheckBox.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -78,7 +72,6 @@ public final class MainFrame extends JFrame {
          }
       });
 
-      isPracticeMode = practiceModeCheckBox.isSelected();
       CONFIG.setAutomatic(automaticCheckBox.isSelected());
 
       /* Window Setup */
