@@ -27,8 +27,8 @@ public final class MainFrame extends JFrame {
    private static boolean isAutomatic;
 
    private static String userId;
+   private static String condition;
 
-   private JTextField conditionTextField;
    private JSpinner trialSpinner;
    private JButton startGameButton;
    private JCheckBox visualizeAgntActivityCheckBox;
@@ -43,6 +43,7 @@ public final class MainFrame extends JFrame {
    public MainFrame() {
       /* Value Init */
       userId = "123"; //TODO: '123' is just a placeholder - Must set the actual User ID somehow!
+      condition = "1"; //TODO:'1' is just a placeholder. What is 'condition'? Should either set it properly or remove it
       isPracticeMode = true; // First run through the game is always practice
       trialSpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
 
@@ -115,7 +116,7 @@ public final class MainFrame extends JFrame {
          JOptionPane.showMessageDialog(this, "Invalid userID!", "Error", JOptionPane.ERROR_MESSAGE);
          return;
       } else {
-         MicroworldHospital.setUpLogFile(userId + "_" + conditionTextField.getText() + "_" + trialSpinner.getValue());
+         MicroworldHospital.setUpLogFile(userId + "_" + condition + "_" + trialSpinner.getValue());
       }
 
       /* Main Timer Setup */
