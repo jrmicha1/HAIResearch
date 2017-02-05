@@ -24,7 +24,7 @@
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="75709" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="75709" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -36,26 +36,16 @@
         <children>
           <component id="df395" class="javax.swing.JButton" binding="startGameButton">
             <constraints>
-              <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font size="20" style="1"/>
               <text value="&lt;html&gt;START&lt;br\&gt;GAME&lt;html\&gt;"/>
             </properties>
           </component>
-          <component id="b54b8" class="javax.swing.JCheckBox" binding="visualizeAgntActivityCheckBox">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-12932647"/>
-              <font size="12"/>
-              <text value="&lt;html&gt;Visualize&lt;br\&gt;Agent's&lt;br\&gt;Activities&lt;html\&gt;"/>
-            </properties>
-          </component>
           <component id="3264b" class="javax.swing.JButton" binding="configButton" default-binding="true">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font size="18"/>
@@ -64,7 +54,7 @@
           </component>
           <component id="9a6e7" class="javax.swing.JCheckBox" binding="automaticCheckBox" default-binding="true">
             <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-12932647"/>

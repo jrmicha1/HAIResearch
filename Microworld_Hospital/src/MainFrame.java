@@ -29,9 +29,10 @@ public final class MainFrame extends JFrame {
    private static String userId;
    private static String condition;
    private static int trialNum;
+   private static boolean visualizeAgntActivity = false; // Currently there is no way to change this in-game; it just
+                                                         // remains false.
 
    private JButton startGameButton;
-   private JCheckBox visualizeAgntActivityCheckBox;
    private JButton configButton;
    private JPanel contentPane;
    private JCheckBox automaticCheckBox;
@@ -173,7 +174,7 @@ public final class MainFrame extends JFrame {
       /* Init Game */
       mainTimer.start();
       plyrGameFrame.start();
-      if (visualizeAgntActivityCheckBox.isSelected()) {
+      if (visualizeAgntActivity) {
          agntGameFrame.setVisible(true);
       }
       agntGameFrame.start();
