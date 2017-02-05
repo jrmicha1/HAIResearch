@@ -24,7 +24,7 @@ public final class MainFrame extends JFrame {
    protected static GameFrame plyrGameFrame;
    protected static GameFrame agntGameFrame;
    private static boolean isPracticeMode;
-   private static boolean isAutomatic;
+   private static boolean isAutomatic = false;//Currently there is no way to change this in-game; it just remains false.
 
    private static String userId;
    private static String condition;
@@ -35,7 +35,6 @@ public final class MainFrame extends JFrame {
    private JButton startGameButton;
    private JButton configButton;
    private JPanel contentPane;
-   private JCheckBox automaticCheckBox;
    private JFileChooser configFileChooser;
 
    /**
@@ -69,14 +68,8 @@ public final class MainFrame extends JFrame {
             startGame();
          }
       });
-      automaticCheckBox.addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            CONFIG.setAutomatic(automaticCheckBox.isSelected());
-         }
-      });
 
-      CONFIG.setAutomatic(automaticCheckBox.isSelected());
+      CONFIG.setAutomatic(isAutomatic);
 
       /* Window Setup */
       setContentPane(contentPane);
