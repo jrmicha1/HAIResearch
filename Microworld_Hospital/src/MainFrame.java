@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -33,9 +34,7 @@ public final class MainFrame extends JFrame {
                                                          // remains false.
 
    private JButton startGameButton;
-   private JButton configButton;
    private JPanel contentPane;
-   private JFileChooser configFileChooser;
 
    /**
     * Constructor
@@ -47,21 +46,24 @@ public final class MainFrame extends JFrame {
       trialNum = 1; //TODO: 1 is just a placeholder. What is 'trial'? Should either set it properly or remove it
       isPracticeMode = true; // First run through the game is always practice
 
-      // Config File Chooser Init
-      configFileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
-      configFileChooser.setDialogTitle("Choose Game Configuration File");
-      FileFilter filter = new FileNameExtensionFilter("Configuration File (*.ini)", "ini");
-      configFileChooser.setFileFilter(filter);
+      // Load Initial Config File (i.e. the training config):
+      File configFile = null;
+      try{
+         configFile = getIni("config\\PracticeConfig");
+      }
+      catch (IllegalArgumentException e) {
+         System.err.println("ERROR: The training mode config file could not be loaded due to an invalid path!");
+         e.printStackTrace();
+         System.exit(1);
+      }
+      catch (FileNotFoundException e) {
+         System.err.println("ERROR: The training mode config file could not be loaded; no .ini files in directory!");
+         e.printStackTrace();
+         System.exit(1);
+      }
+      CONFIG.loadSettings(configFile);
 
       /* Action Listeners */
-      configButton.addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            if (configFileChooser.showOpenDialog(MicroworldHospital.mainFrame) == JFileChooser.APPROVE_OPTION) {
-               CONFIG.loadSettings(configFileChooser.getSelectedFile());
-            }
-         }
-      });
       startGameButton.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -210,5 +212,37 @@ public final class MainFrame extends JFrame {
     */
    public static boolean isPracticeMode() {
       return isPracticeMode;
+   }
+
+   /**
+    * Gets the first .ini file found in the given directory
+    * path and returns it as a File.
+    * @param dir the directory to search
+    * @return The first .ini file found in the dir
+    * @throws IllegalArgumentException If dir is not a valid directory
+    * @throws FileNotFoundException If no .ini files were found  in the directory
+    */
+   public static File getIni(String dir) throws IllegalArgumentException, FileNotFoundException{
+
+      File configDir = new File(dir);
+
+      if(!configDir.isDirectory()){
+         throw new IllegalArgumentException("ERROR: Invalid directory path!");
+      }
+
+      File[] files = configDir.listFiles();
+      File result = null;
+      for(int i = 0; i < files.length; i++){
+         if(files[i].getName().endsWith(".ini")){
+            result = files[i];
+            break;
+         }
+      }
+
+      if(result == null){
+         throw new FileNotFoundException("ERROR: Directory path did not contain any .ini files!");
+      }
+
+      return result;
    }
 }
