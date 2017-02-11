@@ -35,6 +35,8 @@ public final class MainFrame extends JFrame {
 
    private JButton startGameButton;
    private JPanel contentPane;
+   private JLabel headerLabel;
+   private JLabel descLabel;
 
    /**
     * Constructor

@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="contentPane" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="430" height="306"/>
+      <xy x="20" y="20" width="710" height="306"/>
     </constraints>
     <properties>
       <background color="-12932647"/>
@@ -13,7 +13,7 @@
       <title-color color="-4473925"/>
     </border>
     <children>
-      <grid id="ecff" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="ecff" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -22,7 +22,26 @@
           <background color="-12932647"/>
         </properties>
         <border type="none"/>
-        <children/>
+        <children>
+          <component id="e90c5" class="javax.swing.JLabel" binding="headerLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22" style="1"/>
+              <text value="Practice Mode"/>
+            </properties>
+          </component>
+          <component id="3d3b1" class="javax.swing.JLabel" binding="descLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="16"/>
+              <text value="&lt;html&gt;&lt;div style=&quot;text-align:center;&quot;&gt;Play a short, 2-minute version of the game.&lt;br&gt;Don't worry, no data is collected - it's just for practice!&lt;/div&gt;&lt;html&gt;"/>
+            </properties>
+          </component>
+        </children>
       </grid>
       <grid id="75709" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
