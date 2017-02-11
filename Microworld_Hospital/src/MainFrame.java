@@ -133,6 +133,40 @@ public final class MainFrame extends JFrame {
                taskTimer.purge();
                MicroworldHospital.endLog();
                trialNum++;
+
+               /* Current game has ended; transition to the next phase:
+                *
+                * If the previous game was practice mode, then set to play the full
+                * 8-minute game next.
+                *
+                * If the previous game was the full 8-minute game, then end the program.
+                */
+               if(isPracticeMode()){
+                  isPracticeMode = false;
+                  headerLabel.setText("Full Game");
+                  descLabel.setText("<html><div style=\"text-align:center;\">Play the full, 8-minute game!<br>(Data will be collected)</div></html>");
+
+                  // Load Full Game Config File:
+                  File configFile = null;
+                  try{
+                     configFile = getIni("config\\GameConfig");
+                  }
+                  catch (IllegalArgumentException ex) {
+                     System.err.println("ERROR: The main game config file could not be loaded due to an invalid path!");
+                     ex.printStackTrace();
+                     System.exit(1);
+                  }
+                  catch (FileNotFoundException ex) {
+                     System.err.println("ERROR: The main game config file could not be loaded; no .ini files in directory!");
+                     ex.printStackTrace();
+                     System.exit(1);
+                  }
+                  CONFIG.loadSettings(configFile);
+               } else {
+                  System.out.println("Training and 8-min full game completed, closing.");
+                  System.exit(0);
+               }
+
                setVisible(true);
             } else {
                plyrGameFrame.mainTimerAction();
