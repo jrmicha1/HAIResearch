@@ -1,5 +1,5 @@
 
 Microworld_Hospital/*.csv
 Microworld_Hospital/out/
-Microworld_Hospital/.idea/workspace.xml
-Microworld_Hospital/.idea/tasks.xml
+#Microworld_Hospital/.idea/workspace.xml
+#Microworld_Hospital/.idea/tasks.xml
