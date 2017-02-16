@@ -44,6 +44,7 @@
         label {
             display: block;
             text-align: center;
+            border-radius: 7px;
         }
         input[type = radio] {
             border: 0px;
@@ -56,13 +57,17 @@
         }
     </style>
     
-    <script src = "jquery.min.js"></script>
-    <script src = "jquery.floatThead.js"></script>
+    <script src = "Javascript/jquery.min.js"></script>
+    <script src = "Javascript/jquery.floatThead.js"></script>
     <script>
-    $(document).ready(function() {
+    $(document).ready(function(){
+        $("tr:even").css("background-color", "#d7eaf4");    
         var $table = $('table');
         $table.floatThead({
-            position: 'absolute'
+            position: 'fixed',
+            responsiveContainer: function($table){
+                return $table.closest('.table-responsive');
+            }
         });
     });
     </script>
@@ -76,7 +81,7 @@
     </header>
     
     <div class = "main">
-        <form align = "center">
+        <form action="thanks.html" method="POST" align="margin-left">
         <table>
             <thead>
             <tr>
@@ -263,61 +268,61 @@
             </tr>
             <tr>
                 <td><b>I find it hard to forgive others.</b></td>
-                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="1" required></label></td>
-                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="2" ></label></td>
-                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="3" ></label></td>
-                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="4" ></label></td>
+                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="6" required></label></td>
                 <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="5" ></label></td>
-                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="6" ></label></td>
+                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="4" ></label></td>
+                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="3" ></label></td>
+                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="2" ></label></td>
+                <td> <label for="forgive"><input type="radio" name="forgive" id="forgive" value="1" ></label></td>
             </tr>
             <tr>
                 <td><b>I frequently must coordinate my efforts with the neighboring hospital.</b></td>
-                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="1" required></label></td>
-                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="2" ></label></td>
-                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="3" ></label></td>
-                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="4" ></label></td>
+                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="6" required></label></td>
                 <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="5" ></label></td>
-                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="6" ></label></td>
+                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="4" ></label></td>
+                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="3" ></label></td>
+                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="2" ></label></td>
+                <td> <label for="coordinate"><input type="radio" name="coordinate" id="coordinate" value="1" ></label></td>
             </tr>
             <tr>
                 <td><b>Goal attainment for one hospital helped goal attainment for the other hospital.</b></td>
-                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="1" required></label></td>
-                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="2" ></label></td>
-                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="3" ></label></td>
-                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="4" ></label></td>
+                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="6" required></label></td>
                 <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="5" ></label></td>
-                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="6" ></label></td>
+                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="4" ></label></td>
+                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="3" ></label></td>
+                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="2" ></label></td>
+                <td> <label for="attainment"><input type="radio" name="attainment" id="attainment" value="1" ></label></td>
             </tr>
             <tr>
                 <td><b>To achieve high performance, it was important to rely on each other.</b></td>
-                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="1" required></label></td>
-                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="2" ></label></td>
-                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="3" ></label></td>
-                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="4" ></label></td>
+                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="6" required></label></td>
                 <td> <label for="rely"><input type="radio" name="rely" id="rely" value="5" ></label></td>
-                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="6" ></label></td>
+                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="4" ></label></td>
+                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="3" ></label></td>
+                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="2" ></label></td>
+                <td> <label for="rely"><input type="radio" name="rely" id="rely" value="1" ></label></td>
             </tr>
             <tr>
                 <td><b>The tasks performed by the different hospital schedulers were related to one another.</b></td>
-                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="1" required></label></td>
-                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="2" ></label></td>
-                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="3" ></label></td>
-                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="4" ></label></td>
+                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="6" required></label></td>
                 <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="5" ></label></td>
-                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="6" ></label></td>
+                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="4" ></label></td>
+                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="3" ></label></td>
+                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="2" ></label></td>
+                <td> <label for="schedulers"><input type="radio" name="schedulers" id="schedulers" value="1" ></label></td>
             </tr>
             <tr>
                 <td><b>Success for one hospital implied success for the other hospital.</b></td>
-                <td> <label for="success"><input type="radio" name="success" id="success" value="1" required></label></td>
-                <td> <label for="success"><input type="radio" name="success" id="success" value="2" ></label></td>
-                <td> <label for="success"><input type="radio" name="success" id="success" value="3" ></label></td>
-                <td> <label for="success"><input type="radio" name="success" id="success" value="4" ></label></td>
+                <td> <label for="success"><input type="radio" name="success" id="success" value="6" required></label></td>
                 <td> <label for="success"><input type="radio" name="success" id="success" value="5" ></label></td>
-                <td> <label for="success"><input type="radio" name="success" id="success" value="6" ></label></td>
+                <td> <label for="success"><input type="radio" name="success" id="success" value="4" ></label></td>
+                <td> <label for="success"><input type="radio" name="success" id="success" value="3" ></label></td>
+                <td> <label for="success"><input type="radio" name="success" id="success" value="2" ></label></td>
+                <td> <label for="success"><input type="radio" name="success" id="success" value="1" ></label></td>
             </tr>
         </table>
+        <input type="submit" value="Continue" style = "font-size: 18px; width: 25%; height: 15%;">
         </form>
-        <button onclick = "window.location.href = 'thanks.html'" style = "font-size: 18px; width: 25%; height: 15%;">Continue</button>
     </div>
     
     <footer>
