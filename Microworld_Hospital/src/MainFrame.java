@@ -42,6 +42,8 @@ public final class MainFrame extends JFrame {
     * Constructor
     */
    public MainFrame() {
+      setUndecorated(true);
+
       /* Value Init */
       userId = "123"; //TODO: '123' is just a placeholder - Must set the actual User ID somehow!
       condition = "1"; //TODO:'1' is just a placeholder. What is 'condition'? Should either set it properly or remove it
@@ -80,7 +82,8 @@ public final class MainFrame extends JFrame {
       pack();
       setLocationRelativeTo(null);
       setResizable(false);
-      setTitle("Microworld - Hospital Management Game");
+      setTitle("Microworld Hospital");
+      //setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
       setVisible(true);
 
         //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -89,10 +92,14 @@ public final class MainFrame extends JFrame {
       this.addWindowListener(new WindowAdapter() {
          @Override
          public void windowClosing(WindowEvent e) {
-            System.out.println("Closed");
-            e.getWindow().dispose();
-            System.exit(0);
+            //System.out.println("Closed");
+            //e.getWindow().dispose();
+            //System.exit(0);
          }
+//         @Override
+//         public void windowIconified(WindowEvent e) {
+//            setState(NORMAL);
+//         }
       });
    }
 

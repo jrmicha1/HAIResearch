@@ -80,6 +80,8 @@ public class GameFrame extends JFrame {
    public GameFrame() {
       /* Value Init */
       //rand = new Random(System.currentTimeMillis());
+      setUndecorated(true);
+
       rand = new Random();
       behavior = null;
       bhvNum = -1;
@@ -137,7 +139,8 @@ public class GameFrame extends JFrame {
                 //System.out.println("Closed");
             //MicroworldHospital.mainFrame.setVisible(true);
             //e.getWindow().dispose();
-            MicroworldHospital.mainFrame.forceEndGame();
+
+            //MicroworldHospital.mainFrame.forceEndGame();
          }
       });
 
@@ -259,7 +262,8 @@ public class GameFrame extends JFrame {
       setContentPane(contentPane);
       pack();
       setLocationRelativeTo(null);
-      setTitle("Hospital Management Game");
+      //setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+      setTitle("Microworld Hospital");
       setVisible(false);
    }
 
