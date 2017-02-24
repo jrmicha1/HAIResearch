@@ -19,6 +19,10 @@ window.onload = function init() {
 	document.getElementById("back").style.visibility = 'hidden';
     document.getElementById("continue").style.visibility = 'hidden';
     
+    document.getElementById("next").innerText = "Please wait...";
+    document.getElementById("next").disabled = true;
+    setInterval(function() { document.getElementById("next").disabled = false;document.getElementById("next").innerText = 'Next'; }, 4000);
+    
     document.getElementById("next").onclick = function() {
         page++;
         element.innerHTML = text[page];
@@ -26,8 +30,16 @@ window.onload = function init() {
         if (page == 7) {
             document.getElementById("next").style.visibility = 'hidden';
             document.getElementById("continue").style.visibility = 'visible';
+            
+            document.getElementById("continue").innerText = "Please wait...";
+            document.getElementById("continue").disabled = true;
+            setInterval(function() { document.getElementById("continue").disabled = false;document.getElementById("continue").innerText = 'Continue'; }, 8000);
         } else {
             document.getElementById("back").style.visibility = 'visible';
+            
+            document.getElementById("next").innerText = "Please wait...";
+            document.getElementById("next").disabled = true;
+            setInterval(function() { document.getElementById("next").disabled = false;document.getElementById("next").innerText = 'Next'; }, 10000);
         }
     };
     
