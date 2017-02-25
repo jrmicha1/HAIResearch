@@ -646,7 +646,7 @@ public class GameFrame extends JFrame {
 
          int option;
          option = JOptionPane.showInternalConfirmDialog(contentPane, "Are you sure you want to send a " + res
-               + " to the neighboring hospital?", "Confirmation Required", JOptionPane.YES_NO_OPTION);
+               + " to OneLife Medical Center?", "Confirmation Required", JOptionPane.YES_NO_OPTION);
          timeRecord = System.currentTimeMillis();
          isConfirmed = (option == JOptionPane.YES_OPTION);
       }
@@ -721,7 +721,7 @@ public class GameFrame extends JFrame {
                msg += "SURGEON";
                giveSgnPendNum = 0;
             }
-            msgOptionPane = new JOptionPane("The neighboring hospital gives you a " + msg + ".");
+            msgOptionPane = new JOptionPane("OneLife Medical Center gives you a " + msg + ".");
             msgInternalFrame = msgOptionPane.createInternalFrame(peerGameFrame.contentPane, "Notification");
             msgInternalFrame.pack();
             msgInternalFrame.show();
