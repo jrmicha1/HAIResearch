@@ -280,8 +280,8 @@ public class GameFrame extends JFrame {
          if (!isAgent) {
             JOptionPane.showMessageDialog(null, "Time's Up!\n" + "Total Score: "
                   + (thisStatsPanel.getScore() + peerStatsPanel.getScore())
-                  + "\n(Your Score: " + thisStatsPanel.getScore()
-                  + "  Agent Score: " + peerStatsPanel.getScore() + ")");
+                  + "\nYour Score: " + thisStatsPanel.getScore()
+                  + "\nOneLife Medical's Score: " + peerStatsPanel.getScore());
          }
          dispose();
       } else {
