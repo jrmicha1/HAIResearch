@@ -95,7 +95,7 @@
             </constraints>
             <properties>
               <font size="14"/>
-              <text value="&lt;html&gt;Assign&lt;br/&gt;Patient A&lt;/html&gt;"/>
+              <text value="&lt;html&gt;Assign&lt;br/&gt;Standard&lt;br/&gt;Patient&lt;/html&gt;"/>
             </properties>
           </component>
           <component id="5ef14" class="javax.swing.JButton" binding="assignDoctorButton" default-binding="true">
@@ -144,7 +144,7 @@
             </constraints>
             <properties>
               <font size="14"/>
-              <text value="&lt;html&gt;Assign&lt;br/&gt;Patient B&lt;/html&gt;"/>
+              <text value="&lt;html&gt;Assign&lt;br/&gt;Surgery&lt;br/&gt;Patient&lt;/html&gt;"/>
             </properties>
           </component>
           <grid id="6e4ac" binding="coopBtnPanel" layout-manager="CardLayout" hgap="0" vgap="0">
