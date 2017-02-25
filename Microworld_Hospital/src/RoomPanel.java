@@ -140,14 +140,14 @@ public class RoomPanel extends JPanel {
 
       switch (patientType) {
          case A: {
-            lblPatientType.setText("A");
+            lblPatientType.setText("Standard");
             lblHlprType.setText("Doctor(s)");
             MicroworldHospital.writeLogLine("PatientType", "A", linkedGameFrame.isAgent());
             MicroworldHospital.writeLogLine("RoomAssign", lblRoomNum.getText(), linkedGameFrame.isAgent());
             break;
          }
          case B: {
-            lblPatientType.setText("B");
+            lblPatientType.setText("Surgery");
             lblHlprType.setText("Surgeon(s)");
             MicroworldHospital.writeLogLine("PatientType", "B", linkedGameFrame.isAgent());
             MicroworldHospital.writeLogLine("RoomAssign", lblRoomNum.getText(), linkedGameFrame.isAgent());
