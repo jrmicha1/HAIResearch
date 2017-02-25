@@ -8,7 +8,7 @@
     <properties>
       <background color="-12932647"/>
     </properties>
-    <border type="none" title="Hospital Management Game" title-justification="2">
+    <border type="none" title="Microworld Hospital" title-justification="2">
       <font name="Microsoft YaHei UI" size="28" style="1"/>
       <title-color color="-16777216"/>
     </border>

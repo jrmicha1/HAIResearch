@@ -7,7 +7,7 @@
     </constraints>
     <properties/>
     <border type="bevel-raised" title="A's Panel" title-justification="2">
-      <font name="Arial Black" size="22"/>
+      <font name="Arial Black" size="16"/>
     </border>
     <children>
       <grid id="4850a" binding="statisticsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

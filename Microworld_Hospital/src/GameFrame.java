@@ -319,7 +319,7 @@ public class GameFrame extends JFrame {
             behavior = new Behavior(this);
          }
          setTitle("Hospital Management Game");
-         thisStatsPanel.setTitle("Your Panel");
+         thisStatsPanel.setTitle("<html><div style=\"text-align:center;\">Bayview Medical Clinic<br>(You)</div></html>");
          patientAAddCount = MainFrame.CONFIG.getPlayerPatientNum(PatientType.A);
          patientBAddCount = MainFrame.CONFIG.getPlayerPatientNum(PatientType.B);
          thisStatsPanel.setQueueLen(PatientType.A, MainFrame.CONFIG.getPlayerPatientNum(PatientType.A));
