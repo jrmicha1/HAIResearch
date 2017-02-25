@@ -344,7 +344,7 @@ public class GameFrame extends JFrame {
       if (!agentMode) {
          peerGameFrame.peerStatsPanel.setTitle("Player's Panel");
       } else {
-         peerGameFrame.peerStatsPanel.setTitle("Agent's Panel");
+         peerGameFrame.peerStatsPanel.setTitle("OneLife Medical Center");
       }
       peerGameFrame.peerStatsPanel.setQueueBrief();
    }
