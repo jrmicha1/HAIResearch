@@ -37,7 +37,22 @@ app.get('/preQ.html', function (req, res) {
 });
 //Training Page. Handles Post data from Pre-Questionnare
 app.post('/training.html', function (req, res) {
-    //TODO Handle data from PreQ Post.
+    var bodyData = "";
+    //Recieves data from request
+    req.on('data', function (chunk) {
+        bodyData += chunk.toString();
+    });
+    //When done recieving data...
+    req.on('end', function () {
+        //Use Query String to parse data to make easily accessible
+        var preData = qstring.parse(bodyData);
+        var questions = convertPreqData(preData);
+        //Write the csv when done converting data
+        fs.writeFile('test.csv', questions, (err) => {
+            if (err) throw err;
+            console.log('File saved.');
+        });
+    });
     sendHTML(req, res);
 });
 //Sends window.js when called for in Training page.
@@ -72,10 +87,10 @@ app.post('/thanks.html', function (req, res) {
         //Use Query String to parse data to make easily accessible
         var postData = qstring.parse(bodyData);
         var questions = convertPostqData(postData);
-        //Write the csv when done converting data
-        fs.writeFile('test.csv', questions, (err) => {
+        //Append to the csv when done converting data
+        fs.appendFile('test.csv', questions, (err) => {
             if (err) throw err;
-            console.log('File saved.');
+            console.log('File appended.');
         });
     });
     sendHTML(req, res);
@@ -90,9 +105,38 @@ function sendHTML(req, res) {
     });
 }
 
+//Converts the Pre Questionnare data into csv format
+//Also checks if the checkbox input is empty.
+function convertPreqData(preData) {
+    var tmp = preData['age'] + "," + preData['gender'] + "," + preData['education'] + "," + preData['school'] + "," + preData['degree']
+     + "," + preData['degree_yrs'] + "," + preData['employment'] + "," + preData['emp_years'] + "," + preData['cpu_usage'];
+     if(preData['cpu_use'] === undefined) {
+         tmp += ",None";
+     } else {
+         tmp += "," + preData['cpu_use'];
+     }
+     if(preData['vgp'] === undefined) {
+         tmp += ",None";
+     } else {
+         tmp += "," + preData['vgp'];
+     }
+     if(preData['vgt'] === undefined) {
+         tmp += ",None";
+     } else {
+         tmp += "," + preData['vgt'];
+     }
+     if(preData['dev'] === undefined) {
+         tmp += ",None";
+     } else {
+         tmp += "," + preData['dev'];
+     }
+     tmp += "," + preData['vg_exp'] + "," + preData['vg_freq'];
+     return tmp;
+}
+
 //Converts the Post Questionnare data into csv format
 function convertPostqData(postData) {
-    var tmp = postData['cons'] + "," + postData['needs'] + "," + postData['respect'] + "," + postData['along'] + "," + postData['fair'] + "," + postData['rules']
+    var tmp = "\n" + postData['cons'] + "," + postData['needs'] + "," + postData['respect'] + "," + postData['along'] + "," + postData['fair'] + "," + postData['rules']
      + "," + postData['laws'] + "," + postData['word'] + "," + postData['coop'] + "," + postData['change'] + "," + postData['taxes'] + "," + postData['plans']
       + "," + postData['moral'] + "," + postData['start'] + "," + postData['retreat'] + "," + postData['doubts'] + "," + postData['life'] + "," + postData['avoid']
        + "," + postData['lie'] + "," + postData['forgive'] + "," + postData['coordinate'] + "," + postData['attainment'] + "," + postData['rely'] + "," + postData['schedulers']

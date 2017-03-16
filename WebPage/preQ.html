@@ -41,6 +41,15 @@
             background-color: #99ccff;
             text-align: center;
         }
+        select:required:invalid {
+            color: gray;
+        }
+        option[value=""][disabled] {
+            display: none;
+        }
+        option {
+            color: black;
+        }
     </style>
 
 </head>
@@ -53,8 +62,10 @@
     <form action="training.html" method="POST">
     <div class = "main">
         <div class = "section_header">Age:</div>
-        <select name = "age">
-            <option value = "">- Please Select -</option>
+        <select name = "age" required>
+            <option value="" disabled selected>- Please Select -</option>
+            <option value = "16">16</option>
+            <option value = "17">17</option>
             <option value = "18">18</option>
             <option value = "19">19</option>
             <option value = "20">20</option>
@@ -108,8 +119,8 @@
         <hr>
         
         <div class = "section_header">Gender:</div>
-        <select name = "gender">
-            <option value = "">- Please Select -</option>
+        <select name = "gender" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "male">Male</option>
             <option value = "female">Female</option>
             <option value = "undisclosed">Undisclosed</option>
@@ -117,8 +128,8 @@
         <hr>
         
         <div class = "section_header">Highest level of education:</div>
-        <select name = "education">
-            <option value = "">- Please Select -</option>
+        <select name = "education" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "student">Currently a student</option>
             <option value = "someHS">Some high school or less</option>
             <option value = "hs_dip">High school diploma/GED</option>
@@ -130,8 +141,8 @@
         </select>
         
         <div class = "section_header">If you are currently a student, what school do you attend?</div>
-        <select name = "school">
-            <option value = "">- Please Select -</option>
+        <select name = "school" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "ASU">Arizona State University</option>
             <option value = "UofAz">University of Arizona</option>
             <option value = "NAU">Northern Arizona University</option>
@@ -139,15 +150,15 @@
         </select>
         
         <div class = "section_header">What type of degree are you seeking?</div>
-        <select name = "degree">
-            <option value = "">- Please Select -</option>
+        <select name = "degree" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "computer">Computer related degree</option>
             <option value = "noncomputer">Other degree</option>
         </select>
         
         <div class = "section_header">How long have you been pursuing your degree?</div>
-        <select name = "degree_yrs">
-            <option value = "">- Please Select -</option>
+        <select name = "degree_yrs" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "2yr">1-2 years</option>
             <option value = "4yr">2-4 years</option>
             <option value = "6yr">4-6 years</option>
@@ -158,15 +169,17 @@
         <hr>
         
         <div class = "section_header">Are you currently employed?</div>
-        <select name = "employment">
-            <option value = "">- Please Select -</option>
+        <select name = "employment" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "yes">Yes</option>
             <option value = "no">No</option>
         </select>
         
-        <div class = "section_header">If so, how long?</div>
-        <select name = "emp_years">
-            <option value = "">- Please Select -</option>
+        <div class = "section_header">How long have you been employed?</div>
+        <select name = "emp_years" required>
+            <option value="" disabled selected>- Please Select -</option>
+            <option value = "Non-emp">Not employed</option>
+            <option value = "2yr">1-2 years</option>
             <option value = "2yr">1-2 years</option>
             <option value = "4yr">2-4 years</option>
             <option value = "6yr">4-6 years</option>
@@ -177,8 +190,8 @@
         <hr>
         
         <div class = "section_header">I use a computer:</div>
-        <select name = "cpu_usage">
-            <option value = "">- Please Select -</option>
+        <select name = "cpu_usage" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "daily">Daily</option>
             <option value = "every_couple_days">Every couple of days</option>
             <option value = "once_a_week">Once a week</option>
@@ -189,62 +202,62 @@
         <hr>
         
         <div class = "section_header">I use the computer for (check all that apply):</div>
-        <input type = "checkbox" name = "cpu_use_info" id = "cpu_use_info">
+        <input type = "checkbox" name = "cpu_use" value = "cpu_use_info">
             <label for = "cpu_use_info">Looking up information</label><br>
-        <input type = "checkbox" name = "cpu_use_email" id = "cpu_use_email">
+        <input type = "checkbox" name = "cpu_use" value = "cpu_use_email">
             <label for = "cpu_use_email">Checking email</label><br>
-        <input type = "checkbox" name = "cpu_use_word" id = "cpu_use_word">
+        <input type = "checkbox" name = "cpu_use" value = "cpu_use_word">
             <label for = "cpu_use_word">Word Processing</label><br>
-        <input type = "checkbox" name = "cpu_use_ss" id = "cpu_use_ss">
+        <input type = "checkbox" name = "cpu_use" value = "cpu_use_ss">
             <label for = "cpu_use_ss">Spreadsheets</label><br>
-        <input type = "checkbox" name = "cpu_use_games" id = "cpu_use_games">
+        <input type = "checkbox" name = "cpu_use" value = "cpu_use_games">
             <label for = "cpu_use_games">Playing games</label><br>
-        <input type = "checkbox" name = "cpu_use_none" id = "cpu_use_none" class = "none-above">
+        <input type = "checkbox" name = "cpu_use" value = "cpu_use_none">
             <label for = "cpu_use_none">None of the above</label><br>
         <hr>
         
         <div class = "section_header">I own or play video games on the following (check all that apply):</div>
-        <input type = "checkbox" name = "vgp_console" id = "vgp_console">
+        <input type = "checkbox" name = "vgp" value = "vgp_console">
             <label for = "vgp_console">Console connected to a television</label><br>
-        <input type = "checkbox" name = "vgp_mobile" id = "vgp_mobile">
+        <input type = "checkbox" name = "vgp" value = "vgp_mobile">
             <label for = "vgp_mobile">Hand-held tablet or mobile phone</label><br>
-        <input type = "checkbox" name = "vgp_pc" id = "vgp_pc">
+        <input type = "checkbox" name = "vgp" value = "vgp_pc">
             <label for = "vgp_pc">Personal computer</label><br>
-        <input type = "checkbox" name = "vgp_none" id = "vgp_none">
+        <input type = "checkbox" name = "vgp" value = "vgp_none">
             <label for = "vgp_none">None of the above</label><br>
         <hr>
         
         <div class = "section_header">I play the following types of video games (check all that apply):</div>
-        <input type = "checkbox" name = "vgt_sports" id = "vgt_sports">
+        <input type = "checkbox" name = "vgt" value = "vgt_sports">
             <label for = "vgt_sports">Sports or racing</label><br>
-        <input type = "checkbox" name = "vgt_rts" id = "vgt_rts">
+        <input type = "checkbox" name = "vgt" value = "vgt_rts">
             <label for = "vgt_rts">Real-time stragety (RTS)</label><br>
-        <input type = "checkbox" name = "vgt_fps" id = "vgt_fps">
+        <input type = "checkbox" name = "vgt" value = "vgt_fps">
             <label for = "vgt_fps">First person shooters (FPS)</label><br>
-        <input type = "checkbox" name = "vgt_rpg" id = "vgt_rpg">
+        <input type = "checkbox" name = "vgt" value = "vgt_rpg">
             <label for = "vgt_rpg">Role-playing games (RPG)</label><br>
-        <input type = "checkbox" name = "vgt_adv" id = "vgt_adv">
+        <input type = "checkbox" name = "vgt" value = "vgt_adv">
             <label for = "vgt_adv">Adventure</label><br>
-        <input type = "checkbox" name = "vgt_pzl" id = "vgt_pzl">
+        <input type = "checkbox" name = "vgt" value = "vgt_pzl">
             <label for = "vgt_pzl">Puzzle</label><br>
-        <input type = "checkbox" name = "vgt_none" id = "vgt_none">
+        <input type = "checkbox" name = "vgt" value = "vgt_none">
             <label for = "vgt_none">None of the above</label><br>
         <hr>
         
         <div class = "section_header">I use the following (check all that apply):</div>
-        <input type = "checkbox" name = "dev_mobile" id = "dev_mobile">
+        <input type = "checkbox" name = "dev" value = "dev_mobile">
             <label for "dev_mobile">Basic mobile phone</label><br>
-        <input type = "checkbox" name = "dev_smart" id = "dev_smart">
+        <input type = "checkbox" name = "dev" value = "dev_smart">
             <label for "dev_smart">Smart phone, PDA, tablet</label><br>
-        <input type = "checkbox" name = "dev_gps" id = "dev_gps">
+        <input type = "checkbox" name = "dev" value = "dev_gps">
             <label for "dev_gps">GPS navigation device with touch screen</label><br>
-        <input type = "checkbox" name = "dev_none" id = "dev_none">
+        <input type = "checkbox" name = "dev" value = "dev_none">
             <lable for "dev_none">None of the above</label><br>
         <hr>
         
         <div class = "section_header">How much experience do you have playing video games?</div>
-        <select name = "vg_experience">
-            <option value = "">- Please Select -</option>
+        <select name = "vg_exp" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "none">None</option>
             <option value = "less_than_one">Less than 1 year</option>
             <option value = "one-two">1 - 2 years</option>
@@ -253,8 +266,8 @@
         <hr>
         
         <div class = "section_header">I play video games:</div>
-        <select name = "vg_freq">
-            <option value = "">- Please Select -</option>
+        <select name = "vg_freq" required>
+            <option value="" disabled selected>- Please Select -</option>
             <option value = "daily">Daily</option>
             <option value = "few_week">A few times a week</option>
             <option value = "few_month">A few times a month</option>
