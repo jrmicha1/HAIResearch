@@ -51,7 +51,81 @@
             color: black;
         }
     </style>
-
+    
+    <script src="jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $(function() {
+            // cpu_use
+            var $cpu_use_opt = $('input:checkbox[id = cpuUseNum]').change(function() {
+                $cpu_use_none.prop('checked', false);
+            });
+            var $cpu_use_none = $('input:checkbox[id = cpuUseNone]').change(function() {
+                if(this.checked) {
+                    $cpu_use_opt.prop("checked", false);
+                }
+            });
+            
+            // vgp
+            var $vgp_opt = $('input:checkbox[id = vgpNum]').change(function() {
+                $vgp_none.prop('checked', false);
+            });
+            var $vgp_none = $('input:checkbox[id = vgpNone]').change(function() {
+                if(this.checked) {
+                    $vgp_opt.prop("checked", false);
+                }
+            });
+            
+            // vgt
+            var $vgt_opt = $('input:checkbox[id = vgtNum]').change(function() {
+                $vgt_none.prop('checked', false);
+            });
+            var $vgt_none = $('input:checkbox[id = vgtNone]').change(function() {
+                if(this.checked) {
+                    $vgt_opt.prop("checked", false);
+                }
+            });
+            
+            // dev
+            var $dev_opt = $('input:checkbox[id = devNum]').change(function() {
+                $dev_none.prop('checked', false);
+            });
+            var $dev_none = $('input:checkbox[id = devNone]').change(function() {
+                if(this.checked) {
+                    $dev_opt.prop("checked", false);
+                }
+            });
+            
+        });
+    });
+    </script>
+    
+    <script>
+    $(document).ready(function(){
+        $('#checkBtn').click(function() {
+            checked_cpu = $("input[name = cpu_use]:checked").length;
+            if(!checked_cpu) {
+                alert("You must check at least one checkbox for using the computer.");
+                return false;
+            }
+            checked_cpu = $("input[name = vgp]:checked").length;
+            if(!checked_cpu) {
+                alert("You must check at least one checkbox for playing video games on.");
+                return false;
+            }
+            checked_cpu = $("input[name = vgt]:checked").length;
+            if(!checked_cpu) {
+                alert("You must check at least one checkbox for types of games played.");
+                return false;
+            }
+            checked_cpu = $("input[name = dev]:checked").length;
+            if(!checked_cpu) {
+                alert("You must check at least one checkbox for what devices you use.");
+                return false;
+            }
+        });
+    });
+    </script>
 </head>
 
 <body oncontextmenu = "return false;">
@@ -202,56 +276,56 @@
         <hr>
         
         <div class = "section_header">I use the computer for (check all that apply):</div>
-        <input type = "checkbox" name = "cpu_use" value = "cpu_use_info">
+        <input type = "checkbox" name = "cpu_use" id = "cpuUseNum" value = "cpu_use_info">
             <label for = "cpu_use_info">Looking up information</label><br>
-        <input type = "checkbox" name = "cpu_use" value = "cpu_use_email">
+        <input type = "checkbox" name = "cpu_use" id = "cpuUseNum" value = "cpu_use_email">
             <label for = "cpu_use_email">Checking email</label><br>
-        <input type = "checkbox" name = "cpu_use" value = "cpu_use_word">
+        <input type = "checkbox" name = "cpu_use" id = "cpuUseNum" value = "cpu_use_word">
             <label for = "cpu_use_word">Word Processing</label><br>
-        <input type = "checkbox" name = "cpu_use" value = "cpu_use_ss">
+        <input type = "checkbox" name = "cpu_use" id = "cpuUseNum" value = "cpu_use_ss">
             <label for = "cpu_use_ss">Spreadsheets</label><br>
-        <input type = "checkbox" name = "cpu_use" value = "cpu_use_games">
+        <input type = "checkbox" name = "cpu_use" id = "cpuUseNum" value = "cpu_use_games">
             <label for = "cpu_use_games">Playing games</label><br>
-        <input type = "checkbox" name = "cpu_use" value = "cpu_use_none">
+        <input type = "checkbox" name = "cpu_use" id = "cpuUseNone" value = "cpu_use_none">
             <label for = "cpu_use_none">None of the above</label><br>
         <hr>
         
         <div class = "section_header">I own or play video games on the following (check all that apply):</div>
-        <input type = "checkbox" name = "vgp" value = "vgp_console">
+        <input type = "checkbox" name = "vgp" id = "vgpNum" value = "vgp_console">
             <label for = "vgp_console">Console connected to a television</label><br>
-        <input type = "checkbox" name = "vgp" value = "vgp_mobile">
+        <input type = "checkbox" name = "vgp" id = "vgpNum" value = "vgp_mobile">
             <label for = "vgp_mobile">Hand-held tablet or mobile phone</label><br>
-        <input type = "checkbox" name = "vgp" value = "vgp_pc">
+        <input type = "checkbox" name = "vgp" id = "vgpNum" value = "vgp_pc">
             <label for = "vgp_pc">Personal computer</label><br>
-        <input type = "checkbox" name = "vgp" value = "vgp_none">
+        <input type = "checkbox" name = "vgp" id = "vgpNone" value = "vgp_none">
             <label for = "vgp_none">None of the above</label><br>
         <hr>
         
         <div class = "section_header">I play the following types of video games (check all that apply):</div>
-        <input type = "checkbox" name = "vgt" value = "vgt_sports">
+        <input type = "checkbox" name = "vgt" id = "vgtNum" value = "vgt_sports">
             <label for = "vgt_sports">Sports or racing</label><br>
-        <input type = "checkbox" name = "vgt" value = "vgt_rts">
+        <input type = "checkbox" name = "vgt" id = "vgtNum" value = "vgt_rts">
             <label for = "vgt_rts">Real-time stragety (RTS)</label><br>
-        <input type = "checkbox" name = "vgt" value = "vgt_fps">
+        <input type = "checkbox" name = "vgt" id = "vgtNum" value = "vgt_fps">
             <label for = "vgt_fps">First person shooters (FPS)</label><br>
-        <input type = "checkbox" name = "vgt" value = "vgt_rpg">
+        <input type = "checkbox" name = "vgt" id = "vgtNum" value = "vgt_rpg">
             <label for = "vgt_rpg">Role-playing games (RPG)</label><br>
-        <input type = "checkbox" name = "vgt" value = "vgt_adv">
+        <input type = "checkbox" name = "vgt" id = "vgtNum" value = "vgt_adv">
             <label for = "vgt_adv">Adventure</label><br>
-        <input type = "checkbox" name = "vgt" value = "vgt_pzl">
+        <input type = "checkbox" name = "vgt" id = "vgtNum" value = "vgt_pzl">
             <label for = "vgt_pzl">Puzzle</label><br>
-        <input type = "checkbox" name = "vgt" value = "vgt_none">
+        <input type = "checkbox" name = "vgt" id = "vgtNone" value = "vgt_none">
             <label for = "vgt_none">None of the above</label><br>
         <hr>
         
         <div class = "section_header">I use the following (check all that apply):</div>
-        <input type = "checkbox" name = "dev" value = "dev_mobile">
+        <input type = "checkbox" name = "dev" id = "devNum" value = "dev_mobile">
             <label for "dev_mobile">Basic mobile phone</label><br>
-        <input type = "checkbox" name = "dev" value = "dev_smart">
+        <input type = "checkbox" name = "dev" id = "devNum" value = "dev_smart">
             <label for "dev_smart">Smart phone, PDA, tablet</label><br>
-        <input type = "checkbox" name = "dev" value = "dev_gps">
+        <input type = "checkbox" name = "dev" id = "devNum" value = "dev_gps">
             <label for "dev_gps">GPS navigation device with touch screen</label><br>
-        <input type = "checkbox" name = "dev" value = "dev_none">
+        <input type = "checkbox" name = "dev" id = "devNone" value = "dev_none">
             <lable for "dev_none">None of the above</label><br>
         <hr>
         
@@ -276,7 +350,7 @@
             <option value = "never">Never</option>
         </select>
         <hr>
-        <input type="submit" value="Continue" style = "font-size: 18px; width: 25%; height: 15%;">
+        <input type="submit" value="Continue" id="checkBtn" style = "font-size: 18px; width: 25%; height: 15%;">
         </form>
     </div>
     
