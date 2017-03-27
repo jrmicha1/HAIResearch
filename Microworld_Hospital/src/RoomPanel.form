@@ -63,16 +63,6 @@
             </properties>
             <border type="bevel-lowered"/>
             <children>
-              <component id="e7831" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="16"/>
-                  <horizontalTextPosition value="11"/>
-                  <text value="Patient"/>
-                </properties>
-              </component>
               <component id="9b40b" class="javax.swing.JLabel" binding="lblHlprNum">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
@@ -100,15 +90,6 @@
                   <text value="Time Left"/>
                 </properties>
               </component>
-              <component id="d67ca" class="javax.swing.JLabel" binding="lblPatientType">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="16"/>
-                  <text value="A/B"/>
-                </properties>
-              </component>
               <component id="a10c1" class="javax.swing.JLabel" binding="lblHlprType">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -134,6 +115,24 @@
                 <properties>
                   <font size="16"/>
                   <text value="--:--"/>
+                </properties>
+              </component>
+              <component id="d67ca" class="javax.swing.JLabel" binding="lblPatientType">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="16"/>
+                  <text value="Std./Surg."/>
+                </properties>
+              </component>
+              <component id="48f1c" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="16"/>
+                  <text value="Patient"/>
                 </properties>
               </component>
             </children>

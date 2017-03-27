@@ -80,6 +80,8 @@ public class GameFrame extends JFrame {
    public GameFrame() {
       /* Value Init */
       //rand = new Random(System.currentTimeMillis());
+      setUndecorated(true);
+
       rand = new Random();
       behavior = null;
       bhvNum = -1;
@@ -137,7 +139,8 @@ public class GameFrame extends JFrame {
                 //System.out.println("Closed");
             //MicroworldHospital.mainFrame.setVisible(true);
             //e.getWindow().dispose();
-            MicroworldHospital.mainFrame.forceEndGame();
+
+            //MicroworldHospital.mainFrame.forceEndGame();
          }
       });
 
@@ -259,7 +262,8 @@ public class GameFrame extends JFrame {
       setContentPane(contentPane);
       pack();
       setLocationRelativeTo(null);
-      setTitle("Hospital Management Game");
+      //setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+      setTitle("Microworld Hospital");
       setVisible(false);
    }
 
@@ -276,8 +280,8 @@ public class GameFrame extends JFrame {
          if (!isAgent) {
             JOptionPane.showMessageDialog(null, "Time's Up!\n" + "Total Score: "
                   + (thisStatsPanel.getScore() + peerStatsPanel.getScore())
-                  + "\n(Your Score: " + thisStatsPanel.getScore()
-                  + "  Agent Score: " + peerStatsPanel.getScore() + ")");
+                  + "\nYour Score: " + thisStatsPanel.getScore()
+                  + "\nOneLife Medical's Score: " + peerStatsPanel.getScore());
          }
          dispose();
       } else {
@@ -315,7 +319,7 @@ public class GameFrame extends JFrame {
             behavior = new Behavior(this);
          }
          setTitle("Hospital Management Game");
-         thisStatsPanel.setTitle("Your Panel");
+         thisStatsPanel.setTitle("<html><div style=\"text-align:center;\">Bayview Medical Clinic<br>(You)</div></html>");
          patientAAddCount = MainFrame.CONFIG.getPlayerPatientNum(PatientType.A);
          patientBAddCount = MainFrame.CONFIG.getPlayerPatientNum(PatientType.B);
          thisStatsPanel.setQueueLen(PatientType.A, MainFrame.CONFIG.getPlayerPatientNum(PatientType.A));
@@ -340,7 +344,7 @@ public class GameFrame extends JFrame {
       if (!agentMode) {
          peerGameFrame.peerStatsPanel.setTitle("Player's Panel");
       } else {
-         peerGameFrame.peerStatsPanel.setTitle("Agent's Panel");
+         peerGameFrame.peerStatsPanel.setTitle("OneLife Medical Center");
       }
       peerGameFrame.peerStatsPanel.setQueueBrief();
    }
@@ -642,7 +646,7 @@ public class GameFrame extends JFrame {
 
          int option;
          option = JOptionPane.showInternalConfirmDialog(contentPane, "Are you sure you want to send a " + res
-               + " to the neighboring hospital?", "Confirmation Required", JOptionPane.YES_NO_OPTION);
+               + " to OneLife Medical Center?", "Confirmation Required", JOptionPane.YES_NO_OPTION);
          timeRecord = System.currentTimeMillis();
          isConfirmed = (option == JOptionPane.YES_OPTION);
       }
@@ -717,7 +721,7 @@ public class GameFrame extends JFrame {
                msg += "SURGEON";
                giveSgnPendNum = 0;
             }
-            msgOptionPane = new JOptionPane("The neighboring hospital gives you a " + msg + ".");
+            msgOptionPane = new JOptionPane("OneLife Medical Center gives you a " + msg + ".");
             msgInternalFrame = msgOptionPane.createInternalFrame(peerGameFrame.contentPane, "Notification");
             msgInternalFrame.pack();
             msgInternalFrame.show();
