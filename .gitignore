@@ -1,5 +1,10 @@
-
 Microworld_Hospital/*.csv
 Microworld_Hospital/out/
+_Windows/
+IntelliLang.xml
+debugger.xml
+diff.xml
+ide.general.xml
+web-browsers.xml
 #Microworld_Hospital/.idea/workspace.xml
 #Microworld_Hospital/.idea/tasks.xml
