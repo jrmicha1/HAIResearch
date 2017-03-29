@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.io.IOException;
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.lang.StringBuffer;
@@ -9,6 +10,7 @@ import java.lang.StringBuffer;
  */
 public class MicroworldHospital {
 
+   static File file1, file2; // Log files to save to
    static PrintWriter fileOut1, fileOut2;  //  PrintWriter for logging
    static MainFrame mainFrame;
    private static String UID;
@@ -54,15 +56,19 @@ public class MicroworldHospital {
    /**
     * Initialize log file
     *
-    * @param filename Log file name
     * @return Success or fail
     */
-   public static boolean setUpLogFile(String filename) {
+   public static boolean setUpLogFile() {
       if (MainFrame.isPracticeMode()) {
          return true;
       }
       try {
-         fileOut1 = new PrintWriter(filename + "_Plyr" + ".csv");
+
+         //CSV files for both player and agent will be saved to ResearchData\UID
+         file1 = new File("ResearchData\\" + UID + "\\" + UID + "_P" + ".csv");
+         file2 = new File("ResearchData\\" + UID + "\\" + UID + "_A" + ".csv");
+
+         fileOut1 = new PrintWriter(file1);
          fileOut1.println("InputType,"
                + "InputParameter,"
                + "TimeInput,"
@@ -79,7 +85,7 @@ public class MicroworldHospital {
                + "PlayerScore,"
                + "AgentScore,"
                + "GroupScore");
-         fileOut2 = new PrintWriter(filename + "_Agnt" + ".csv");
+         fileOut2 = new PrintWriter(file2);
          fileOut2.println("InputType,"
                + "InputParameter,"
                + "TimeInput,"
@@ -98,6 +104,7 @@ public class MicroworldHospital {
                + "GroupScore");
       } catch (IOException e) {
          System.err.println("Fail to Write Log");
+         e.printStackTrace();
          return false;
       }
       return true;
