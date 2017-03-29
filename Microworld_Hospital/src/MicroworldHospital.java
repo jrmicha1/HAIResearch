@@ -23,7 +23,12 @@ public class MicroworldHospital {
    public static void main(String[] args) {
 
       try {
-         UID = args[0];
+         UID = args[0];//Throws exception if no args
+         File f = new File("ResearchData\\" + UID);
+         if(!f.exists()){//If the directory does not already exist, something is wrong.
+            //Jump to the catch block and generate "error" UID:
+            throw new ArrayIndexOutOfBoundsException();
+         }
       }
       catch(ArrayIndexOutOfBoundsException e) {
          //If no UID provided, generate "error" UID:
@@ -35,6 +40,11 @@ public class MicroworldHospital {
             s.append((char)(r.nextInt(26) + 'A'));
          }
          UID = s.toString();
+
+         //If "error" UID, no CSV directory exists yet.
+         //Create directory for CSV files:
+         File f = new File("ResearchData\\" + UID);
+         f.mkdir();
       }
 
       try {
