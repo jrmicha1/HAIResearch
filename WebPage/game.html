@@ -2,6 +2,15 @@
 <html>
 <meta charset="utf-8">
 
+<script type="text/javascript">
+var uuid = localStorage.getItem("uuid");
+var dv = "<div class = \"main\" style=\"height:1000px;\" data-webswing-instance=\"webswing\" data-webswing-options=\"{autoStart:true, anonym:true, applicationName:'Microworld Hospital', connectionUrl:'http://10.152.88.87:8080', args:'" +uuid+ "'}\"></div>";
+window.onload = function init() {
+    var element = document.getElementById("uid");
+	element.innerHTML =  dv;
+	}
+</script>
+
 <head>
     <title>Microworld Hospital</title>
     
@@ -39,12 +48,14 @@
         <p>Microworld Hospital</p>
         <p>Game</p>
     </header>
-    <div class = "main" style="height:1000px;" data-webswing-instance="webswing" data-webswing-options="{autoStart:true, anonym:true, applicationName:'Microworld Hospital', connectionUrl:'http://10.143.213.183:8080'}"></div>
-        <script>
+	
+    <!-- <div class = "main" style="height:1000px;" data-webswing-instance="webswing" data-webswing-options="{autoStart:true, anonym:true, applicationName:'Microworld Hospital', connectionUrl:'http://10.143.213.183:8080' args:''}"></div> -->
+        <h4 id = "uid"></h4>
+		<script>
             (function (window, document) {
                 var loader = function () {
                 var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-                script.src =  "http://10.143.213.183:8080/javascript/webswing-embed.js";
+                script.src =  "http://10.152.88.87:8080/javascript/webswing-embed.js";
                 tag.parentNode.insertBefore(script, tag);
                 };
                 window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
