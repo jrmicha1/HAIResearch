@@ -32,12 +32,20 @@ public class MicroworldHospital {
       }
       catch(ArrayIndexOutOfBoundsException e) {
          //If no UID provided, generate "error" UID:
-         //"error" UID x2 length of UID (64vs32 chars)
-         //"error" UID only cap. letters, no spc or -
+         //"error" UID format: "ERROR-" followed by 16 chars
+         // like so: "ERROR-XXXXXXXXXXXXXXXX"
+         //(where each 'X' is a random number or cap. letter)
          Random r = new Random();
-         StringBuffer s = new StringBuffer(64);
-         for(int i = 0; i < 64; i++){
-            s.append((char)(r.nextInt(26) + 'A'));
+         StringBuffer s = new StringBuffer(22);
+         s.append("ERROR-");
+         for(int i = 0; i < 16; i++){
+            //Random chars can be numbers or letters:
+            boolean isNum = r.nextBoolean();
+            if(isNum){
+               s.append((char)(r.nextInt(10) + '0'));
+            } else {
+               s.append((char)(r.nextInt(26) + 'A'));
+            }
          }
          UID = s.toString();
 
