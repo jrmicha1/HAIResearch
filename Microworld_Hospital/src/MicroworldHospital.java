@@ -22,6 +22,12 @@ public class MicroworldHospital {
     */
    public static void main(String[] args) {
 
+      //If no "ResearchData" folder exists yet, create one:
+      File researchData = new File("ResearchData");
+      if(!researchData.exists()){
+         researchData.mkdir();
+      }
+
       try {
          UID = args[0];//Throws exception if no args
          File f = new File("ResearchData\\" + UID);
