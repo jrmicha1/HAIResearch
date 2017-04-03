@@ -1,12 +1,18 @@
 package SettingsProgram;
 
 import java.awt.EventQueue;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Properties;
 
 import javax.swing.JFrame;
@@ -19,6 +25,9 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.PropertiesConfigurationLayout;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
 import javax.swing.JScrollPane;
@@ -26,6 +35,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainGUI {
 
@@ -34,7 +45,9 @@ public class MainGUI {
 	private JLabel lblIniFile;
 	private JRadioButtonMenuItem menuitemHighCoop, menuitemLowCoop;
 	private JCheckBoxMenuItem menuitemCustom;
-	private String AllConfigsLocation, GameConfigLocation, CurrentConfig;
+	private static String AllConfigsLocation;
+	private static String GameConfigLocation;
+	private static String CurrentConfig;
 	private String[] iniSections, iniVariables, iniValues;
 	private ArrayList<String> iniAllInOrder;
 	
@@ -120,7 +133,7 @@ public class MainGUI {
 			// load a properties file
 			prop.load(input);
 
-			// get the property value and print it out
+			// get the property value
 			this.AllConfigsLocation = prop.getProperty("AllConfigsLocation");
 			this.GameConfigLocation = prop.getProperty("GameConfigLocation");
 			this.CurrentConfig = prop.getProperty("CurrentConfig");
@@ -135,6 +148,33 @@ public class MainGUI {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	
+	private void changeProperty(String propertyName, String propertyValue) {
+		
+		File file = new File("config.properties");
+		
+        PropertiesConfiguration config = new PropertiesConfiguration();
+        PropertiesConfigurationLayout layout = new PropertiesConfigurationLayout(config);
+        
+        try {
+			layout.load(new InputStreamReader(new FileInputStream(file)));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+        config.setProperty(propertyName, propertyValue);
+        
+        try {
+			layout.save(new FileWriter("config.properties", false));
+		} catch (ConfigurationException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 
@@ -159,9 +199,19 @@ public class MainGUI {
 		mnFile.add(mnProfiles);
 		
 		menuitemHighCoop = new JRadioButtonMenuItem("High Cooperation");
+		menuitemHighCoop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchProfiles("HIGH");
+			}
+		});
 		mnProfiles.add(menuitemHighCoop);
 		
 		menuitemLowCoop = new JRadioButtonMenuItem("Low Cooperation");
+		menuitemLowCoop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchProfiles("LOW");
+			}
+		});
 		mnProfiles.add(menuitemLowCoop);
 		
 		menuitemCustom = new JCheckBoxMenuItem("Custom");
@@ -174,7 +224,7 @@ public class MainGUI {
 		mnFile.add(mntmPreferences);
 		frmHairesearchSettings.getContentPane().setLayout(null);
 		
-		initializeTable();
+		refreshTable();
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 55, 574, 427);
@@ -183,10 +233,12 @@ public class MainGUI {
 		scrollPane.setViewportView(table);
 		
 		JButton btnSaveChanges = new JButton("Save Changes");
+		btnSaveChanges.setEnabled(false);
 		btnSaveChanges.setBounds(145, 505, 125, 34);
 		frmHairesearchSettings.getContentPane().add(btnSaveChanges);
 		
 		JButton btnRevertChanges = new JButton("Revert Changes");
+		btnRevertChanges.setEnabled(false);
 		btnRevertChanges.setBounds(306, 505, 125, 34);
 		frmHairesearchSettings.getContentPane().add(btnRevertChanges);
 		
@@ -200,18 +252,9 @@ public class MainGUI {
 	}
 	
 	
-	private void initializeTable() {
-		
-		Ini ini = null;
-		try {
-			ini = new Ini(new FileReader(GameConfigLocation+CurrentConfig));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void refreshTable() {
 		
 		Object columnNames[] = { "Variable", "Value" };
-		
 		
 		int variablecount = 0;
 		Object rowData[][] = new Object[iniSections.length+iniVariables.length][2];
@@ -232,9 +275,11 @@ public class MainGUI {
 		       return column == 1;
 		    }
 		};
-		 
-		table = new JTable(rowData, columnNames);
+		if (table == null) {
+			table = new JTable(rowData, columnNames);
+		}
 		table.setModel(tablemodel);
+		tablemodel.fireTableDataChanged();
 	}
 	
 
@@ -243,21 +288,59 @@ public class MainGUI {
 			menuitemHighCoop.setSelected(false);
 			menuitemLowCoop.setSelected(true);
 			menuitemCustom.setSelected(false);
+			lblIniFile.setText("GLOC.ini");
 		}
 		else if(CurrentConfig.equals("GHIC.ini")) {
 			menuitemHighCoop.setSelected(true);
 			menuitemLowCoop.setSelected(false);
 			menuitemCustom.setSelected(false);
+			lblIniFile.setText("GHIC.ini");
 		}
 		else if(CurrentConfig.equals("Custom")) {
 			menuitemHighCoop.setSelected(false);
 			menuitemLowCoop.setSelected(false);
 			menuitemCustom.setSelected(true);
+			lblIniFile.setText("Custom");
 		}
 		else {
 			menuitemHighCoop.setSelected(false);
 			menuitemLowCoop.setSelected(false);
 			menuitemCustom.setSelected(false);
+		}
+	}
+	
+	private boolean switchProfiles(String type) {
+		if (type.equals("HIGH")) {
+			switchFiles("GLOC.ini", "GHIC.ini");
+			changeProperty("CurrentConfig", "GHIC.ini");
+			loadProperties();
+			whichSelected();
+			prepareIniFile();
+			refreshTable();
+			return true;
+		}
+		else if (type.equals("LOW")) {
+			switchFiles("GHIC.ini", "GLOC.ini");
+			changeProperty("CurrentConfig", "GLOC.ini");
+			loadProperties();
+			whichSelected();
+			prepareIniFile();
+			refreshTable();
+			return true;
+		}
+		return false;
+	}
+	
+	public static void switchFiles(String originalfile, String newfile) {
+		File source = new File(AllConfigsLocation+newfile);
+		File target = new File(GameConfigLocation+originalfile);
+		try {
+			target.delete();
+			target = new File(GameConfigLocation+newfile);
+			Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

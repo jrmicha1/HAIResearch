@@ -1,0 +1,14 @@
+package SettingsProgram;
+
+import javax.swing.JPanel;
+
+public class PreferencesWindow extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public PreferencesWindow() {
+
+	}
+
+}
