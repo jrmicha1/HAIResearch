@@ -1,21 +1,66 @@
 import javax.swing.*;
 import java.io.IOException;
+import java.io.File;
 import java.io.PrintWriter;
+import java.util.Random;
+import java.lang.StringBuffer;
 
 /**
  * Main Class of the Game Created by Stanso on 2/28/2015.
  */
 public class MicroworldHospital {
 
+   static File file1, file2; // Log files to save to
    static PrintWriter fileOut1, fileOut2;  //  PrintWriter for logging
    static MainFrame mainFrame;
+   private static String UID;
 
    /**
     * MAIN Entry of the program
     *
-    * @param args Unused
+    * @param args UID
     */
    public static void main(String[] args) {
+
+      //If no "ResearchData" folder exists yet, create one:
+      File researchData = new File("ResearchData");
+      if(!researchData.exists()){
+         researchData.mkdir();
+      }
+
+      try {
+         UID = args[0];//Throws exception if no args
+         File f = new File("ResearchData\\" + UID);
+         if(!f.exists()){//If the directory does not already exist, something is wrong.
+            //Jump to the catch block and generate "error" UID:
+            throw new ArrayIndexOutOfBoundsException();
+         }
+      }
+      catch(ArrayIndexOutOfBoundsException e) {
+         //If no UID provided, generate "error" UID:
+         //"error" UID format: "ERROR-" followed by 16 chars
+         // like so: "ERROR-XXXXXXXXXXXXXXXX"
+         //(where each 'X' is a random number or cap. letter)
+         Random r = new Random();
+         StringBuffer s = new StringBuffer(22);
+         s.append("ERROR-");
+         for(int i = 0; i < 16; i++){
+            //Random chars can be numbers or letters:
+            boolean isNum = r.nextBoolean();
+            if(isNum){
+               s.append((char)(r.nextInt(10) + '0'));
+            } else {
+               s.append((char)(r.nextInt(26) + 'A'));
+            }
+         }
+         UID = s.toString();
+
+         //If "error" UID, no CSV directory exists yet.
+         //Create directory for CSV files:
+         File f = new File("ResearchData\\" + UID);
+         f.mkdir();
+      }
+
       try {
          //System.out.println("Test");
          // set look and feel
@@ -35,15 +80,19 @@ public class MicroworldHospital {
    /**
     * Initialize log file
     *
-    * @param filename Log file name
     * @return Success or fail
     */
-   public static boolean setUpLogFile(String filename) {
+   public static boolean setUpLogFile() {
       if (MainFrame.isPracticeMode()) {
          return true;
       }
       try {
-         fileOut1 = new PrintWriter(filename + "_Plyr" + ".csv");
+
+         //CSV files for both player and agent will be saved to ResearchData\UID
+         file1 = new File("ResearchData\\" + UID + "\\" + UID + "_P" + ".csv");
+         file2 = new File("ResearchData\\" + UID + "\\" + UID + "_A" + ".csv");
+
+         fileOut1 = new PrintWriter(file1);
          fileOut1.println("InputType,"
                + "InputParameter,"
                + "TimeInput,"
@@ -60,7 +109,7 @@ public class MicroworldHospital {
                + "PlayerScore,"
                + "AgentScore,"
                + "GroupScore");
-         fileOut2 = new PrintWriter(filename + "_Agnt" + ".csv");
+         fileOut2 = new PrintWriter(file2);
          fileOut2.println("InputType,"
                + "InputParameter,"
                + "TimeInput,"
@@ -79,6 +128,7 @@ public class MicroworldHospital {
                + "GroupScore");
       } catch (IOException e) {
          System.err.println("Fail to Write Log");
+         e.printStackTrace();
          return false;
       }
       return true;
@@ -143,5 +193,9 @@ public class MicroworldHospital {
       if (fileOut2 != null) {
          fileOut2.close();
       }
+   }
+
+   public static String getUID(){
+      return UID;
    }
 }

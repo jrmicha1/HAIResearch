@@ -27,9 +27,7 @@ public final class MainFrame extends JFrame {
    private static boolean isPracticeMode;
    private static boolean isAutomatic = false;//Currently there is no way to change this in-game; it just remains false.
 
-   private static String userId;
    private static String condition;
-   private static int trialNum;
    private static boolean visualizeAgntActivity = false; // Currently there is no way to change this in-game; it just
                                                          // remains false.
 
@@ -45,9 +43,7 @@ public final class MainFrame extends JFrame {
       setUndecorated(true);
 
       /* Value Init */
-      userId = "123"; //TODO: '123' is just a placeholder - Must set the actual User ID somehow!
-      condition = "1"; //TODO:'1' is just a placeholder. What is 'condition'? Should either set it properly or remove it
-      trialNum = 1; //TODO: 1 is just a placeholder. What is 'trial'? Should either set it properly or remove it
+      condition = "1"; //TODO:'1' is just a placeholder. Condition -> High or Low coop agent -> is this still needed?
       isPracticeMode = true; // First run through the game is always practice
 
       // Load Initial Config File (i.e. the training config):
@@ -117,12 +113,7 @@ public final class MainFrame extends JFrame {
          return;
       }
 
-      if (userId.isEmpty() || userId == null) {
-         JOptionPane.showMessageDialog(this, "Invalid userID!", "Error", JOptionPane.ERROR_MESSAGE);
-         return;
-      } else {
-         MicroworldHospital.setUpLogFile(userId + "_" + condition + "_" + trialNum);
-      }
+      MicroworldHospital.setUpLogFile();
 
       /* Main Timer Setup */
       // main (swing) timer for display
@@ -139,7 +130,6 @@ public final class MainFrame extends JFrame {
                plyrGameFrame.mainTimerAction();
                taskTimer.purge();
                MicroworldHospital.endLog();
-               trialNum++;
 
                /* Current game has ended; transition to the next phase:
                 *
