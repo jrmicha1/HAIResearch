@@ -4,9 +4,9 @@ import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,8 +19,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +44,7 @@ import java.awt.event.ActionEvent;
 public class MainGUI {
 
 	private JFrame frmHairesearchSettings;
+	private PreferencesWindow preferenceswindow;
 	private JTable table;
 	private JLabel lblIniFile;
 	private JRadioButtonMenuItem menuitemHighCoop, menuitemLowCoop;
@@ -81,10 +85,17 @@ public class MainGUI {
 	private void prepareIniFile() {
 		Ini ini = null;
 		try {
-			ini = new Ini(new FileReader(GameConfigLocation+CurrentConfig));
+			ini = new Ini(new FileReader(MainGUI.GameConfigLocation+MainGUI.CurrentConfig));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			JOptionPane erroroptionPane = new JOptionPane("Failure to access GameConfigLocation file, please check"
+					+ " if the file exists and your folder permissions before starting this program again. Otherwise, delete all entered property values in config.properties but not the variable names.", JOptionPane.ERROR_MESSAGE);    
+			JDialog errordialog = erroroptionPane.createDialog("Failure");
+			errordialog.setAlwaysOnTop(true);
+			errordialog.setVisible(true);
+			errordialog.dispose();
+			System.exit(1);
 		}
 		
 		iniSections = new String[ini.size()];
@@ -133,11 +144,114 @@ public class MainGUI {
 			// load a properties file
 			prop.load(input);
 
-			// get the property value
-			this.AllConfigsLocation = prop.getProperty("AllConfigsLocation");
-			this.GameConfigLocation = prop.getProperty("GameConfigLocation");
-			this.CurrentConfig = prop.getProperty("CurrentConfig");
+			// get the property value BeenStartedBefore to get user input of folder locations
+			if (prop.getProperty("AllConfigsLocation").equals("") || prop.getProperty("GameConfigLocation").equals("")) {
+				
+				String AllGameConfigLoc = null;
+				String GameConfigLoc = null;
+				
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				
+				JOptionPane welcomePane = new JOptionPane("Hello. I see this is your first time using this program.", JOptionPane.PLAIN_MESSAGE);    
+				JDialog welcomedialog = welcomePane.createDialog("Message");
+				welcomedialog.setAlwaysOnTop(true);
+				welcomedialog.setVisible(true);
+				welcomedialog.dispose();
+				
+				JOptionPane optionPane = new JOptionPane("Please select the folder that contains all the .ini files (AllConfigs).", JOptionPane.PLAIN_MESSAGE);    
+				JDialog dialog = optionPane.createDialog("Message");
+				dialog.setAlwaysOnTop(true);
+				dialog.setVisible(true);
+				dialog.dispose();
+				
+				int result = fileChooser.showOpenDialog(frmHairesearchSettings);
+				
+				if (result == JFileChooser.APPROVE_OPTION) {
+				    File selectedFile = fileChooser.getSelectedFile();
+				    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+				    AllGameConfigLoc = selectedFile.getAbsolutePath();
+				}
+				else if (result == JFileChooser.CANCEL_OPTION) {
+					JOptionPane erroroptionPane = new JOptionPane("Failure to select folders, please enter them "
+							+ "manually in config.properties or start this program again.", JOptionPane.ERROR_MESSAGE);    
+					JDialog errordialog = erroroptionPane.createDialog("Failure");
+					errordialog.setAlwaysOnTop(true);
+					errordialog.setVisible(true);
+					errordialog.dispose();
+					System.exit(1);
+				}
+				
+				JOptionPane optionPane2 = new JOptionPane("Please select the folder that contains the game .ini file (GameConfig).", JOptionPane.PLAIN_MESSAGE);    
+				JDialog dialog2 = optionPane2.createDialog("Message");
+				dialog2.setAlwaysOnTop(true);
+				dialog2.setVisible(true);
+				dialog2.dispose();
+				
+				int result2 = fileChooser.showOpenDialog(frmHairesearchSettings);
+				
+				if (result2 == JFileChooser.APPROVE_OPTION) {
+				    File selectedFile = fileChooser.getSelectedFile();
+				    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+				    GameConfigLoc = selectedFile.getAbsolutePath();
+				}
+				else if (result2 == JFileChooser.CANCEL_OPTION) {
+					JOptionPane erroroptionPane = new JOptionPane("Failure to select folders, please enter them "
+							+ "manually in config.properties or start this program again.", JOptionPane.ERROR_MESSAGE);    
+					JDialog errordialog = erroroptionPane.createDialog("Failure");
+					errordialog.setAlwaysOnTop(true);
+					errordialog.setVisible(true);
+					errordialog.dispose();
+					System.exit(1);
+				}
+				
+				if (input != null) {
+					try {
+						input.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				changeProperty("AllConfigsLocation", AllGameConfigLoc+"\\");
+				changeProperty("GameConfigLocation", GameConfigLoc+"\\");
+			}
+			
+			input = new FileInputStream("config.properties");
 
+			// load a properties file
+			prop.load(input);
+			
+			MainGUI.AllConfigsLocation = prop.getProperty("AllConfigsLocation");
+			MainGUI.GameConfigLocation = prop.getProperty("GameConfigLocation");
+			
+			if(prop.getProperty("CurrentConfig").equals("")) {
+				File f = new File(MainGUI.GameConfigLocation);
+				File[] matchingFiles = f.listFiles(new FilenameFilter() {
+				    public boolean accept(File dir, String name) {
+				        return name.endsWith("ini");
+				    }
+				});
+				
+				if (input != null) {
+					try {
+						input.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				changeProperty("CurrentConfig", matchingFiles[0].getName().toString());
+			}
+			
+			input = new FileInputStream("config.properties");
+
+			// load a properties file
+			prop.load(input);
+			
+			MainGUI.CurrentConfig = prop.getProperty("CurrentConfig");
+			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -215,12 +329,20 @@ public class MainGUI {
 		mnProfiles.add(menuitemLowCoop);
 		
 		menuitemCustom = new JCheckBoxMenuItem("Custom");
+		menuitemCustom.setEnabled(false);
 		mnProfiles.add(menuitemCustom);
 		
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
 		
 		JMenuItem mntmPreferences = new JMenuItem("Preferences");
+		mntmPreferences.setEnabled(false);
+		mntmPreferences.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				preferenceswindow = new PreferencesWindow();
+				preferenceswindow.setVisible(true);
+			}
+		});
 		mnFile.add(mntmPreferences);
 		frmHairesearchSettings.getContentPane().setLayout(null);
 		
@@ -280,6 +402,7 @@ public class MainGUI {
 		}
 		table.setModel(tablemodel);
 		tablemodel.fireTableDataChanged();
+		table.setEnabled(false);
 	}
 	
 

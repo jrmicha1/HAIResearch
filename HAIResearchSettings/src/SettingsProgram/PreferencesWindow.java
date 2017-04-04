@@ -13,7 +13,7 @@ import javax.swing.JComponent;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 
-public class PreferencesWindow {
+public class PreferencesWindow extends JFrame {
 
 	private JFrame frame;
 
