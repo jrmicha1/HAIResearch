@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import netscape.javascript.JSObject;
 
 /**
  * The start up window Main timers are managed here Created by Stanso on
@@ -161,6 +162,8 @@ public final class MainFrame extends JFrame {
                   CONFIG.loadSettings(configFile);
                } else {
                   System.out.println("Training and 8-min full game completed, closing.");
+				  netscape.javascript.JSObject global = JSObject.getWindow(null);
+				  Object res = global.eval("gameEnded();");
                   System.exit(0);
                }
 
