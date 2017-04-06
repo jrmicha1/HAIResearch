@@ -61,9 +61,11 @@ window.onload = function init() {
                 window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
             })(window, document);
         </script>
-    <div class = "button">
-        <button onclick = "window.location.href = 'postQ.html'" style = "font-size: 18px; width: 25%; height: 15%;">Continue</button>
-    </div>
+		<script>
+			function gameEnded() {
+				window.location.href = 'postQ.html'
+			}
+		</script>
     <footer>
         Copyright 2016 - ASU Polytechnic
     </footer>
