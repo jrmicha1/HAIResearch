@@ -32,6 +32,13 @@
             text-align: center;
         }
     </style>
+    <script>
+    if (localStorage.getItem("completedSurvey") == 1) {
+        localStorage.setItem("completedSurvey", parseInt(localStorage.getItem("completedSurvey"))+1);
+    } else {
+        window.location.href = 'thanks.html';
+    }
+    </script>
     
     <script src = "Javascript/window.js"></script>
 </head>

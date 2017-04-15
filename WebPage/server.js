@@ -4,7 +4,7 @@ const qstring = require('querystring'); // Install with 'npm install querystring
 const uuidV4 = require('uuid/v4');//UUID - Install with 'npm install uuid --save'
 const cookieParser = require('cookie-parser');//Install with 'npm install cookie-parser --save'
 const mkdirp = require('mkdirp');//Install with 'npm install mkdirp --save'
-const researchDir = "C:/Users/Junior/Documents/Capstone Project/HAIResearch/webswing-2.3/webswing-2.3/demo/Microworld/researchData";//Full path to Directory for research data
+const researchDir = "";//Relative path to Directory for research data
 var collectData = true;
 
 //Initializing Express server on localhost:3000
@@ -25,7 +25,9 @@ app.get('/', function (req, res) {
     }
 });
 //Welcome Page
+//Sends out cookie to keep track of user
 app.get('/welcome.html', function (req, res) {
+    res.cookie('completedSurvey', 0);
     sendHTML(req, res);
 });
 //No Survey Page
@@ -107,6 +109,9 @@ app.post('/thanks.html', function (req, res) {
             //console.log('File appended.');
         });
     });
+    sendHTML(req, res);
+});
+app.get('/thanks.html', function (req, res) {
     sendHTML(req, res);
 });
 

@@ -54,6 +54,13 @@
     
     <script src="Javascript/jquery.min.js"></script>
     <script>
+    if (localStorage.getItem("completedSurvey") == 0) {
+        localStorage.setItem("completedSurvey", parseInt(localStorage.getItem("completedSurvey"))+1);
+    } else {
+        window.location.href = 'thanks.html';
+    }
+    </script>
+    <script>
     $(document).ready(function(){
         $(function() {
             //Grab cookie and put it into local storage
